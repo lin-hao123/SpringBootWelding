@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+
+<!-- source http://www.scnoob.com More templates http://www.scnoob.com/moban -->
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>个人信息</title>
+
+<link rel="stylesheet" type="text/css" href="wareadmin/assets/css/bootstrap.min.css">
+
+<link rel="stylesheet" type="text/css" href="wareadmin/assets/fonts/line-icons.css">
+
+<link rel="stylesheet" href="wareadmin/assets/plugins/morris/morris.css">
+
+<link rel="stylesheet" type="text/css" href="wareadmin/assets/css/main.css">
+
+<link rel="stylesheet" type="text/css" href="wareadmin/assets/css/responsive.css">
+<script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/personalMessage.js"></script>
+<script type="text/javascript" src="js/sideBar.js"></script>
+</head>
+<div class="app header-default side-nav-dark">
+<div class="layout">
+<!-- 头条开始 -->
+<div class="header navbar">
+<div class="header-container">
+<div class="nav-logo">
+<a>
+<b><img src="wareadmin/assets/img/logo.png" alt=""></b>
+<span class="logo" style="display:inline-block;width:200px;font-weight:bold;color:red">焊接生产管理系统
+</span>
+</a>
+</div>
+<ul class="nav-left">
+<li>
+<a class="sidenav-fold-toggler" href="wareadmin/javascript:void(0);">
+<i class="lni-menu"></i>
+</a>
+<a class="sidenav-expand-toggler" href="wareadmin/javascript:void(0);">
+<i class="lni-menu"></i>
+</a>
+</li>
+</ul>
+<ul class="nav-right">
+
+<li class="user-profile dropdown dropdown-animated scale-left">
+<a href="wareadmin/#" class="dropdown-toggle" data-toggle="dropdown">
+<img class="profile-img img-fluid" src="wareadmin/assets/img/avatar/avatar.jpg" alt="">
+</a>
+<ul class="dropdown-menu dropdown-md">
+<li>
+<ul class="list-media">
+<li class="list-item avatar-info">
+<div class="media-img">
+<img src="wareadmin/assets/img/avatar/avatar.jpg" alt="">
+</div>
+<div class="info">
+<span class="title text-semibold" id="helloname"></span>
+</div>
+</li>
+</ul>
+</li>
+
+<li>
+<a href="login.html">
+<i class="lni-lock"></i>
+<span>退出</span>
+</a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<!-- 头条结束 -->
+<!-- 左导航栏开始 -->
+<div class="side-nav expand-lg">
+<div class="side-nav-inner">
+<ul class="side-nav-menu">
+<li class="side-nav-header">
+<span>焊接企业部门管理</span>
+</li>
+<li class="nav-item dropdown" style="display: none" id="resourcePermission">
+<a href="#" class="dropdown-toggle">
+<span class="icon-holder">
+<i class="lni-cloud"></i>
+</span>
+<span class="title">资源管理</span>
+<span class="arrow">
+<i class="lni-chevron-right"></i>
+</span>
+</a>
+<ul class="dropdown-menu sub-down">
+<li>
+<a href="index.html">用户管理</a>
+</li>
+<li>
+<a href="role.html">角色管理</a>
+</li>
+<li>
+<a href="permission.html">权限管理</a>
+</li>
+</ul>
+</li>
+
+<li class="nav-item dropdown open"  id="personMessage">
+<a href="#" class="dropdown-toggle">
+<span class="icon-holder">
+<i class="lni-cloud"></i>
+</span>
+<span class="title">个人信息</span>
+<span class="arrow">
+<i class="lni-chevron-right"></i>
+</span>
+</a>
+<ul class="dropdown-menu sub-down">
+<li>
+<a href="personalMessage.html">信息查看</a>
+</li>
+<li>
+<a href="#">修改密码</a>
+</li>
+</ul>
+</li>
+
+<li class="nav-item dropdown">
+<a class="dropdown-toggle" href="#">
+<span class="icon-holder">
+<i class="lni-cloud"></i>
+</span>
+<span class="title">设计部门</span>
+<span class="arrow">
+<i class="lni-chevron-right"></i>
+</span>
+</a>
+<ul class="dropdown-menu sub-down">
+<li  class="active">
+<a href="hk_product.html">商品采购变更管理</a>
+</li>
+<li>
+<a href="hk_warerk2.html">首次商品采购信息登记</a>
+</li>
+</ul>
+</li>
+
+<li class="nav-item dropdown">
+<a class="dropdown-toggle">
+<span class="icon-holder">
+<i class="lni-cloud"></i>
+</span>
+<span class="title">生产部门</span>
+<span class="arrow">
+<i class="lni-chevron-right"></i>
+ </span>
+</a>
+<ul class="dropdown-menu sub-down">
+<li>
+<a href="hk_waregys1.html">供应商信息管理</a>
+</li>
+</ul>
+</li>
+<li class="nav-item dropdown">
+<a class="dropdown-toggle">
+<span class="icon-holder">
+<i class="lni-cloud"></i>
+</span>
+<span class="title">质检部门</span>
+<span class="arrow">
+<i class="lni-chevron-right"></i>
+ </span>
+</a>
+<ul class="dropdown-menu sub-down">
+<li>
+<a href="hk_waregys1.html">供应商信息管理</a>
+</li>
+</ul>
+</li>
+<li class="nav-item dropdown">
+<a class="dropdown-toggle">
+<span class="icon-holder">
+<i class="lni-cloud"></i>
+</span>
+<span class="title">仓库管理</span>
+<span class="arrow">
+<i class="lni-chevron-right"></i>
+ </span>
+</a>
+<ul class="dropdown-menu sub-down">
+<li>
+<a href="hk_waregys1.html">供应商信息管理</a>
+</li>
+</ul>
+</li>
+<li class="nav-item dropdown">
+<a class="dropdown-toggle">
+<span class="icon-holder">
+<i class="lni-cloud"></i>
+</span>
+<span class="title">维修部门</span>
+<span class="arrow">
+<i class="lni-chevron-right"></i>
+ </span>
+</a>
+<ul class="dropdown-menu sub-down">
+<li>
+<a href="hk_waregys1.html">供应商信息管理</a>
+</li>
+</ul>
+</li>
+
+</ul>
+</div>
+</div>
+<!-- 左导航栏结束 -->
+
+<!-- main开始 -->
+<div class="page-container">
+<div class="main-content">
+<div class="container-fluid">
+
+
+<div class="row">
+<div class="col-12">
+<div class="card faq">
+<div class="card-header border-bottom">			
+<form class="form-inline" >	
+		   
+     <div class="input-group mb-3 col-6">
+      <div class="input-group-prepend">
+        <span class="input-group-text">编号</span>
+      </div>
+      <span class="form-control" id="userId"></span>
+     </div>
+        <div class="input-group mb-3 col-6">
+      <div class="input-group-prepend">
+        <span class="input-group-text">姓名</span>
+      </div>
+      <span class="form-control" id="userName"></span>
+    </div>
+     <div class="input-group mb-3 col-6">
+      <div class="input-group-prepend">
+        <span class="input-group-text">部门</span>
+      </div>
+      <span class="form-control" id="department"></span>
+    </div>
+	
+        <div class="input-group mb-3 col-6">
+      <div class="input-group-prepend">
+        <span class="input-group-text">职位</span>
+      </div>
+      <span class="form-control" id="position"></span>
+    </div>
+    
+        <div class="input-group mb-3 col-6">
+      <div class="input-group-prepend">
+        <span class="input-group-text">性别</span>
+      </div>
+      <span class="form-control" id="sex"></span>
+    </div>
+    
+        <div class="input-group mb-3 col-6">
+      <div class="input-group-prepend">
+        <span class="input-group-text">年龄</span>
+      </div>
+     <span class="form-control" id="age"></span>
+    </div>
+    
+        <div class="input-group mb-3 col-6">
+      <div class="input-group-prepend">
+        <span class="input-group-text">电话</span>
+      </div>
+            <span class="form-control" id="tel"></span>
+    </div>
+     <div class="input-group mb-3 col-6">
+      <div class="input-group-prepend">
+        <span class="input-group-text">状态</span>
+      </div>
+     <span class="form-control" id="status"></span>
+    </div>
+    <div class="input-group mb-3 col-6">
+      <div class="input-group-prepend">
+        <span class="input-group-text">创建时间</span>
+      </div>
+       <span class="form-control" id="createTime"></span>
+    </div>
+    
+    <div class="input-group-prepend mb-0 col-12">
+       <span class="input-group-text">角色</span>
+    </div>
+    &nbsp;&nbsp;&nbsp;
+	<div class="form-group">
+      <textarea class="form-control mb-3 contenteditable" rows="1" Style="width:1608px" id="role" disabled></textarea>
+    </div>
+    
+    <div class="input-group-prepend mb-0 col-12">
+       <span class="input-group-text">权限</span>
+    </div>
+    &nbsp;&nbsp;&nbsp;
+	<div class="form-group">
+      <textarea class="form-control mb-3" rows="4" Style="width:1608px" id="permission" disabled></textarea>
+    </div>
+
+    <div class="input-group-prepend mb-0 col-12">
+       <span class="input-group-text">认证</span>
+    </div>
+    &nbsp;&nbsp;&nbsp;
+	<div class="form-group">
+      <textarea class="form-control" rows="4" Style="width:1608px" id="credential" disabled></textarea>
+    </div>		     
+ </form>					
+</div>
+<!-- <div class="card-body">
+<div id="accordian-part">
+<div id="accordian-3">
+
+
+
+</div>
+</div>
+</div> -->
+
+</div>
+</div>
+</div>
+
+
+
+</div>
+</div>
+</div>
+<!-- main结束-->
+<div id="preloader">
+<div class="loader" id="loader-1"></div>
+</div>
+</div>
+</div>
+
+
+<script src="wareadmin/assets/js/jquery-min.js"></script>
+<script src="wareadmin/assets/js/popper.min.js"></script>
+<script src="wareadmin/assets/js/bootstrap.min.js"></script>
+<script src="wareadmin/assets/js/jquery.app.js"></script>
+<script src="wareadmin/assets/js/main.js"></script>
+
+<!-- <script src="wareadmin/assets/plugins/morris/morris.min.js"></script> -->
+<script src="wareadmin/assets/plugins/raphael/raphael-min.js"></script>
+<!-- <script src="wareadmin/assets/js/dashborad1.js"></script> -->
+</body>
+
+<!-- source http://www.scnoob.com More templates http://www.scnoob.com/moban -->
+
+</html>
