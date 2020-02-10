@@ -175,6 +175,7 @@
 			 //--删除开始--//
 			 $("button[name=btn003]").click(function(){
 				 var id=this.id;
+				 console.log(id);
 				 var numb=id.slice(4);
 						$.ajax({
 							type : "DELETE",
