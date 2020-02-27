@@ -1,11 +1,13 @@
 package com.zz.system.production.controller;
 
-import com.zz.system.device.entity.Device;
+
 import com.zz.system.production.entity.DispatchInformation;
+import com.zz.system.production.entity.Equipment;
 import com.zz.system.production.entity.EquipmentMaintenanceApplication;
 import com.zz.system.production.entity.WelderInformation;
 import com.zz.system.production.service.DispatchInformationService;
 import com.zz.system.production.service.EquipmentMaintenanceApplicationService;
+import com.zz.system.production.service.EquipmentService;
 import com.zz.system.production.service.WelderInformationService;
 import com.zz.vo.ResponseData;
 import org.springframework.data.domain.Page;
@@ -15,6 +17,7 @@ import javax.annotation.Resource;
 
 /**
  * created by linlx on 2020/1/21
+ * 生产部门
  */
 @RestController
 @RequestMapping("production")
@@ -28,6 +31,9 @@ public class ProductionController {
 
     @Resource
     DispatchInformationService dispatchInformationService;
+
+    @Resource
+    EquipmentService equipmentService;
 
 
 
@@ -241,6 +247,77 @@ public class ProductionController {
         responseData.setData(dispatchInformation);
         return responseData;
     }
+
+
+    //=============================================================设备监控管理==================================================
+
+    /**
+     * 分页获取设备监控信息
+     * @param page
+     * @param size
+     * @param equipmentName
+     * @return
+     */
+    @GetMapping("equipment/{page}/{size}")
+    public ResponseData queryEquipmentPage(@PathVariable("page") int page, @PathVariable("size") int size, String equipmentName){
+
+        ResponseData responseData=new ResponseData();
+        Page<Equipment> equipmentPage=equipmentService.findByEquipmentNameLike(equipmentName,page,size);
+        responseData.setCode(200);
+        responseData.setMsg("success");
+        responseData.setData(equipmentPage);
+        return responseData;
+    }
+
+
+    /**
+     * 添加设备监控信息
+     * @param equipment
+     * @return
+     */
+    @PostMapping("equipment")
+    public ResponseData createEquipment(@RequestBody Equipment equipment){
+
+        ResponseData responseData=new ResponseData();
+        Equipment createEquipment=equipmentService.create(equipment);
+        responseData.setCode(200);
+        responseData.setMsg("success");
+        responseData.setData(createEquipment);
+        return responseData;
+    }
+
+
+    /**
+     * 删除设备监控信息
+     * @param equipmentId
+     * @return
+     */
+    @DeleteMapping("equipment/{equipmentId}")
+    public ResponseData deleteEquipment(@PathVariable ("equipmentId") Long equipmentId){
+
+        ResponseData responseData=new ResponseData();
+        equipmentService.delete(equipmentId);
+        responseData.setCode(200);
+        responseData.setMsg("success");
+        return responseData;
+    }
+
+    /**
+     * 回显设备监控信息
+     * @param equipmentId
+     * @return
+     */
+    @GetMapping("equipment/{equipmentId}")
+    public ResponseData findEquipment(@PathVariable ("equipmentId") Long equipmentId){
+
+        ResponseData responseData=new ResponseData();
+        Equipment equipment=equipmentService.findById(equipmentId);
+        responseData.setCode(200);
+        responseData.setMsg("success");
+        responseData.setData(equipment);
+        return responseData;
+    }
+
 
 
 

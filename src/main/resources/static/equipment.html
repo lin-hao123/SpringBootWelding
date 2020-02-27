@@ -17,7 +17,7 @@
 
     <link rel="stylesheet" type="text/css" href="wareadmin/assets/css/responsive.css">
     <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript" src="js/device.js"></script>
+    <script type="text/javascript" src="js/equipment.js"></script>
     <script type="text/javascript" src="js/sideBar.js"></script>
 </head>
 <div class="app header-default side-nav-dark">
@@ -154,7 +154,7 @@
                         </ul>
                     </li>
                     <!-- ------------------------------------------------------------------------------------------------ -->
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown open">
                         <a class="dropdown-toggle">
                         <span class="icon-holder">
                             <i class="lni-cloud"></i>
@@ -171,7 +171,7 @@
                             <li>
                                 <a href="welderInformation.html">焊工信息</a>
                             </li>
-                            <li>
+                            <li class="active">
                                 <a href="equipment.html">设备监控</a>
                             </li>
                             <li>
@@ -237,7 +237,7 @@
                         </ul>
                     </li>
                     <!-- ------------------------------------------------------------------------------------------------ -->
-                    <li class="nav-item dropdown open">
+                    <li class="nav-item dropdown">
                         <a class="dropdown-toggle">
                         <span class="icon-holder">
                             <i class="lni-cloud"></i>
@@ -248,7 +248,7 @@
                         </span>
                         </a>
                         <ul class="dropdown-menu sub-down">
-                            <li class="active">
+                            <li>
                                 <a href="deviceMessage.html">设备信息</a>
                             </li>
                             <li>
@@ -300,7 +300,7 @@
                                             &nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-outline-secondary" id="selectbtn2">取消查询</button>
                                         </div>
                                         <div class="col-12 col-lg-2 col-md-2">
-                                            <button type="button" class="btn btn-danger btn-rounded" data-toggle="modal" data-target="#insertrkbtn" name='createDevicebtn'>新建设备信息  +</button>
+                                            <button type="button" class="btn btn-danger btn-rounded" data-toggle="modal" data-target="#insertrkbtn" name='createEquipmentBtn'>新建设备监控信息  +</button>
                                             <!-- <button type="button" class="btn btn-danger btn-rounded" id="insertrkbtn">新建用户信息  +</button> -->
                                         </div>
                                     </form>
@@ -315,16 +315,13 @@
                                                     <tr align="center">
                                                         <th>设备编号</th>
                                                         <th>设备名称</th>
-                                                        <th>厂商</th>
-                                                        <th>厂商联系方式</th>
                                                         <th>焊接种类</th>
-                                                        <th>所在部门</th>
                                                         <th>功能作用</th>
-                                                        <th>责任人</th>
+                                                        <th>使用状态</th>
                                                         <th>操作</th>
                                                     </tr>
                                                     </thead>
-                                                    <tbody align="center" id="tbodydevicebtn">
+                                                    <tbody align="center" id="tbodyEquipmentBtn">
 
                                                     </tbody>
                                                 </table>
@@ -380,54 +377,41 @@
 
             <!-- 模态框头部 -->
             <div class="modal-header">
-                <h4 class="modal-title">编辑设备信息</h4>
+                <h4 class="modal-title">编辑设备监控信息</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
 
             <!-- 模态框主体 -->
             <div class="modal-body">
+
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text">设备名称</span>
                     </div>
-                    <input type="text" class="form-control" id="deviceName" name="deviceName">
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">厂商</span>
-                    </div>
-                    <input type="text" class="form-control" id="vendor"name="vendor">
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">厂商联系方式</span>
-                    </div>
-                    <input type="text" class="form-control" id="vendorTel" name="vendorTel">
+                    <input type="text" class="form-control" id="equipmentName" name="equipmentName">
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text">焊接种类</span>
                     </div>
-                    <input type="text" class="form-control" id="weldingType" name="weldingType">
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">所在部门</span>
-                    </div>
-                    <input type="text" class="form-control"  id="department" name="department">
+                    <input type="text" class="form-control" id="weldingType"name="weldingType">
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text">功能作用</span>
                     </div>
-                    <input type="text" class="form-control"  id="deviceFunction" name="deviceFunction">
+                    <input type="text" class="form-control" id="equipmentFunction" name="equipmentFunction">
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text">责任人</span>
+                        <span class="input-group-text">使用状态</span>
                     </div>
-                    <input type="text" class="form-control" id="responsible" name="responsible">
+                    <input type="text" class="form-control" placeholder="使用状态（1-正在使用，0-未使用）" id="useStatus" name="useStatus">
+                    <div class="input-group-append">
+                        <span class="input-group-text">（1-正在使用，0-未使用）</span>
+                    </div>
                 </div>
+
             </div>
 
             <!-- 模态框底部 -->
@@ -449,7 +433,7 @@
 
             <!-- 模态框头部 -->
             <div class="modal-header">
-                <h4 class="modal-title">新建设备信息</h4>
+                <h4 class="modal-title">新建设备监控信息</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
 
@@ -459,19 +443,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text">设备名称</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="设备名称" id="createDeviceName" name="createDeviceName">
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">厂商</span>
-                    </div>
-                    <input type="password" class="form-control" placeholder="厂商" id="createVendor" name="createVendor">
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">厂商联系方式</span>
-                    </div>
-                    <input type="text" class="form-control" placeholder="厂商联系方式" id="createVendorTel" name="createVendorTel">
+                    <input type="text" class="form-control" placeholder="设备名称" id="createEquipmentName" name="createEquipmentName">
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -481,27 +453,24 @@
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text">所在部门</span>
-                    </div>
-                    <input type="text" class="form-control" placeholder="所在部门" id="createDepartment" name="createDepartment">
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
                         <span class="input-group-text">功能作用</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="功能作用" id="createDeviceFunction" name="createDeviceFunction">
+                    <input type="text" class="form-control" placeholder="功能作用" id="createEquipmentFunction" name="createEquipmentFunction">
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text">责任人</span>
+                        <span class="input-group-text">使用状态</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="责任人" id="createResponsible" name="createResponsible">
+                    <input type="text" class="form-control" placeholder="使用状态（1-正在使用，0-未使用）" id="createUseStatus" name="createUseStatus">
+                    <div class="input-group-append">
+                        <span class="input-group-text">（1-正在使用，0-未使用）</span>
+                    </div>
                 </div>
             </div>
 
             <!-- 模态框底部 -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" id="createDeviceSave">确定</button>
+                <button type="button" class="btn btn-danger" id="createEquipmentSave">确定</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
             </div>
 
