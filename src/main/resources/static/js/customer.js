@@ -40,7 +40,7 @@ $(document).ready(function(){
     getData();
     function getData(){
         $.getJSON("design/customer/"+startpage+"/"+startsize,function(json){
-            console.log(json);
+//            console.log(json);
             var contentdata=json.data.content;
             $("#tbodycustomerbtn").empty();
             for(var i=0;i<contentdata.length;i++){
@@ -74,12 +74,14 @@ $(document).ready(function(){
             $("button[name='editBtn']").click(function(){
                 var customerId=this.id
                 $.getJSON("design/customer/"+customerId,function(data){
-                    console.log(data);
+                    console.log("---------------",data);
+                   var setId=data.data.customerId;
                     var setCustomerName=data.data.customerName;
                     var setProductId=data.data.productId;
                     var setCustomerTel=data.data.customerTel;
                     var setAddress=data.data.address;
                     var setSex=data.data.sex;
+                    $("#customerId2").text(setId);
                     $("input[name='customerName']").val(setCustomerName);
                     $("input[name='productId']").val(setProductId);
                     $("input[name='customerTel']").val(setCustomerTel);
@@ -91,40 +93,38 @@ $(document).ready(function(){
 
 
             //保存修改
-            $("#editSaveBtn").click(function(data){
+            $("#subbtn").click(function(data){
+            	var id= $("#customerId2").text();
                 var customerName= $("input[name='customerName']").val();
                 var productId=$("input[name='productId']").val();
                 var customerTel=$("input[name='customerTel']").val();
                 var address=$("input[name='address']").val();
                 var sex=$("input[name='sex']").val();
-                $('input[name="interest1"]:checked').each(function(){
-                    var temp = {};
-                    temp.id = $(this).val();
-                    chk_value.push(temp);
-                });
                 var data = {
                     "customerName": customerName,
                     "productId": productId,
                     "customerTel": customerTel,
                     "address": address,
                     "sex": sex,
-
                 }
-                $.ajax({
-                    type: "PUT",
-                    url: "deviceController/device",
-                    data: JSON.stringify(data),
-                    contentType: 'application/json',
-                    success: function (json) {
-                        console.log(json);
-                        if(json.code==200){
-                            alert("保存成功");
-                            window.location.href="deviceMessage.html";
-                        }else{
-                            alert("编辑失败");
-                        }
-                    }
-                });
+                     
+				 $.ajax({
+	                    type: "PUT",
+	                    url: "design/customer/update/"+id,
+	                    data: JSON.stringify(data),
+	                    contentType: 'application/json',
+	                    success: function (json) {
+	                    	console.log(json);
+	                    	if(json.code==200){
+								alert("保存成功");
+	                    		window.location.href="customer.html";
+	                    	}else{
+	                    		alert("编辑失败");
+	                    	}
+			            }
+				 });
+                
+                
             });
             //--修改结束--//
             //--删除开始--//

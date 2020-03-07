@@ -70,50 +70,49 @@ $(document).ready(function(){
                 var equipmentMaintenanceApplicationId=this.id
                 $.getJSON("production/equipmentMaintenanceApplication/"+equipmentMaintenanceApplicationId,function(data){
                     console.log(data);
+                    var setEquipmentMaintenanceApplicationId=data.data.equipmentMaintenanceApplicationId;
                     var setDeviceId=data.data.deviceId;
                     var setDeviceName=data.data.deviceName;
                     var setResponsible=data.data.responsible;
                     var setApplyReason=data.data.applyReason;
+                    var setStatus=data.data.status;
 
+                    $("#equipmentMaintenanceApplicationId2").text(setEquipmentMaintenanceApplicationId);
                     $("input[name='deviceId']").val(setDeviceId);
                     $("input[name='deviceName']").val(setDeviceName);
                     $("input[name='responsible']").val(setResponsible);
                     $("input[name='applyReason']").val(setApplyReason);
-
+                    $("input[name='status']").val(setStatus);
                 });
             })
 
 
             //保存修改
-            $("#editSaveBtn").click(function(data){
-                var customerName= $("input[name='customerName']").val();
-                var productId=$("input[name='productId']").val();
-                var customerTel=$("input[name='customerTel']").val();
-                var address=$("input[name='address']").val();
-                var sex=$("input[name='sex']").val();
-                $('input[name="interest1"]:checked').each(function(){
-                    var temp = {};
-                    temp.id = $(this).val();
-                    chk_value.push(temp);
-                });
+            $("#equipmentMaintenanceApplicationSubbtn").click(function(data){
+            	var id=$("#equipmentMaintenanceApplicationId2").text();
+                var deviceId= $("input[name='deviceId']").val();
+                var deviceName=$("input[name='deviceName']").val();
+                var responsible=$("input[name='responsible']").val();
+                var applyReason=$("input[name='applyReason']").val();
+                var status=$("input[name='status']").val();
+                
                 var data = {
-                    "customerName": customerName,
-                    "productId": productId,
-                    "customerTel": customerTel,
-                    "address": address,
-                    "sex": sex,
-
+                    "deviceId": deviceId,
+                    "deviceName": deviceName,
+                    "responsible": responsible,
+                    "applyReason": applyReason,
+                    "status": status,
                 }
                 $.ajax({
                     type: "PUT",
-                    url: "deviceController/device",
+                    url: "production/equipmentMaintenanceApplication/update/"+id,
                     data: JSON.stringify(data),
                     contentType: 'application/json',
                     success: function (json) {
                         console.log(json);
                         if(json.code==200){
                             alert("保存成功");
-                            window.location.href="deviceMessage.html";
+                            window.location.href="equipmentMaintenanceApplication.html";
                         }else{
                             alert("编辑失败");
                         }

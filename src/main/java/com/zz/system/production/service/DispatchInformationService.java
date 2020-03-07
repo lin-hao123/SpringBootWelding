@@ -15,4 +15,6 @@ public interface DispatchInformationService {
     DispatchInformation create(DispatchInformation dispatchInformation);
 
     void delete(Long dispatchId);
+    
+    Integer updateDispatchInformation(DispatchInformation dispatchInformation);
 }

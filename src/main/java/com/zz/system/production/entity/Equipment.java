@@ -23,7 +23,7 @@ public class Equipment implements Serializable {
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     /**
-     * 设备编号
+     * 设备号
      */
     private Long equipmentId;
 
@@ -32,17 +32,28 @@ public class Equipment implements Serializable {
      */
     private String equipmentName;
     /**
+     * 设备位置
+     */
+    private String equipmentLocation;
+    /**
      * 焊接种类
      */
     private String weldingType;
-
-    /**
-     * 功能作用
-     */
-    private String EquipmentFunction;
     /**
      * 使用状态
      */
-    private int useStatus;
+    private String useStatus;
+    /**
+     * 焊接电压
+     */
+    private String weldingVoltage;
+    /**
+     * 焊接电流
+     */
+    private String weldingCurrent;
+    /**
+     * 焊接速度
+     */
+    private String weldingSpeed;
 
 }

@@ -27,7 +27,7 @@ public class TaskInstruction {
     private Long taskInstructionId;
 
     /**
-     * 生产订单
+     * 产品编号
      */
     private String productionOrder;
 
@@ -37,7 +37,7 @@ public class TaskInstruction {
     private String productName;
 
     /**
-     * 计划用量
+     * 生产数量
      */
     private Long num;
 
@@ -47,9 +47,9 @@ public class TaskInstruction {
     private String productionDepartment;
 
     /**
-     * 焊材编号
+     * 焊材型号
      */
-    private Long weldingMaterialId;
+    private String weldingMaterialId;
 
     /**
      * 焊材名称

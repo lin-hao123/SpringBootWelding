@@ -2,11 +2,13 @@ $(document).ready(function(){
 //	创建出库单
     //保存
     $("#creatDeliveryListSave").click(function(data){
+    	var weldingProducts=$("input[name='createWeldingProducts']").val();
         var productId=$("input[name='createProductId']").val();
         var warehouseId=$("input[name='createWarehouseId']").val();
         var customerId=$("input[name='createCustomerId']").val();
         var num=$("input[name='createNum']").val();
         var data = {
+        		"weldingProducts": weldingProducts,
             "warehouseId": warehouseId,
             "productId": productId,
             "customerId": customerId,
@@ -45,15 +47,17 @@ $(document).ready(function(){
                     "<tr id='tridval"+i+"'>"
                     +"<td>"+contentdata[i].deliveryListId
                     +"</td>"
-                    +"<td>"+contentdata[i].customerId
+                    +"<td>"+contentdata[i].weldingProducts
                     +"</td>"
                     +"<td>"+contentdata[i].productId
                     +"</td>"
                     +"<td>"+contentdata[i].warehouseId
                     +"</td>"
-                    +"<td>"+contentdata[i].outTime
+                    +"<td>"+contentdata[i].customerId
                     +"</td>"
                     +"<td>"+contentdata[i].num
+                    +"</td>"
+                    +"<td>"+contentdata[i].outTime
                     +"</td>"
                     +"<td>"
                     +"&nbsp<button type='button' class='btn btn-outline-danger btn-sm'  id="+contentdata[i].deliveryListId+" name='deleteBtn' >删除</button>&nbsp;&nbsp;"
@@ -68,50 +72,54 @@ $(document).ready(function(){
                 var deliveryListId=this.id
                 $.getJSON("warehouse/deliveryList/"+deliveryListId,function(data){
                     console.log(data);
-                    var setCustomerId=data.data.customerId;
+                    var setDeliveryListId=data.data.deliveryListId;
+                    var setWeldingProducts=data.data.weldingProducts;
                     var setProductId=data.data.productId;
                     var setWarehouseId=data.data.warehouseId;
+                    var setCustomerId=data.data.customerId;
                     var setNum=data.data.num;
+                    var setOutTime=data.data.outTime;
 
-                    $("input[name='customerId']").val(setCustomerId);
+                    $("#deliveryListId2").text(setDeliveryListId);
+                    $("input[name='weldingProducts']").val(setWeldingProducts);
                     $("input[name='productId']").val(setProductId);
                     $("input[name='warehouseId']").val(setWarehouseId);
+                    $("input[name='customerId']").val(setCustomerId);
                     $("input[name='num']").val(setNum);
+                    $("input[name='outTime']").val(setOutTime);
 
                 });
             })
 
 
             //保存修改
-            $("#editSaveBtn").click(function(data){
-                var customerName= $("input[name='customerName']").val();
-                var productId=$("input[name='productId']").val();
-                var customerTel=$("input[name='customerTel']").val();
-                var address=$("input[name='address']").val();
-                var sex=$("input[name='sex']").val();
-                $('input[name="interest1"]:checked').each(function(){
-                    var temp = {};
-                    temp.id = $(this).val();
-                    chk_value.push(temp);
-                });
+            $("#deliveryListSubbtn").click(function(data){
+            	var id=$("#deliveryListId2").text();
+            	var weldingProducts= $("input[name='weldingProducts']").val();
+                var productId= $("input[name='productId']").val();
+                var warehouseId=$("input[name='warehouseId']").val();
+                var customerId=$("input[name='customerId']").val();
+                var num=$("input[name='num']").val();
+                var outTime=$("input[name='outTime']").val();
                 var data = {
-                    "customerName": customerName,
+                    "weldingProducts": weldingProducts,
                     "productId": productId,
-                    "customerTel": customerTel,
-                    "address": address,
-                    "sex": sex,
+                    "warehouseId": warehouseId,
+                    "customerId": customerId,
+                    "num": num,
+                    "outTime": outTime,
 
                 }
                 $.ajax({
                     type: "PUT",
-                    url: "deviceController/device",
+                    url: "warehouse/deliveryList/update/"+id,
                     data: JSON.stringify(data),
                     contentType: 'application/json',
                     success: function (json) {
                         console.log(json);
                         if(json.code==200){
                             alert("保存成功");
-                            window.location.href="deviceMessage.html";
+                            window.location.href="deliveryList.html";
                         }else{
                             alert("编辑失败");
                         }

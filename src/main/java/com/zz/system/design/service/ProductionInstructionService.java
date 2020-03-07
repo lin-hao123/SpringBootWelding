@@ -15,5 +15,7 @@ public interface ProductionInstructionService {
     ProductionInstruction create(ProductionInstruction productionInstruction);
 
     void delete(Long productionInstructionId);
+    
+    Integer updateProductionInstruction(ProductionInstruction productionInstruction);
 
 }

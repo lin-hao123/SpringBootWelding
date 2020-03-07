@@ -52,4 +52,10 @@ public class WelderInformationServiceImpl implements WelderInformationService {
         welderInformationRepository.deleteById(welderId);
 
     }
+
+	@Override
+	 @Transactional(value = "transactionManager", rollbackFor = {Exception.class}, readOnly = false)
+	public Integer updateWelderInformation(WelderInformation welderInformation) {
+		return welderInformationRepository.updateWelderInformation(welderInformation);
+	}
 }

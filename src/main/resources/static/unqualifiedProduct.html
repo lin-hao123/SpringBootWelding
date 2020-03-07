@@ -168,9 +168,26 @@
                         </a>
                         <ul class="dropdown-menu sub-down">
 
+                           <li class="nav-item dropdown">
+                         <a href="taskQueryProductionPlan.html" class="dropdown-toggle">
+                            <span>任务查询</span>
+                             <span class="arrow"> 
+                            <i class="lni-chevron-right"></i>
+                        </span>
+                        </a>
+                        <ul class="dropdown-menu sub-down">
                             <li>
-                                <a href="taskQuery.html">任务查询</a>
+                                <a href="taskQueryProductionPlan.html">生产计划</a>
                             </li>
+                            <li>
+                                <a href="taskQueryTaskInstruction.html">任务指令</a>
+                            </li>
+                            <li>
+                                <a href="taskQueryProductionInstruction.html">生产指导书</a>
+                            </li>
+                      
+                        </ul>
+                    </li>
                             <li>
                                 <a href="welderInformation.html">焊工信息</a>
                             </li>
@@ -297,7 +314,7 @@
                                 <div class="card-header border-bottom">
                                     <form class="form-inline" >
                                         <div class="col-12 col-lg-10 col-md-10">
-                                            输入名字:&nbsp;&nbsp;<input type="text" class="form-control" name="selectname" id="searchName">
+                                            选择日期:&nbsp;&nbsp;<input type="text" class="form-control" name="selectname" id="searchName">
                                             &nbsp;&nbsp;<button type="button" class="btn btn-outline-primary" id="searchbtn">查询</button>
                                             &nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-outline-secondary" id="selectbtn2">取消查询</button>
                                         </div>
@@ -315,8 +332,8 @@
                                                 <table class="table table-striped table-bordered">
                                                     <thead>
                                                     <tr align="center">
-                                                        <th>不合格产品编号</th>
-                                                        <th>生产订单</th>
+                                                        <th>编号</th>
+                                                        <th>产品编号</th>
                                                         <th>焊接产品</th>
                                                         <th>发现时间</th>
                                                         <th>不合格原因</th>
@@ -385,15 +402,15 @@
 
             <!-- 模态框主体 -->
             <div class="modal-body">
+                 <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                       <span class="input-group-text">编号</span>
+                  </div>
+                  <span class="form-control" id="unqualifiedProductId"></span>
+                  </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text">不合格产品编号</span>
-                    </div>
-                    <input type="text" class="form-control" id="unqualifiedProductId" name="unqualifiedProductId">
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">生产订单</span>
+                        <span class="input-group-text">产品编号</span>
                     </div>
                     <input type="text" class="form-control"  id="productionOrder" name="productionOrder">
                 </div>
@@ -405,6 +422,12 @@
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
+                        <span class="input-group-text">发现时间</span>
+                    </div>
+                    <input type="text" class="form-control" id="discoveryTime" name="discoveryTime">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
                         <span class="input-group-text">不合格原因</span>
                     </div>
                     <input type="text" class="form-control" id="disqualificationReason" name="disqualificationReason">
@@ -413,7 +436,7 @@
 
             <!-- 模态框底部 -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" id="subbtn">保存</button>
+                <button type="button" class="btn btn-danger" id="unqualifiedProductSubbtn">保存</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
             </div>
 
@@ -440,21 +463,21 @@
             <div class="modal-body">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text">生产订单</span>
+                        <span class="input-group-text">产品编号</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="生产订单" id="createProductionOrder" name="createProductionOrder">
+                    <input type="text" class="form-control" id="createProductionOrder" name="createProductionOrder">
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text">焊接产品</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="焊接产品" id="createWeldingProducts" name="createWeldingProducts">
+                    <input type="text" class="form-control"  id="createWeldingProducts" name="createWeldingProducts">
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text">不合格原因</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="不合格原因" id="createDisqualificationReason" name="createDisqualificationReason">
+                    <input type="text" class="form-control"  id="createDisqualificationReason" name="createDisqualificationReason">
                 </div>
             </div>
 

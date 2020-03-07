@@ -28,9 +28,9 @@ public class DispatchInformation {
      */
     private Long dispatchId;
     /**
-     * 生产单号
+     * 产品编号
      */
-    private Long productionId;
+    private String productionId;
     /**
      * 产品名称
      */

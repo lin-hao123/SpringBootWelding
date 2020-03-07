@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+	<!DOCTYPE html>
 
-</body>
-</html><!DOCTYPE html>
 <html>
 
 <!-- source http://www.scnoob.com More templates http://www.scnoob.com/moban -->
@@ -173,9 +165,26 @@
                         </span>
                         </a>
                         <ul class="dropdown-menu sub-down">
+                            <li class="nav-item dropdown">
+                         <a href="taskQueryProductionPlan.html" class="dropdown-toggle">
+                            <span>任务查询</span>
+                             <span class="arrow"> 
+                            <i class="lni-chevron-right"></i>
+                        </span>
+                        </a>
+                        <ul class="dropdown-menu sub-down">
                             <li>
-                                <a href="taskQuery.html">任务查询</a>
+                                <a href="taskQueryProductionPlan.html">生产计划</a>
                             </li>
+                            <li>
+                                <a href="taskQueryTaskInstruction.html">任务指令</a>
+                            </li>
+                            <li>
+                                <a href="taskQueryProductionInstruction.html">生产指导书</a>
+                            </li>
+                      
+                        </ul>
+                    </li>
                             <li>
                                 <a href="welderInformation.html">焊工信息</a>
                             </li>
@@ -303,7 +312,7 @@
                                 <div class="card-header border-bottom">
                                     <form class="form-inline" >
                                         <div class="col-12 col-lg-10 col-md-10">
-                                            输入名字:&nbsp;&nbsp;<input type="text" class="form-control" name="selectname" id="selectname">
+                                            产品编号:&nbsp;&nbsp;<input type="text" class="form-control" name="selectname" id="selectname">
                                             &nbsp;&nbsp;<button type="button" class="btn btn-outline-primary" id="searchbtn">查询</button>
                                             &nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-outline-secondary" id="selectbtn2">取消查询</button>
                                         </div>
@@ -320,12 +329,13 @@
                                                 <table class="table table-striped table-bordered">
                                                     <thead>
                                                     <tr align="center">
-                                                        <th>出库单编号</th>
-                                                        <th>客户编号</th>
+                                                        <th>编号</th>
+                                                        <th>焊接产品</th>
                                                         <th>产品编号</th>
                                                         <th>仓库编号</th>
-                                                        <th>出库日期</th>
+                                                        <th>客户编号</th>
                                                         <th>数量</th>
+                                                        <th>出库日期</th>
                                                         <th>操作</th>
                                                     </tr>
                                                     </thead>
@@ -393,11 +403,17 @@
 
             <!-- 模态框主体 -->
             <div class="modal-body">
+             <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                       <span class="input-group-text">编号</span>
+                  </div>
+                  <span class="form-control" id="deliveryListId2"></span>
+                  </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text">客户编号</span>
+                        <span class="input-group-text">焊接产品</span>
                     </div>
-                    <input type="text" class="form-control"  id="customerId" name="customerId">
+                    <input type="text" class="form-control"  id="weldingProducts" name="weldingProducts">
                 </div>
 
                 <div class="input-group mb-3">
@@ -413,6 +429,12 @@
                     </div>
                     <input type="text" class="form-control"  id="warehouseId" name="warehouseId">
                 </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">客户编号</span>
+                    </div>
+                    <input type="text" class="form-control"  id="customerId" name="customerId">
+                </div>
 
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -420,13 +442,19 @@
                     </div>
                     <input type="text" class="form-control"  id="num" name="num">
                 </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">出库日期</span>
+                    </div>
+                    <input type="text" class="form-control"  id="outTime" name="outTime">
+                </div>
 
 
             </div>
 
             <!-- 模态框底部 -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" id="subbtn">保存</button>
+                <button type="button" class="btn btn-danger" id="deliveryListSubbtn">保存</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
             </div>
 
@@ -450,31 +478,38 @@
             <div class="modal-body">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
+                        <span class="input-group-text">焊接产品</span>
+                    </div>
+                    <input type="text" class="form-control" id="createWeldingProducts" name="createWeldingProducts">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
                         <span class="input-group-text">产品编号</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="产品编号" id="createProductId" name="createProductId">
+                    <input type="text" class="form-control" id="createProductId" name="createProductId">
                 </div>
 
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text">仓库编号</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="仓库编号" id="createWarehouseId" name="createWarehouseId">
+                    <input type="text" class="form-control" id="createWarehouseId" name="createWarehouseId">
                 </div>
 
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text">顾客编号</span>
+                        <span class="input-group-text">客户编号</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="顾客编号" id="createCustomerId" name="createCustomerId">
+                    <input type="text" class="form-control" id="createCustomerId" name="createCustomerId">
                 </div>
 
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text">数量</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="数量" id="createNum" name="createNum">
+                    <input type="text" class="form-control" id="createNum" name="createNum">
                 </div>
+                
 
 
 

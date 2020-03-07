@@ -15,4 +15,6 @@ public interface DeliveryListService {
     void delete(Long deliveryListId);
 
     DeliveryList findById(Long deliveryListId);
+    
+    Integer updateDeliveryList(DeliveryList deliveryList);
 }

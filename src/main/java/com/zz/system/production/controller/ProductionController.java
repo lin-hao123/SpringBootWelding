@@ -1,6 +1,7 @@
 package com.zz.system.production.controller;
 
 
+import com.zz.system.design.entity.Customer;
 import com.zz.system.production.entity.DispatchInformation;
 import com.zz.system.production.entity.Equipment;
 import com.zz.system.production.entity.EquipmentMaintenanceApplication;
@@ -10,8 +11,12 @@ import com.zz.system.production.service.EquipmentMaintenanceApplicationService;
 import com.zz.system.production.service.EquipmentService;
 import com.zz.system.production.service.WelderInformationService;
 import com.zz.vo.ResponseData;
+import com.zz.vo.ResponseDataUtil;
+
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Date;
 
 import javax.annotation.Resource;
 
@@ -106,6 +111,17 @@ public class ProductionController {
         return responseData;
     }
 
+    @PutMapping("welderInformation/update/{id}")
+    public ResponseData updateWelderInformation(@PathVariable(value = "id") String id, @RequestBody WelderInformation welderInformation) {
+    	welderInformation.setWelderId(Long.parseLong(id));        
+    	welderInformation.setUpdateTime(new Date());
+    	Integer rs=welderInformationService.updateWelderInformation(welderInformation);
+    	if(rs==1){
+    		 return ResponseDataUtil.success("修改成功",rs);
+    	}else{
+    		return ResponseDataUtil.failure(500, "修改失败");
+    	}
+    }
 
     //=============================================================设备维修申请管理==================================================
 
@@ -165,7 +181,7 @@ public class ProductionController {
      * @param equipmentMaintenanceApplicationId
      * @return
      */
-    @GetMapping("equipmentMaintenanceApplication/{equipmentMaintenanceApplicationId}")
+    @GetMapping("equipmentMaintenanceApplication/{equipmentMaintenanceApplicationId}") 
     public ResponseData findEquipmentMaintenanceApplication(@PathVariable ("equipmentMaintenanceApplicationId") Long equipmentMaintenanceApplicationId){
 
         ResponseData responseData=new ResponseData();
@@ -176,6 +192,16 @@ public class ProductionController {
         return responseData;
     }
 
+    @PutMapping("equipmentMaintenanceApplication/update/{id}")
+    public ResponseData updateEquipmentMaintenanceApplication(@PathVariable(value = "id") String id, @RequestBody EquipmentMaintenanceApplication equipmentMaintenanceApplication) {
+    	equipmentMaintenanceApplication.setEquipmentMaintenanceApplicationId(Long.parseLong(id));
+    	Integer rs=equipmentMaintenanceApplicationService.updateEquipmentMaintenanceApplication(equipmentMaintenanceApplication);
+    	if(rs==1){
+    		 return ResponseDataUtil.success("修改成功",rs);             
+    	}else{           
+    		return ResponseDataUtil.failure(500, "修改失败");
+    	}
+    }
 
 
 
@@ -246,6 +272,17 @@ public class ProductionController {
         responseData.setMsg("success");
         responseData.setData(dispatchInformation);
         return responseData;
+    }
+    
+    @PutMapping("dispatchInformation/update/{id}")
+    public ResponseData updateDispatchInformation(@PathVariable(value = "id") String id, @RequestBody DispatchInformation dispatchInformation) {
+    	dispatchInformation.setDispatchId(Long.parseLong(id));
+    	Integer rs=dispatchInformationService.updateDispatchInformation(dispatchInformation);
+    	if(rs==1){
+    		 return ResponseDataUtil.success("修改成功",rs);             
+    	}else{           
+    		return ResponseDataUtil.failure(500, "修改失败");
+    	}
     }
 
 
@@ -318,6 +355,16 @@ public class ProductionController {
         return responseData;
     }
 
+    @PutMapping("equipment/update/{id}")
+    public ResponseData updateEquipment(@PathVariable(value = "id") String id, @RequestBody Equipment equipment) {
+    	equipment.setEquipmentId(Long.parseLong(id));     
+    	Integer rs=equipmentService.updateEquipment(equipment);
+    	if(rs==1){
+    		 return ResponseDataUtil.success("修改成功",rs);             
+    	}else{
+    		return ResponseDataUtil.failure(500, "修改失败");
+    	}
+    }
 
 
 

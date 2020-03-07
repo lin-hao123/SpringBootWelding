@@ -1,5 +1,5 @@
 $(document).ready(function(){
-//	创建设备
+//	创建生产指导书
     //保存
     $("#createProductionInstructionSave").click(function(data){
         var productionOrder=$("input[name='createProductionOrder']").val();
@@ -77,12 +77,14 @@ $(document).ready(function(){
                 var productionInstructionId=this.id
                 $.getJSON("design/productionInstruction/"+productionInstructionId,function(data){
                     console.log(data);
+                    var setProductionInstructionId=data.data.productionInstructionId;
                     var setProductionOrder=data.data.productionOrder;
                     var setWeldingMethod=data.data.weldingMethod;
                     var setWeldingEquipment=data.data.weldingEquipment;
                     var setProcessParameter=data.data.processParameter;
                     var setPreWeldingTreatment=data.data.preWeldingTreatment;
                     var setPostWeldProcessing=data.data.postWeldProcessing;
+                    $("#productionOrderId2").text(setProductionInstructionId); 
                     $("input[name='productionOrder']").val(setProductionOrder);
                     $("input[name='weldingMethod']").val(setWeldingMethod);
                     $("input[name='weldingEquipment']").val(setWeldingEquipment);
@@ -95,39 +97,32 @@ $(document).ready(function(){
 
 
             //保存修改
-            $("#editSaveBtn").click(function(data){
-                var productName=$("input[name='productName']").val();
-                var num=$("input[name='num']").val();
-                var status=$("input[name='status']").val();
-                var customerId=$("input[name='customerId']").val();
-                var warehouseId=$("input[name='warehouseId']").val();
-                var entryListId=$("input[name='entryListId']").val();
-                var money=$("input[name='money']").val();
-                $('input[name="interest1"]:checked').each(function(){
-                    var temp = {};
-                    temp.id = $(this).val();
-                    chk_value.push(temp);
-                });
+            $("#productionInstructionSubbtn").click(function(data){
+            	var id=$("#productionOrderId2").text();
+                var productionOrder=$("input[name='productionOrder']").val();
+                var weldingMethod=$("input[name='weldingMethod']").val();
+                var weldingEquipment=$("input[name='weldingEquipment']").val();
+                var processParameter=$("input[name='processParameter']").val();
+                var preWeldingTreatment=$("input[name='preWeldingTreatment']").val();
+                var postWeldProcessing=$("input[name='postWeldProcessing']").val();
                 var data = {
-                    "productName": productName,
-                    "num": num,
-                    "status": status,
-                    "customerId": customerId,
-                    "warehouseId": warehouseId,
-                    "entryListId": entryListId,
-                    "money": money,
-
+                    "productionOrder": productionOrder,
+                    "weldingMethod": weldingMethod,
+                    "weldingEquipment": weldingEquipment,
+                    "processParameter": processParameter,
+                    "preWeldingTreatment": preWeldingTreatment,
+                    "postWeldProcessing": postWeldProcessing,
                 }
                 $.ajax({
                     type: "PUT",
-                    url: "deviceController/device",
+                    url: "design/productionInstruction/update/"+id,
                     data: JSON.stringify(data),
                     contentType: 'application/json',
                     success: function (json) {
                         console.log(json);
                         if(json.code==200){
                             alert("保存成功");
-                            window.location.href="deviceMessage.html";
+                            window.location.href="productionInstruction.html";
                         }else{
                             alert("编辑失败");
                         }

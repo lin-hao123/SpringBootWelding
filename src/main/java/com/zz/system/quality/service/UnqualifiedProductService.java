@@ -16,5 +16,7 @@ public interface UnqualifiedProductService {
     void delete(Long unqualifiedProductId);
 
     UnqualifiedProduct findById(Long unqualifiedProductId);
+    
+    Integer updateUnqualifiedProduct(UnqualifiedProduct unqualifiedProduct);
 
 }

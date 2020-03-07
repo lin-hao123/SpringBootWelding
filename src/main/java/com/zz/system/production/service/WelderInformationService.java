@@ -15,4 +15,6 @@ public interface WelderInformationService {
     WelderInformation create(WelderInformation welderInformation);
 
     void delete(Long welderId);
+    
+    Integer updateWelderInformation(WelderInformation welderInformation); 
 }

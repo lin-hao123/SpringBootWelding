@@ -23,7 +23,7 @@ public class MaterialInspectionServiceImpl implements MaterialInspectionService 
 
     @Override
     public Page<MaterialInspection> findByInspectionStaffLike(String inspectionStaff, int page, int size) {
-        Sort sort=new Sort(Sort.Direction.DESC,"detectionStatus");
+        Sort sort=new Sort(Sort.Direction.DESC,"checkedTime");
         Pageable pageable= PageRequest.of(page,size,sort);
         if(inspectionStaff==null||inspectionStaff==""){
             inspectionStaff="%%";
@@ -50,4 +50,10 @@ public class MaterialInspectionServiceImpl implements MaterialInspectionService 
     public MaterialInspection findById(Long materialInspectionId) {
         return materialInspectionRepository.findById(materialInspectionId).get();
     }
+
+	@Override
+	@Transactional(value = "transactionManager", rollbackFor = {Exception.class}, readOnly = false)
+	public Integer updateMaterialInspection(MaterialInspection materialInspection) {
+		return materialInspectionRepository.updateMaterialInspection(materialInspection);
+	}
 }

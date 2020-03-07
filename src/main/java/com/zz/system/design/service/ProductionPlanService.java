@@ -15,4 +15,6 @@ public interface ProductionPlanService {
     ProductionPlan create(ProductionPlan productionPlan);
 
     void delete(Long productionPlanId);
+    
+    Integer updateProductionPlan(ProductionPlan productionPlan);
 }

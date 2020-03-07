@@ -32,12 +32,12 @@ public class DeliveryList implements Serializable {
     private Long deliveryListId;
 
     /**
-     *用户id
+     * 焊接产品
      */
-    private String userId;
+    private String weldingProducts;
 
     /**
-     *产品id
+     *产品编号
      */
     private String productId;
 
@@ -47,18 +47,19 @@ public class DeliveryList implements Serializable {
     private String warehouseId;
 
     /**
-     *顾客id
+     *客户
      */
     private String customerId;
+    /**
+     *数量
+     */
+    private Long num;
 
     /**
      *出库日期
      */
     private Date outTime;
 
-    /**
-     *数量
-     */
-    private Long num;
+    
 
 }

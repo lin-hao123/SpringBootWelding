@@ -53,4 +53,10 @@ public class UnqualifiedProductServiceImpl implements UnqualifiedProductService 
     public UnqualifiedProduct findById(Long unqualifiedProductId) {
         return unqualifiedProductRepository.findById(unqualifiedProductId).get();
     }
+
+	@Override
+	@Transactional(value = "transactionManager", rollbackFor = {Exception.class}, readOnly = false)
+	public Integer updateUnqualifiedProduct(UnqualifiedProduct unqualifiedProduct) {
+		return unqualifiedProductRepository.updateUnqualifiedProduct(unqualifiedProduct);
+	}
 }

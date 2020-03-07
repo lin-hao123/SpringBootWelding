@@ -26,7 +26,7 @@ public class ProductionInstruction {
     private Long productionInstructionId;
 
     /**
-     * 生产订单
+     * 产品编号
      */
     private String productionOrder;
 

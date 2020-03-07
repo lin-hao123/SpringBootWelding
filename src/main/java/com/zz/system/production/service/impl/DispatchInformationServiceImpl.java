@@ -52,4 +52,10 @@ public class DispatchInformationServiceImpl implements DispatchInformationServic
         dispatchInformationRepository.deleteById(dispatchId);
 
     }
+
+	@Override
+	 @Transactional(value = "transactionManager", rollbackFor = {Exception.class}, readOnly = false)
+	public Integer updateDispatchInformation(DispatchInformation dispatchInformation) {
+		return dispatchInformationRepository.updateDispatchInformation(dispatchInformation);
+	}
 }

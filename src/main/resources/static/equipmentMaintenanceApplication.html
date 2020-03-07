@@ -1,13 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
 
-</body>
-</html><!DOCTYPE html>
 <html>
 
 <!-- source http://www.scnoob.com More templates http://www.scnoob.com/moban -->
@@ -173,9 +165,26 @@
                         </span>
                         </a>
                         <ul class="dropdown-menu sub-down">
+                            <li class="nav-item dropdown">
+                         <a href="taskQueryProductionPlan.html" class="dropdown-toggle">
+                            <span>任务查询</span>
+                             <span class="arrow"> 
+                            <i class="lni-chevron-right"></i>
+                        </span>
+                        </a>
+                        <ul class="dropdown-menu sub-down">
                             <li>
-                                <a href="taskQuery.html">任务查询</a>
+                                <a href="taskQueryProductionPlan.html">生产计划</a>
                             </li>
+                            <li>
+                                <a href="taskQueryTaskInstruction.html">任务指令</a>
+                            </li>
+                            <li>
+                                <a href="taskQueryProductionInstruction.html">生产指导书</a>
+                            </li>
+                      
+                        </ul>
+                    </li>
                             <li>
                                 <a href="welderInformation.html">焊工信息</a>
                             </li>
@@ -303,7 +312,7 @@
                                 <div class="card-header border-bottom">
                                     <form class="form-inline" >
                                         <div class="col-12 col-lg-10 col-md-10">
-                                            输入名字:&nbsp;&nbsp;<input type="text" class="form-control" name="selectname" id="selectname">
+                                            输入日期:&nbsp;&nbsp;<input type="text" class="form-control" name="selectname" id="selectname">
                                             &nbsp;&nbsp;<button type="button" class="btn btn-outline-primary" id="searchbtn">查询</button>
                                             &nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-outline-secondary" id="selectbtn2">取消查询</button>
                                         </div>
@@ -394,7 +403,12 @@
 
             <!-- 模态框主体 -->
             <div class="modal-body">
-
+                  <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                       <span class="input-group-text">编号</span>
+                  </div>
+                  <span class="form-control" id="equipmentMaintenanceApplicationId2"></span>
+                  </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text">设备编号</span>
@@ -423,13 +437,22 @@
                     </div>
                     <input type="text" class="form-control"  id="applyReason" name="applyReason">
                 </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">状态</span>
+                    </div>
+                    <input type="text" class="form-control" id="status" name="status">
+                    <div class="input-group-append">
+                        <span class="input-group-text">（已维修/待维修）</span>
+                    </div>
+                </div>
 
 
             </div>
 
             <!-- 模态框底部 -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" id="subbtn">保存</button>
+                <button type="button" class="btn btn-danger" id="equipmentMaintenanceApplicationSubbtn">保存</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
             </div>
 
@@ -455,28 +478,28 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text">设备编号</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="设备编号" id="createDeviceId" name="createDeviceId">
+                    <input type="text" class="form-control" id="createDeviceId" name="createDeviceId">
                 </div>
 
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text">设备名称</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="设备名称" id="createDeviceName" name="createDeviceName">
+                    <input type="text" class="form-control" id="createDeviceName" name="createDeviceName">
                 </div>
 
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text">负责人</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="负责人" id="createResponsible" name="createResponsible">
+                    <input type="text" class="form-control" id="createResponsible" name="createResponsible">
                 </div>
 
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text">申请原因</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="申请原因" id="createApplyReason" name="createApplyReason">
+                    <input type="text" class="form-control" id="createApplyReason" name="createApplyReason">
                 </div>
 
             </div>

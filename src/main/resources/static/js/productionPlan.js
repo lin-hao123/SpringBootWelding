@@ -1,5 +1,5 @@
 $(document).ready(function(){
-//	创建设备
+//	创建生产计划
     //保存
     $("#createProductionPlanSave").click(function(data){
         var productName=$("input[name='createProductName']").val();
@@ -77,11 +77,13 @@ $(document).ready(function(){
                 var productionPlanId=this.id
                 $.getJSON("design/productionPlan/"+productionPlanId,function(data){
                     console.log(data);
+                    var setProductionPlanId=data.data.productionPlanId;
                     var setProductName=data.data.productName;
                     var setSpecification=data.data.specification;
                     var setProductionOrder=data.data.productionOrder;
                     var setNum=data.data.num;
                     var setDeliveryDate=data.data.deliveryDate;
+                    $("#productionPlanId2").text(setProductionPlanId);
                     $("input[name='productName']").val(setProductName);
                     $("input[name='specification']").val(setSpecification);
                     $("input[name='productionOrder']").val(setProductionOrder);
@@ -93,39 +95,30 @@ $(document).ready(function(){
 
 
             //保存修改
-            $("#editSaveBtn").click(function(data){
+            $("#productionPlanSubbtn").click(function(data){
+            	var id=$("#productionPlanId2").text();
                 var productName=$("input[name='productName']").val();
+                var specification=$("input[name='specification']").val();
+                var productionOrder=$("input[name='productionOrder']").val();
                 var num=$("input[name='num']").val();
-                var status=$("input[name='status']").val();
-                var customerId=$("input[name='customerId']").val();
-                var warehouseId=$("input[name='warehouseId']").val();
-                var entryListId=$("input[name='entryListId']").val();
-                var money=$("input[name='money']").val();
-                $('input[name="interest1"]:checked').each(function(){
-                    var temp = {};
-                    temp.id = $(this).val();
-                    chk_value.push(temp);
-                });
+                var deliveryDate=$("input[name='deliveryDate']").val();
                 var data = {
+                    "specification": specification,
                     "productName": productName,
+                    "productionOrder": productionOrder,
                     "num": num,
-                    "status": status,
-                    "customerId": customerId,
-                    "warehouseId": warehouseId,
-                    "entryListId": entryListId,
-                    "money": money,
-
+                    "deliveryDate": deliveryDate,
                 }
                 $.ajax({
                     type: "PUT",
-                    url: "deviceController/device",
+                    url: "design/productionPlan/update/"+id,
                     data: JSON.stringify(data),
                     contentType: 'application/json',
                     success: function (json) {
                         console.log(json);
                         if(json.code==200){
                             alert("保存成功");
-                            window.location.href="deviceMessage.html";
+                            window.location.href="productionPlan.html";
                         }else{
                             alert("编辑失败");
                         }

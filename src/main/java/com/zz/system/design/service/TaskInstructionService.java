@@ -15,4 +15,6 @@ public interface TaskInstructionService {
     TaskInstruction create(TaskInstruction taskInstruction);
 
     void delete(Long taskInstructionId);
+    
+    Integer updateTaskInstruction(TaskInstruction taskInstruction); 
 }

@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
 
 <!-- source http://www.scnoob.com More templates http://www.scnoob.com/moban -->
@@ -17,13 +18,11 @@
 
     <link rel="stylesheet" type="text/css" href="wareadmin/assets/css/responsive.css">
     <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript" src="js/materialInspection.js"></script>
+    <script type="text/javascript" src="js/taskQueryProductionPlan.js"></script>
     <script type="text/javascript" src="js/sideBar.js"></script>
 </head>
 <div class="app header-default side-nav-dark">
     <div class="layout">
-
-
         <!-- 头条开始 -->
         <div class="header navbar">
             <div class="header-container">
@@ -66,8 +65,13 @@
 
                             <li>
                                 <a href="login.html">
+
                                     <i class="lni-lock"></i>
                                     <span>退出</span>
+                                </a>
+                                <a href="index.html">
+                                    <i class="lni-lock"></i>
+                                    <span>首页</span>
                                 </a>
                             </li>
                         </ul>
@@ -84,7 +88,7 @@
                     <li class="side-nav-header">
                         <span>焊接企业部门管理</span>
                     </li>
-                    <li class="nav-item dropdown" id="resourcePermission">
+                    <li class="nav-item dropdown"  id="resourcePermission">
                         <a href="#" class="dropdown-toggle">
                         <span class="icon-holder">
                             <i class="lni-cloud"></i>
@@ -95,7 +99,7 @@
                         </span>
                         </a>
                         <ul class="dropdown-menu sub-down">
-                            <li class="active">
+                            <li>
                                 <a href="index.html">用户管理</a>
                             </li>
                             <li>
@@ -156,7 +160,8 @@
                         </ul>
                     </li>
                     <!-- ------------------------------------------------------------------------------------------------ -->
-                    <li class="nav-item dropdown">
+                   
+                    <li class="nav-item dropdown open">
                         <a class="dropdown-toggle">
                         <span class="icon-holder">
                             <i class="lni-cloud"></i>
@@ -167,15 +172,15 @@
                         </span>
                         </a>
                         <ul class="dropdown-menu sub-down">
-                            <li class="nav-item dropdown">
+                      <li class="nav-item dropdown">
                          <a href="taskQueryProductionPlan.html" class="dropdown-toggle">
-                            <span>任务查询</span>
+                            <span class="title">任务查询</span>
                              <span class="arrow"> 
                             <i class="lni-chevron-right"></i>
                         </span>
                         </a>
                         <ul class="dropdown-menu sub-down">
-                            <li>
+                            <li class="active">
                                 <a href="taskQueryProductionPlan.html">生产计划</a>
                             </li>
                             <li>
@@ -201,7 +206,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item dropdown open">
+                    <li class="nav-item dropdown">
                         <a class="dropdown-toggle">
                         <span class="icon-holder">
                             <i class="lni-cloud"></i>
@@ -212,11 +217,11 @@
                         </span>
                         </a>
                         <ul class="dropdown-menu sub-down">
-                            <li class="active">
+                            <li>
                                 <a href="materialInspection.html">物料检测</a>
                             </li>
                             <li>
-                                <a href="unqualifiedProduct.html">不合格产品处理</a>
+                                <a href="wait.html">不合格产品处理</a>
                             </li>
                         </ul>
                     </li>
@@ -301,6 +306,7 @@
             </div>
         </div>
         <!-- 左导航栏结束 -->
+
         <!-- main开始 -->
         <div class="page-container">
             <div class="main-content">
@@ -313,12 +319,9 @@
                                 <div class="card-header border-bottom">
                                     <form class="form-inline" >
                                         <div class="col-12 col-lg-10 col-md-10">
-                                            输入日期:&nbsp;&nbsp;<input type="text" class="form-control" name="selectname" id="searchName">
+                                           产品编号:&nbsp;&nbsp;<input type="text" class="form-control" name="selectname" id="selectname">
                                             &nbsp;&nbsp;<button type="button" class="btn btn-outline-primary" id="searchbtn">查询</button>
                                             &nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-outline-secondary" id="selectbtn2">取消查询</button>
-                                        </div>
-                                        <div class="col-12 col-lg-2 col-md-2">
-                                            <button type="button" class="btn btn-danger btn-rounded" data-toggle="modal" data-target="#insertrkbtn" name='createMaterialInspectionBtn'>新建物料检测信息  +</button>
                                         </div>
                                     </form>
                                 </div>
@@ -331,17 +334,16 @@
                                                     <thead>
                                                     <tr align="center">
                                                         <th>编号</th>
+                                                        <th>产品规格</th>
+                                                        <th>产品名称</th>
                                                         <th>产品编号</th>
-                                                        <th>焊接产品</th>
-                                                        <th>检测数量</th>
-                                                        <th>合格数量</th>
-                                                        <th>备注</th>
-                                                        <th>检测人员</th>
-                                                        <th>检测时间</th>
-                                                        <th>操作</th>
+                                                        <th>生产数量</th>
+                                                        <th>截止日期</th>
+                                                        <th>创建日期</th>
+                                                        <th>更新日期</th>
                                                     </tr>
                                                     </thead>
-                                                    <tbody align="center" id="tbodyMaterialInspectionBtn">
+                                                    <tbody align="center" id="tbodyProductionPlanbtn">
 
                                                     </tbody>
                                                 </table>
@@ -378,6 +380,8 @@
         </div>
     </div>
 </div>
+
+
 <script src="wareadmin/assets/js/jquery-min.js"></script>
 <script src="wareadmin/assets/js/popper.min.js"></script>
 <script src="wareadmin/assets/js/bootstrap.min.js"></script>
@@ -388,149 +392,8 @@
 <script src="wareadmin/assets/plugins/raphael/raphael-min.js"></script>
 <!-- <script src="wareadmin/assets/js/dashborad1.js"></script> -->
 </body>
-
+<!--<script type="text/javascript" src="js/customer.js"></script>-->
 <!-- source http://www.scnoob.com More templates http://www.scnoob.com/moban -->
-<!-- 所有用户     编辑模态框 -->
-<div class="modal fade" id="myModal">
-    <div class="modal-dialog modal-lg"> 
-        <div class="modal-content">
-
-            <!-- 模态框头部 -->
-            <div class="modal-header">
-                <h4 class="modal-title">编辑物料检测信息</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-
-            <!-- 模态框主体 -->
-            <div class="modal-body">
-               <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                       <span class="input-group-text">编号</span>
-                  </div>
-                  <span class="form-control" id="materialInspectionId2"></span>
-                  </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">产品编号</span>
-                    </div>
-                    <input type="text" class="form-control" id="weldingConsumablesId" name="weldingConsumablesId">
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">焊接产品</span>
-                    </div>
-                    <input type="text" class="form-control"  id="weldingConsumables" name="weldingConsumables">
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">检测数量</span>
-                    </div>
-                    <input type="text" class="form-control"  id="detectionQuantity" name="detectionQuantity">
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">合格数量</span>
-                    </div>
-                    <input type="text" class="form-control" id="qualifiedQuantity" name="qualifiedQuantity">
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">备注</span>
-                    </div>
-                    <input type="text" class="form-control" id="note" name="note">
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">检测人员</span>
-                    </div>
-                    <input type="text" class="form-control" id="inspectionStaff" name="inspectionStaff">
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">检测时间</span>
-                    </div>
-                    <input type="text" class="form-control" placeholder="××××-××-××" id="checkedTime" name="checkedTime">
-                </div>
-                    </div>
-
-            <!-- 模态框底部 -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" id="materialInspectionSubbtn">保存</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
-            </div>
-
-        </div>
-    </div>
-</div>
 
 
-
-
-<!-- 新建物料检测信息 -->
-<!-- 模态框 -->
-<div class="modal fade" id="insertrkbtn">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-
-            <!-- 模态框头部 -->
-            <div class="modal-header">
-                <h4 class="modal-title">新建物料检测信息</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-
-            <!-- 模态框主体 -->
-            <div class="modal-body">
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">产品编号</span>
-                    </div>
-                    <input type="text" class="form-control" id="createWeldingConsumablesId" name="createWeldingConsumablesId">
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">焊接产品</span>
-                    </div>
-                    <input type="text" class="form-control"  id="createWeldingConsumables" name="createWeldingConsumables">
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">检测数量</span>
-                    </div>
-                    <input type="text" class="form-control"  id="createDetectionQuantity" name="createDetectionQuantity">
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">合格数量</span>
-                    </div>
-                    <input type="text" class="form-control" id="createQualifiedQuantity" name="createQualifiedQuantity">
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">备注</span>
-                    </div>
-                    <input type="text" class="form-control" id="createNote" name="createNote">
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">检测人员</span>
-                    </div>
-                    <input type="text" class="form-control" id="createInspectionStaff" name="createInspectionStaff">
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">检测时间</span>
-                    </div>
-                    <input type="text" class="form-control" placeholder="××××-××-××" id="createCheckedTime" name="createCheckedTime">
-                </div>
-                    </div>
-
-            <!-- 模态框底部 -->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" id="createMaterialInspectionSave">确定</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
-            </div>
-
-        </div>
-    </div>
-</div>
 </html>

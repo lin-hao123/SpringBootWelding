@@ -2,6 +2,7 @@ package com.zz.system.quality.controller;
 
 
 import com.zz.system.design.entity.Customer;
+import com.zz.system.production.entity.DispatchInformation;
 import com.zz.system.quality.entity.Announcement;
 import com.zz.system.quality.entity.MaterialInspection;
 import com.zz.system.quality.entity.UnqualifiedProduct;
@@ -9,6 +10,8 @@ import com.zz.system.quality.service.AnnouncementService;
 import com.zz.system.quality.service.MaterialInspectionService;
 import com.zz.system.quality.service.UnqualifiedProductService;
 import com.zz.vo.ResponseData;
+import com.zz.vo.ResponseDataUtil;
+
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
@@ -101,7 +104,17 @@ public class QualityController {
         return responseData;
     }
 
-
+    
+    @PutMapping("materialInspection/update/{id}")
+    public ResponseData updateMaterialInspection(@PathVariable(value = "id") String id, @RequestBody MaterialInspection materialInspection) {
+    	materialInspection.setMaterialInspectionId(Long.parseLong(id));
+    	Integer rs=materialInspectionService.updateMaterialInspection(materialInspection);
+    	if(rs==1){
+    		 return ResponseDataUtil.success("修改成功",rs);             
+    	}else{           
+    		return ResponseDataUtil.failure(500, "修改失败");
+    	}
+    }
 
     //=================================================不合格产品处理=================================================
 
@@ -170,7 +183,17 @@ public class QualityController {
         responseData.setData(unqualifiedProduct);
         return responseData;
     }
-
+    
+    @PutMapping("unqualifiedProduct/update/{id}")
+    public ResponseData updateUnqualifiedProduct(@PathVariable(value = "id") String id, @RequestBody UnqualifiedProduct unqualifiedProduct) {
+    	unqualifiedProduct.setUnqualifiedProductId(Long.parseLong(id));
+    	Integer rs=unqualifiedProductService.updateUnqualifiedProduct(unqualifiedProduct);
+    	if(rs==1){
+    		 return ResponseDataUtil.success("修改成功",rs);             
+    	}else{           
+    		return ResponseDataUtil.failure(500, "修改失败");
+    	}
+    }
 
     //=================================================公告信息管理=================================================
 

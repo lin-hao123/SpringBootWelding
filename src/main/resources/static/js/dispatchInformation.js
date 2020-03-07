@@ -82,6 +82,7 @@ $(document).ready(function(){
                 var dispatchId=this.id
                 $.getJSON("production/dispatchInformation/"+dispatchId,function(data){
                     console.log(data);
+                    var setDispatchId=data.data.dispatchId;
                     var setProductionId=data.data.productionId;
                     var setProductName=data.data.productName;
                     var setTaskVolume=data.data.taskVolume;
@@ -91,6 +92,7 @@ $(document).ready(function(){
                     var setProduction=data.data.production;
                     var setDeliveryTime=data.data.deliveryTime;
 
+                    $("#dispatchInformationId2").text(setDispatchId);
                     $("input[name='productionId']").val(setProductionId);
                     $("input[name='productName']").val(setProductName);
                     $("input[name='taskVolume']").val(setTaskVolume);
@@ -105,35 +107,38 @@ $(document).ready(function(){
 
 
             //保存修改
-            $("#editSaveBtn").click(function(data){
-                var customerName= $("input[name='customerName']").val();
-                var productId=$("input[name='productId']").val();
-                var customerTel=$("input[name='customerTel']").val();
-                var address=$("input[name='address']").val();
-                var sex=$("input[name='sex']").val();
-                $('input[name="interest1"]:checked').each(function(){
-                    var temp = {};
-                    temp.id = $(this).val();
-                    chk_value.push(temp);
-                });
+            $("#dispatchInformationSubbtn").click(function(data){
+            	var id=$("#dispatchInformationId2").text();
+                var productionId= $("input[name='productionId']").val();
+                var productName=$("input[name='productName']").val();
+                var taskVolume=$("input[name='taskVolume']").val();
+                var startTime=$("input[name='startTime']").val();
+                var finishTime=$("input[name='finishTime']").val();
+                var productionInstruction=$("input[name='productionInstruction']").val();
+                var production=$("input[name='production']").val();
+                var deliveryTime=$("input[name='deliveryTime']").val();
+               
                 var data = {
-                    "customerName": customerName,
-                    "productId": productId,
-                    "customerTel": customerTel,
-                    "address": address,
-                    "sex": sex,
+                    "productionId": productionId,
+                    "productName": productName,
+                    "taskVolume": taskVolume,
+                    "startTime": startTime,
+                    "finishTime": finishTime,
+                    "productionInstruction": productionInstruction,
+                    "production": production,
+                    "deliveryTime": deliveryTime,
 
                 }
                 $.ajax({
                     type: "PUT",
-                    url: "deviceController/device",
+                    url: "production/dispatchInformation/update/"+id,
                     data: JSON.stringify(data),
                     contentType: 'application/json',
                     success: function (json) {
                         console.log(json);
                         if(json.code==200){
                             alert("保存成功");
-                            window.location.href="deviceMessage.html";
+                            window.location.href="dispatchInformation.html";
                         }else{
                             alert("编辑失败");
                         }

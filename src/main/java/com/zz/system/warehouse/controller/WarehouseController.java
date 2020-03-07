@@ -1,9 +1,12 @@
 package com.zz.system.warehouse.controller;
 
 
+import com.zz.system.quality.entity.MaterialInspection;
 import com.zz.system.warehouse.entity.*;
 import com.zz.system.warehouse.service.*;
 import com.zz.vo.ResponseData;
+import com.zz.vo.ResponseDataUtil;
+
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
@@ -113,6 +116,16 @@ public class WarehouseController {
         return responseData;
     }
 
+    @PutMapping("deliveryList/update/{id}")
+    public ResponseData updateDeliveryList(@PathVariable(value = "id") String id, @RequestBody DeliveryList deliveryList) {
+    	deliveryList.setDeliveryListId(Long.parseLong(id));
+    	Integer rs=deliveryListService.updateDeliveryList(deliveryList);
+    	if(rs==1){
+    		 return ResponseDataUtil.success("修改成功",rs);             
+    	}else{           
+    		return ResponseDataUtil.failure(500, "修改失败");
+    	}
+    }
 
     //===========================================入库单信息管理======================================
 

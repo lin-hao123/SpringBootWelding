@@ -15,4 +15,6 @@ public interface EquipmentMaintenanceApplicationService {
     EquipmentMaintenanceApplication create(EquipmentMaintenanceApplication equipmentMaintenanceApplication);
 
     void delete(Long equipmentMaintenanceApplicationId);
+    
+    Integer updateEquipmentMaintenanceApplication(EquipmentMaintenanceApplication equipmentMaintenanceApplication);
 }

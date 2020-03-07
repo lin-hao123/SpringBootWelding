@@ -1,19 +1,23 @@
 $(document).ready(function(){
 //	创建物料
     //保存
-    $("#createMaterialInspectionSave").click(function(data){
+    $("#createMaterialInspectionSave").click(function(data){ 
+        var weldingConsumablesId=$("input[name='createWeldingConsumablesId']").val();
+        var weldingConsumables=$("input[name='createWeldingConsumables']").val();
         var detectionQuantity=$("input[name='createDetectionQuantity']").val();
         var qualifiedQuantity=$("input[name='createQualifiedQuantity']").val();
-        var weldingConsumables=$("input[name='createWeldingConsumables']").val();
+        var note=$("input[name='createNote']").val();
         var inspectionStaff=$("input[name='createInspectionStaff']").val();
-        var detectionStatus=$("input[name='createDetectionStatus']").val();
+        var checkedTime=$("input[name='createCheckedTime']").val();
 
         var data = {
+            "weldingConsumablesId": weldingConsumablesId,
+            "weldingConsumables": weldingConsumables,
             "detectionQuantity": detectionQuantity,
             "qualifiedQuantity": qualifiedQuantity,
-            "weldingConsumables": weldingConsumables,
+            "note": note,
             "inspectionStaff": inspectionStaff,
-            "detectionStatus": detectionStatus,
+            "checkedTime": checkedTime,
 
         }
         $.ajax({
@@ -50,15 +54,19 @@ $(document).ready(function(){
                     "<tr id='tridval"+i+"'>"
                     +"<td>"+contentdata[i].materialInspectionId
                     +"</td>"
+                    +"<td>"+contentdata[i].weldingConsumablesId
+                    +"</td>"
+                    +"<td>"+contentdata[i].weldingConsumables
+                    +"</td>"
                     +"<td>"+contentdata[i].detectionQuantity
                     +"</td>"
                     +"<td>"+contentdata[i].qualifiedQuantity
                     +"</td>"
-                    +"<td>"+contentdata[i].weldingConsumables
+                    +"<td>"+contentdata[i].note
                     +"</td>"
                     +"<td>"+contentdata[i].inspectionStaff
                     +"</td>"
-                    +"<td>"+contentdata[i].detectionStatus
+                    +"<td>"+contentdata[i].checkedTime
                     +"</td>"
                     +"<td>"
                     +"&nbsp<button type='button' class='btn btn-outline-danger btn-sm'  id="+contentdata[i].materialInspectionId+" name='deleteBtn' >删除</button>&nbsp;&nbsp;"
@@ -69,61 +77,61 @@ $(document).ready(function(){
 
 
             //--物料编辑显示--//
-            $("button[name='editBtn']").click(function(){
+          $("button[name='editBtn']").click(function(){
                 var materialInspectionId=this.id
                 $.getJSON("quality/materialInspection/"+materialInspectionId,function(data){
                     console.log(data);
+                    
                     var setMaterialInspectionId=data.data.materialInspectionId;
+                    var setWeldingConsumablesId=data.data.weldingConsumablesId;
+                    var setWeldingConsumables=data.data.weldingConsumables;
                     var setDetectionQuantity=data.data.detectionQuantity;
                     var setQualifiedQuantity=data.data.qualifiedQuantity;
-                    var setWeldingConsumables=data.data.weldingConsumables;
+                    var setNote=data.data.note;
                     var setInspectionStaff=data.data.inspectionStaff;
-                    var setDetectionStatus=data.data.detectionStatus;
-
-                    $("input[name='materialInspectionId']").val(setMaterialInspectionId);
+                    var setCheckedTime=data.data.checkedTime;
+                    $("#materialInspectionId2").text(setMaterialInspectionId);
+                    $("input[name='weldingConsumablesId']").val(setWeldingConsumablesId);
+                    $("input[name='weldingConsumables']").val(setWeldingConsumables);
                     $("input[name='detectionQuantity']").val(setDetectionQuantity);
                     $("input[name='qualifiedQuantity']").val(setQualifiedQuantity);
-                    $("input[name='weldingConsumables']").val(setWeldingConsumables);
+                    $("input[name='note']").val(setNote);
                     $("input[name='inspectionStaff']").val(setInspectionStaff);
-                    $("input[name='detectionStatus']").val(setDetectionStatus);
+                    $("input[name='checkedTime']").val(setCheckedTime);
 
                 });
             })
 
 
             //保存修改
-            $("#editSaveBtn").click(function(data){
-                var materialInspectionId=$("input[name='materialInspectionId']").val();
+            $("#materialInspectionSubbtn").click(function(data){
+            	var id=$("#materialInspectionId2").text();
+                var weldingConsumablesId=$("input[name='weldingConsumablesId']").val();
+                var weldingConsumables=$("input[name='weldingConsumables']").val();
                 var detectionQuantity=$("input[name='detectionQuantity']").val();
                 var qualifiedQuantity=$("input[name='qualifiedQuantity']").val();
-                var weldingConsumables=$("input[name='weldingConsumables']").val();
+                var note=$("input[name='note']").val();
                 var inspectionStaff=$("input[name='inspectionStaff']").val();
-                var detectionStatus=$("input[name='detectionStatus']").val();
-
-                $('input[name="interest1"]:checked').each(function(){
-                    var temp = {};
-                    temp.id = $(this).val();
-                    chk_value.push(temp);
-                });
+                var checkedTime=$("input[name='checkedTime']").val();
                 var data = {
-                    "materialInspectionId": materialInspectionId,
+                    "weldingConsumablesId": weldingConsumablesId,
+                    "weldingConsumables": weldingConsumables,
                     "detectionQuantity": detectionQuantity,
                     "qualifiedQuantity": qualifiedQuantity,
-                    "weldingConsumables": weldingConsumables,
+                    "note": note,
                     "inspectionStaff": inspectionStaff,
-                    "detectionStatus": detectionStatus,
-
+                    "checkedTime": checkedTime,
                 }
                 $.ajax({
                     type: "PUT",
-                    url: "deviceController/device",
+                    url: "quality/materialInspection/update/"+id,
                     data: JSON.stringify(data),
                     contentType: 'application/json',
                     success: function (json) {
                         console.log(json);
                         if(json.code==200){
                             alert("保存成功");
-                            window.location.href="deviceMessage.html";
+                            window.location.href="materialInspection.html";
                         }else{
                             alert("编辑失败");
                         }

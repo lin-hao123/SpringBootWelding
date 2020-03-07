@@ -38,7 +38,7 @@ public class ProductionPlan {
     private String productName;
 
     /**
-     *生产订单
+     *产品编号
      */
     private String productionOrder;
 
@@ -48,7 +48,7 @@ public class ProductionPlan {
     private Long num;
 
     /**
-     * 交货日期
+     * 截至日期
      */
     private Date deliveryDate;
 

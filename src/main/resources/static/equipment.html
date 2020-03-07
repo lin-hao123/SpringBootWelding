@@ -165,9 +165,26 @@
                         </span>
                         </a>
                         <ul class="dropdown-menu sub-down">
+                           <li class="nav-item dropdown">
+                         <a href="taskQueryProductionPlan.html" class="dropdown-toggle">
+                            <span>任务查询</span>
+                             <span class="arrow"> 
+                            <i class="lni-chevron-right"></i>
+                        </span>
+                        </a>
+                        <ul class="dropdown-menu sub-down">
                             <li>
-                                <a href="taskQuery.html">任务查询</a>
+                                <a href="taskQueryProductionPlan.html">生产计划</a>
                             </li>
+                            <li>
+                                <a href="taskQueryTaskInstruction.html">任务指令</a>
+                            </li>
+                            <li>
+                                <a href="taskQueryProductionInstruction.html">生产指导书</a>
+                            </li>
+                      
+                        </ul>
+                    </li>
                             <li>
                                 <a href="welderInformation.html">焊工信息</a>
                             </li>
@@ -313,11 +330,14 @@
                                                 <table class="table table-striped table-bordered">
                                                     <thead>
                                                     <tr align="center">
-                                                        <th>设备编号</th>
+                                                        <th>设备号</th>
                                                         <th>设备名称</th>
+                                                        <th>设备位置</th>
                                                         <th>焊接种类</th>
-                                                        <th>功能作用</th>
                                                         <th>使用状态</th>
+                                                        <th>焊接电压</th>
+                                                        <th>焊接电流</th>
+                                                        <th>焊接速度</th>
                                                         <th>操作</th>
                                                     </tr>
                                                     </thead>
@@ -383,12 +403,23 @@
 
             <!-- 模态框主体 -->
             <div class="modal-body">
-
+                   <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                       <span class="input-group-text">设备号</span>
+                  </div>
+                  <span class="form-control" id="equipmentId2"></span>
+                  </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text">设备名称</span>
                     </div>
                     <input type="text" class="form-control" id="equipmentName" name="equipmentName">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">设备位置</span>
+                    </div>
+                    <input type="text" class="form-control" id="equipmentLocation" name="equipmentLocation">
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -398,25 +429,34 @@
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text">功能作用</span>
-                    </div>
-                    <input type="text" class="form-control" id="equipmentFunction" name="equipmentFunction">
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
                         <span class="input-group-text">使用状态</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="使用状态（1-正在使用，0-未使用）" id="useStatus" name="useStatus">
-                    <div class="input-group-append">
-                        <span class="input-group-text">（1-正在使用，0-未使用）</span>
+                    <input type="text" class="form-control" id="useStatus" name="useStatus">
+                </div>
+                 <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">焊接电压</span>
                     </div>
+                    <input type="text" class="form-control" id="weldingVoltage" name="weldingVoltage">
+                </div>
+                 <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">焊接电流</span>
+                    </div>
+                    <input type="text" class="form-control" id="weldingCurrent" name="weldingCurrent">
+                </div>
+                 <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">焊接速度</span>
+                    </div>
+                    <input type="text" class="form-control" id="weldingSpeed" name="weldingSpeed">
                 </div>
 
             </div>
 
             <!-- 模态框底部 -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" id="editSaveBtn">保存</button>
+                <button type="button" class="btn btn-danger" id="equitmentSaveBtn">保存</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
             </div>
 
@@ -443,28 +483,25 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text">设备名称</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="设备名称" id="createEquipmentName" name="createEquipmentName">
+                    <input type="text" class="form-control" id="createEquipmentName" name="createEquipmentName">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">设备位置</span>
+                    </div>
+                    <input type="text" class="form-control" id="createEquipmentLocation" name="createEquipmentLocation">
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text">焊接种类</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="焊接种类" id="createWeldingType" name="createWeldingType">
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">功能作用</span>
-                    </div>
-                    <input type="text" class="form-control" placeholder="功能作用" id="createEquipmentFunction" name="createEquipmentFunction">
+                    <input type="text" class="form-control" id="createWeldingType" name="createWeldingType">
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text">使用状态</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="使用状态（1-正在使用，0-未使用）" id="createUseStatus" name="createUseStatus">
-                    <div class="input-group-append">
-                        <span class="input-group-text">（1-正在使用，0-未使用）</span>
-                    </div>
+                    <input type="text" class="form-control" id="createUseStatus" name="createUseStatus">
                 </div>
             </div>
 

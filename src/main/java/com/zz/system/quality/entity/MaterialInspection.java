@@ -6,6 +6,7 @@ import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Getter
@@ -28,7 +29,15 @@ public class MaterialInspection implements Serializable {
      * 物料检测Id
      */
     private Long materialInspectionId;
+    /**
+     * 产品编号
+     */
+    private String weldingConsumablesId;
 
+    /**
+     * 焊接产品
+     */
+    private String weldingConsumables;
     /**
      * 检测数量
      */
@@ -38,24 +47,20 @@ public class MaterialInspection implements Serializable {
      * 合格数量
      */
     private Long qualifiedQuantity;
-
     /**
-     * 焊材
+     * 备注：
      */
-    private String weldingConsumables;
-
+    private String note;
     /**
      * 检测人员
      */
     private String inspectionStaff;
 
+    
     /**
-     * 检测状态
-     * 0:未检测
-     * 1:正在检测
-     * 2:检测完成
+     * 检测时间
      */
-    private int detectionStatus;
+    private Date checkedTime;
 
 
 }

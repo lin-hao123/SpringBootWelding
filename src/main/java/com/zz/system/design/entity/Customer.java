@@ -41,7 +41,7 @@ public class Customer implements Serializable {
     /**
      * 产品编号
      */
-    private Long productId;
+    private String productId;
 
     /**
      * 联系方式
@@ -52,22 +52,10 @@ public class Customer implements Serializable {
      * 地址
      */
     private String address;
-
     /**
      * 性别
      */
     private String sex;
-
-    /**
-     *
-     */
-    private String userId;
-
-    /**
-     *
-     */
-    private String note;
-
 
     /**
      * 创建时间

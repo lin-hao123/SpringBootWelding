@@ -52,4 +52,10 @@ public class DeliveryListServiceImpl implements DeliveryListService {
     public DeliveryList findById(Long deliveryListId) {
         return deliveryListRepository.findById(deliveryListId).get();
     }
+
+	@Override
+	@Transactional(value = "transactionManager", rollbackFor = {Exception.class}, readOnly = false)
+	public Integer updateDeliveryList(DeliveryList deliveryList) {
+		return deliveryListRepository.updateDeliveryList(deliveryList);
+	}
 }

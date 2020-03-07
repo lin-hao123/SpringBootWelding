@@ -70,12 +70,14 @@ $(document).ready(function(){
                     var setUnqualifiedProductId=data.data.unqualifiedProductId;
                     var setProductionOrder=data.data.productionOrder;
                     var setWeldingProducts=data.data.weldingProducts;
+                    var setDiscoveryTime=data.data.discoveryTime;
                     var setDisqualificationReason=data.data.disqualificationReason;
 
 
-                    $("input[name='unqualifiedProductId']").val(setUnqualifiedProductId);
+                    $("#unqualifiedProductId").text(setUnqualifiedProductId);
                     $("input[name='productionOrder']").val(setProductionOrder);
                     $("input[name='weldingProducts']").val(setWeldingProducts);
+                    $("input[name='discoveryTime']").val(setDiscoveryTime);
                     $("input[name='disqualificationReason']").val(setDisqualificationReason);
 
 
@@ -84,35 +86,30 @@ $(document).ready(function(){
 
 
             //保存修改
-            $("#editSaveBtn").click(function(data){
-                var unqualifiedProductId=$("input[name='unqualifiedProductId']").val();
+            $("#unqualifiedProductSubbtn").click(function(data){
+                var id=$("#unqualifiedProductId").text();
                 var productionOrder=$("input[name='productionOrder']").val();
                 var weldingProducts=$("input[name='weldingProducts']").val();
+                var discoveryTime=$("input[name='discoveryTime']").val();
                 var disqualificationReason=$("input[name='disqualificationReason']").val();
 
-
-                $('input[name="interest1"]:checked').each(function(){
-                    var temp = {};
-                    temp.id = $(this).val();
-                    chk_value.push(temp);
-                });
                 var data = {
-                    "unqualifiedProductId": unqualifiedProductId,
                     "productionOrder": productionOrder,
                     "weldingProducts": weldingProducts,
+                    "discoveryTime": discoveryTime,
                     "disqualificationReason": disqualificationReason,
 
                 }
                 $.ajax({
                     type: "PUT",
-                    url: "deviceController/device",
+                    url: "quality/unqualifiedProduct/update/"+id,
                     data: JSON.stringify(data),
                     contentType: 'application/json',
                     success: function (json) {
                         console.log(json);
                         if(json.code==200){
                             alert("保存成功");
-                            window.location.href="deviceMessage.html";
+                            window.location.href="unqualifiedProduct.html";
                         }else{
                             alert("编辑失败");
                         }

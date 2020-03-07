@@ -15,4 +15,6 @@ public interface MaterialInspectionService {
     void delete(Long materialInspectionId);
 
     MaterialInspection findById(Long materialInspectionId);
+    
+    Integer updateMaterialInspection(MaterialInspection materialInspection);
 }

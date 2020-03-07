@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
@@ -40,8 +41,8 @@ public class EquipmentServiceImpl implements EquipmentService {
     }
 
     @Override
+    @Transactional(value = "transactionManager", rollbackFor = {Exception.class}, readOnly = false)
     public void delete(Long equipmentId) {
-
         equipmentRepository.deleteById(equipmentId);
     }
 
@@ -49,5 +50,11 @@ public class EquipmentServiceImpl implements EquipmentService {
     public Equipment findById(Long equipmentId) {
         return equipmentRepository.findById(equipmentId).get();
     }
+
+	@Override
+	@Transactional(value = "transactionManager", rollbackFor = {Exception.class}, readOnly = false)
+	public Integer updateEquipment(Equipment equipment) {
+		return equipmentRepository.updateEquipment(equipment);
+	}
 
 }

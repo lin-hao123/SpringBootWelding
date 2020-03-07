@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
@@ -43,7 +44,14 @@ public class ProductionInstructionServiceImpl implements ProductionInstructionSe
     }
 
     @Override
+    @Transactional(value = "transactionManager", rollbackFor = {Exception.class}, readOnly = false)
     public void delete(Long productionInstructionId) {
         productionInstructionRepository.deleteById(productionInstructionId);
     }
+
+	@Override
+	@Transactional(value = "transactionManager", rollbackFor = {Exception.class}, readOnly = false)
+	public Integer updateProductionInstruction(ProductionInstruction productionInstruction) {
+		return productionInstructionRepository.updateProductionInstruction(productionInstruction);
+	}
 }

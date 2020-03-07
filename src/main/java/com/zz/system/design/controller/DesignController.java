@@ -9,11 +9,14 @@ import com.zz.system.design.service.ProductionInstructionService;
 import com.zz.system.design.service.ProductionPlanService;
 import com.zz.system.design.service.TaskInstructionService;
 import com.zz.vo.ResponseData;
+import com.zz.vo.ResponseDataUtil;
+
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
+import java.util.Date;
 
+import javax.annotation.Resource;
 
 /**
  *
@@ -106,6 +109,18 @@ public class DesignController {
         responseData.setData(customer);
         return responseData;
     }
+    
+    @PutMapping("customer/update/{id}")
+    public ResponseData updateCustomer(@PathVariable(value = "id") String id, @RequestBody Customer customer) {
+    	customer.setCustomerId(Long.parseLong(id));
+    	customer.setUpdateTime(new Date());
+    	Integer rs=customerService.updateCustomer(customer);
+    	if(rs==1){
+    		 return ResponseDataUtil.success("修改成功",rs);
+    	}else{
+    		return ResponseDataUtil.failure(500, "修改失败");
+    	}
+    }
 
 
     //=================================================生产计划管理=================================================
@@ -179,7 +194,17 @@ public class DesignController {
         return responseData;
     }
 
-
+    @PutMapping("productionPlan/update/{id}")
+    public ResponseData updateproductionPlan(@PathVariable(value = "id") String id, @RequestBody ProductionPlan productionPlan) {
+    	productionPlan.setProductionPlanId(Long.parseLong(id));
+    	productionPlan.setUpdateTime(new Date());
+    	Integer rs=productionPlanService.updateProductionPlan(productionPlan);
+    	if(rs==1){
+    		 return ResponseDataUtil.success("修改成功",rs);
+    	}else{
+    		return ResponseDataUtil.failure(500, "修改失败");
+    	}
+    }
 
 
     //=================================================生产指导书管理=================================================
@@ -251,7 +276,17 @@ public class DesignController {
         responseData.setData(productionInstruction);
         return responseData;
     }
-
+    
+    @PutMapping("productionInstruction/update/{id}")
+    public ResponseData updateProductionInstruction(@PathVariable(value = "id") String id, @RequestBody ProductionInstruction productionInstruction) {
+    	productionInstruction.setProductionInstructionId(Long.parseLong(id));
+    	Integer rs=productionInstructionService.updateProductionInstruction(productionInstruction);
+    	if(rs==1){
+    		 return ResponseDataUtil.success("修改成功",rs);
+    	}else{
+    		return ResponseDataUtil.failure(500, "修改失败");
+    	}
+    }
 
 
     //=================================================任务指导管理=================================================
@@ -322,6 +357,17 @@ public class DesignController {
         responseData.setMsg("success");
         responseData.setData(taskInstruction);
         return responseData;
+    }
+    
+    @PutMapping("taskInstruction/update/{id}")
+    public ResponseData updateTaskInstruction(@PathVariable(value = "id") String id, @RequestBody TaskInstruction taskInstruction) {
+    	taskInstruction.setTaskInstructionId(Long.parseLong(id));
+    	Integer rs=taskInstructionService.updateTaskInstruction(taskInstruction);
+    	if(rs==1){
+    		 return ResponseDataUtil.success("修改成功",rs);
+    	}else{
+    		return ResponseDataUtil.failure(500, "修改失败");
+    	}
     }
 
 

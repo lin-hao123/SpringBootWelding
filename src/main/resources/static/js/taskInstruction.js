@@ -1,5 +1,5 @@
 $(document).ready(function(){
-//	创建设备
+//	创建任务指令
     //保存
     $("#createTaskInstructionSave").click(function(data){
         var productionOrder=$("input[name='createProductionOrder']").val();
@@ -87,6 +87,7 @@ $(document).ready(function(){
                 var productionInstructionId=this.id
                 $.getJSON("design/taskInstruction/"+productionInstructionId,function(data){
                     console.log(data);
+                    var setTaskInstructionId=data.data.taskInstructionId;
                     var setProductionOrder=data.data.productionOrder;
                     var setProductName=data.data.productName;
                     var setNum=data.data.num;
@@ -95,7 +96,7 @@ $(document).ready(function(){
                     var setWeldingMaterialName=data.data.weldingMaterialName;
                     var setWeldingMaterialNum=data.data.weldingMaterialNum;
                     var setCurrentInventory=data.data.currentInventory;
-
+                    $("#productionOrderId2").text(setTaskInstructionId);
                     $("input[name='productionOrder']").val(setProductionOrder);
                     $("input[name='productName']").val(setProductName);
                     $("input[name='num']").val(setNum);
@@ -111,39 +112,36 @@ $(document).ready(function(){
 
 
             //保存修改
-            $("#editSaveBtn").click(function(data){
+            $("#taskInstructionSubbtn").click(function(data){
+            	var id=$("#productionOrderId2").text();
+                var productionOrder=$("input[name='productionOrder']").val();
                 var productName=$("input[name='productName']").val();
                 var num=$("input[name='num']").val();
-                var status=$("input[name='status']").val();
-                var customerId=$("input[name='customerId']").val();
-                var warehouseId=$("input[name='warehouseId']").val();
-                var entryListId=$("input[name='entryListId']").val();
-                var money=$("input[name='money']").val();
-                $('input[name="interest1"]:checked').each(function(){
-                    var temp = {};
-                    temp.id = $(this).val();
-                    chk_value.push(temp);
-                });
+                var productionDepartment=$("input[name='productionDepartment']").val();
+                var weldingMaterialId=$("input[name='weldingMaterialId']").val();
+                var weldingMaterialName=$("input[name='weldingMaterialName']").val();
+                var weldingMaterialNum=$("input[name='weldingMaterialNum']").val();
+                var currentInventory=$("input[name='currentInventory']").val();
                 var data = {
+                    "productionOrder": productionOrder,
                     "productName": productName,
                     "num": num,
-                    "status": status,
-                    "customerId": customerId,
-                    "warehouseId": warehouseId,
-                    "entryListId": entryListId,
-                    "money": money,
-
+                    "productionDepartment": productionDepartment,
+                    "weldingMaterialId": weldingMaterialId,
+                    "weldingMaterialName": weldingMaterialName,
+                    "weldingMaterialNum": weldingMaterialNum,
+                    "currentInventory": currentInventory,
                 }
                 $.ajax({
                     type: "PUT",
-                    url: "deviceController/device",
+                    url: "design/taskInstruction/update/"+id,
                     data: JSON.stringify(data),
                     contentType: 'application/json',
                     success: function (json) {
                         console.log(json);
                         if(json.code==200){
                             alert("保存成功");
-                            window.location.href="deviceMessage.html";
+                            window.location.href="taskInstruction.html";
                         }else{
                             alert("编辑失败");
                         }

@@ -51,6 +51,10 @@ public class CustomerServiceImpl implements CustomerService {
         return customerRepository.findById(customerId).get();
     }
 
-
+    @Override
+    @Transactional(value = "transactionManager", rollbackFor = {Exception.class}, readOnly = false)
+    public Integer updateCustomer(Customer customer){
+		return customerRepository.updateCustomer(customer);
+    } 
 
 }

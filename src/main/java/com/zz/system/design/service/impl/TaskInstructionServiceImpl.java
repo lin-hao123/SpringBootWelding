@@ -1,5 +1,6 @@
 package com.zz.system.design.service.impl;
 
+import com.zz.system.design.entity.ProductionPlan;
 import com.zz.system.design.entity.TaskInstruction;
 import com.zz.system.design.repository.TaskInstructionRepository;
 import com.zz.system.design.service.TaskInstructionService;
@@ -51,4 +52,12 @@ public class TaskInstructionServiceImpl implements TaskInstructionService {
     public void delete(Long taskInstructionId) {
         taskInstructionRepository.deleteById(taskInstructionId);
     }
+    
+    @Override
+    @Transactional(value = "transactionManager", rollbackFor = {Exception.class}, readOnly = false)
+    public Integer updateTaskInstruction(TaskInstruction taskInstruction){
+		return taskInstructionRepository.updateTaskInstruction(taskInstruction);
+    	
+    }
+    
 }

@@ -79,12 +79,14 @@ $(document).ready(function(){
                 var welderId=this.id
                 $.getJSON("production/welderInformation/"+welderId,function(data){
                     console.log(data);
+                    var setWelderId=data.data.welderId;
                     var setWelderName=data.data.welderName;
                     var setWelderTel=data.data.welderTel;
                     var setSex=data.data.sex;
                     var setBirthday=data.data.birthday;
                     var setAddress=data.data.address;
                     var setTrainingInformation=data.data.trainingInformation;
+                    $("#welderInformationId2").text(setWelderId);
                     $("input[name='welderName']").val(setWelderName);
                     $("input[name='welderTel']").val(setWelderTel);
                     $("input[name='sex']").val(setSex);
@@ -97,35 +99,32 @@ $(document).ready(function(){
 
 
             //保存修改
-            $("#editSaveBtn").click(function(data){
-                var customerName= $("input[name='customerName']").val();
-                var productId=$("input[name='productId']").val();
-                var customerTel=$("input[name='customerTel']").val();
-                var address=$("input[name='address']").val();
+            $("#welderInformationSubbtn").click(function(data){
+            	var id=$("#welderInformationId2").text();
+                var welderName= $("input[name='welderName']").val();
+                var welderTel=$("input[name='welderTel']").val();
                 var sex=$("input[name='sex']").val();
-                $('input[name="interest1"]:checked').each(function(){
-                    var temp = {};
-                    temp.id = $(this).val();
-                    chk_value.push(temp);
-                });
+                var birthday=$("input[name='birthday']").val();
+                var address=$("input[name='address']").val();
+                var trainingInformation=$("input[name='trainingInformation']").val();
                 var data = {
-                    "customerName": customerName,
-                    "productId": productId,
-                    "customerTel": customerTel,
-                    "address": address,
+                    "welderName": welderName,
+                    "welderTel": welderTel,
                     "sex": sex,
-
+                    "birthday": birthday,
+                    "address": address,
+                    "trainingInformation": trainingInformation,
                 }
                 $.ajax({
                     type: "PUT",
-                    url: "deviceController/device",
+                    url: "production/welderInformation/update/"+id,
                     data: JSON.stringify(data),
                     contentType: 'application/json',
                     success: function (json) {
                         console.log(json);
                         if(json.code==200){
                             alert("保存成功");
-                            window.location.href="deviceMessage.html";
+                            window.location.href="welderInformation.html";
                         }else{
                             alert("编辑失败");
                         }

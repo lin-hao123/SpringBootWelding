@@ -32,7 +32,7 @@ public class UnqualifiedProduct implements Serializable {
     private Long unqualifiedProductId;
 
     /**
-     * 生产订单
+     * 产品编号
      */
     private String productionOrder;
     /**

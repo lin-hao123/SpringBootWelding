@@ -52,4 +52,11 @@ public class EquipmentMaintenanceApplicationServiceImpl implements EquipmentMain
         equipmentMaintenanceApplicationRepository.deleteById(equipmentMaintenanceApplicationId);
 
     }
+
+	@Override
+	@Transactional(value = "transactionManager", rollbackFor = {Exception.class}, readOnly = false)
+	public Integer updateEquipmentMaintenanceApplication(
+			EquipmentMaintenanceApplication equipmentMaintenanceApplication) {
+		return equipmentMaintenanceApplicationRepository.updateEquipmentMaintenanceApplication(equipmentMaintenanceApplication);
+	}
 }

@@ -1,16 +1,16 @@
 $(document).ready(function(){
 //	创建设备
     //保存
-    $("#createEquipmentSave").click(function(data){
+	 $("#createEquipmentSave").click(function(data){
         var equipmentName=$("input[name='createEquipmentName']").val();
+        var equipmentLocation=$("input[name='createEquipmentLocation']").val();
         var weldingType=$("input[name='createWeldingType']").val();
-        var equipmentFunction=$("input[name='createEquipmentFunction']").val();
         var useStatus=$("input[name='createUseStatus']").val();
 
         var data = {
             "equipmentName": equipmentName,
             "weldingType": weldingType,
-            "equipmentFunction": equipmentFunction,
+            "equipmentLocation": equipmentLocation,
             "useStatus": useStatus,
 
 
@@ -54,11 +54,17 @@ $(document).ready(function(){
                     +"</td>"
                     +"<td>"+contentdata[i].equipmentName
                     +"</td>"
+                    +"<td>"+contentdata[i].equipmentLocation
+                    +"</td>"
                     +"<td>"+contentdata[i].weldingType
                     +"</td>"
-                    +"<td>"+contentdata[i].equipmentFunction
-                    +"</td>"
                     +"<td>"+contentdata[i].useStatus
+                    +"</td>"
+                    +"<td>"+contentdata[i].weldingVoltage
+                    +"</td>"
+                    +"<td>"+contentdata[i].weldingCurrent
+                    +"</td>"
+                    +"<td>"+contentdata[i].weldingSpeed
                     +"</td>"
                     +"<td>"
                     +"&nbsp<button type='button' class='btn btn-outline-danger btn-sm'  id="+contentdata[i].equipmentId+" name='deleteBtn' >删除</button>&nbsp;&nbsp;"
@@ -69,48 +75,53 @@ $(document).ready(function(){
 
 
             //--设备编辑显示--//
-            $("button[name='editBtn']").click(function(){
+           $("button[name='editBtn']").click(function(){
                 var equipmentId=this.id
                 $.getJSON("production/equipment/"+equipmentId,function(data){
                     console.log(data);
+                    var setEquipmentId=data.data.equipmentId;
                     var setEquipmentName=data.data.equipmentName;
+                    var setEquipmentLocation=data.data.equipmentLocation;
                     var setWeldingType=data.data.weldingType;
-                    var setEquipmentFunction=data.data.equipmentFunction;
                     var setUseStatus=data.data.useStatus;
+                    var setWeldingVoltage=data.data.weldingVoltage;
+                    var setWeldingCurrent=data.data.weldingCurrent;
+                    var setWeldingSpeed=data.data.weldingSpeed;
 
+                    $("#equipmentId2").text(setEquipmentId);
                     $("input[name='equipmentName']").val(setEquipmentName);
+                    $("input[name='equipmentLocation']").val(setEquipmentLocation);
                     $("input[name='weldingType']").val(setWeldingType);
-                    $("input[name='equipmentFunction']").val(setEquipmentFunction);
                     $("input[name='useStatus']").val(setUseStatus);
-
-
+                    $("input[name='weldingVoltage']").val(setWeldingVoltage);
+                    $("input[name='weldingCurrent']").val(setWeldingCurrent);
+                    $("input[name='weldingSpeed']").val(setWeldingSpeed);
                 });
             })
 
 
             //保存修改
-            $("#editSaveBtn").click(function(data){
+            $("#equitmentSaveBtn").click(function(data){
+            	var id=$("#equipmentId2").text();
                 var equipmentName=$("input[name='equipmentName']").val();
+                var equipmentLocation=$("input[name='equipmentLocation']").val();
                 var weldingType=$("input[name='weldingType']").val();
-                var equipmentFunction=$("input[name='equipmentFunction']").val();
                 var useStatus=$("input[name='useStatus']").val();
-
-                $('input[name="interest1"]:checked').each(function(){
-                    var temp = {};
-                    temp.id = $(this).val();
-                    chk_value.push(temp);
-                });
+                var weldingVoltage=$("input[name='weldingVoltage']").val();
+                var weldingCurrent=$("input[name='weldingCurrent']").val();
+                var weldingSpeed=$("input[name='weldingSpeed']").val();
                 var data = {
                     "equipmentName": equipmentName,
+                    "equipmentLocation": equipmentLocation,
                     "weldingType": weldingType,
-                    "equipmentFunction": equipmentFunction,
                     "useStatus": useStatus,
-
-
+                    "weldingVoltage": weldingVoltage,
+                    "weldingCurrent": weldingCurrent,
+                    "weldingSpeed": weldingSpeed,
                 }
                 $.ajax({
                     type: "PUT",
-                    url: "production/equipment",
+                    url: "production/equipment/update/"+id,
                     data: JSON.stringify(data),
                     contentType: 'application/json',
                     success: function (json) {

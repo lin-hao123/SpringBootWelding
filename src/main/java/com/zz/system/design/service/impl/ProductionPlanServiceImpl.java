@@ -1,5 +1,6 @@
 package com.zz.system.design.service.impl;
 
+import com.zz.system.design.entity.Customer;
 import com.zz.system.design.entity.ProductionPlan;
 import com.zz.system.design.repository.ProductionPlanRepository;
 import com.zz.system.design.service.ProductionPlanService;
@@ -53,4 +54,13 @@ public class ProductionPlanServiceImpl implements ProductionPlanService {
         productionPlanRepository.deleteById(productionPlanId);
 
     }
+    
+    @Override
+    @Transactional(value = "transactionManager", rollbackFor = {Exception.class}, readOnly = false)
+    public Integer updateProductionPlan(ProductionPlan productionPlan){
+		return productionPlanRepository.updateProductionPlan(productionPlan);
+    	
+    }
+    
+
 }
