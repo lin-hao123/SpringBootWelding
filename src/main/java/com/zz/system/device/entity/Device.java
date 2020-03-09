@@ -6,6 +6,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
+import java.util.Date;
 
 
 /**
@@ -19,17 +20,27 @@ import javax.persistence.*;
 public class Device {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     /**
      * 设备编号
      */
     @Column
-    private Long deviceId;
+    private String deviceId;
 
     /**
      * 设备名称
      */
     private String deviceName;
+
+
+    /**
+     * 焊接种类
+     */
+    private String weldingType;
+
+    /**
+     * 位置
+     */
+    private String location;
 
     /**
      * 厂商
@@ -42,22 +53,12 @@ public class Device {
     private String vendorTel;
 
     /**
-     * 焊接种类
+     * 购买时间
      */
-    private String weldingType;
+    private Date purchaseTime;
 
     /**
-     * 所在部门
-     */
-    private String department;
-
-    /**
-     * 功能作用
-     */
-    private String deviceFunction;
-
-    /**
-     * 责任人
+     * 负责人
      */
     private String responsible;
 }

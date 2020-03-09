@@ -15,10 +15,9 @@ public interface DeviceService {
 
     Device createDevice(Device device);
 
-    Device findByDeviceId(Long deviceId);
+    Device findByDeviceId(String deviceId);
 
-    void delete(Long deviceId);
+    void delete(String deviceId);
 
-    void update(Device device);
-
+    Integer updateDevice(Device device);
 }

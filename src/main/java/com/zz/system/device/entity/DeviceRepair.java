@@ -23,22 +23,16 @@ public class DeviceRepair {
 
     @Id
     @Column
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     /**
      * 设备编号
      */
-    private Long deviceId;
+    private String deviceId;
 
     /**
      * 设备名称
      */
     private String deviceName;
-
-    /**
-     * 责任部门
-     */
-    private String department;
 
     /**
      * 维修内容

@@ -1,5 +1,7 @@
 package com.zz.system.device.service;
 
+import com.zz.config.ShiroRealm;
+import com.zz.system.device.entity.Device;
 import com.zz.system.device.entity.DeviceRepair;
 import org.springframework.data.domain.Page;
 
@@ -10,9 +12,11 @@ public interface DeviceRepairService {
 
     Page<DeviceRepair> findByDeviceNameLike(String deviceName, int page,int size);
 
-    DeviceRepair findByDeviceId(Long deviceId);
+    DeviceRepair findByDeviceId(String deviceId);
 
-    void deleteDeviceRepair(Long deviceId);
+    void deleteDeviceRepair(String deviceId);
 
     DeviceRepair create(DeviceRepair deviceRepair);
+
+    Integer updateDeviceRepair(DeviceRepair deviceRepair);
 }

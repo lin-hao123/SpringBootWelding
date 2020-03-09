@@ -11,9 +11,11 @@ public interface DeviceMaintenanceService {
 
     Page<DeviceMaintenance> findByDeviceNameLike(String deviceName, int page, int size);
 
-    DeviceMaintenance findByDeviceId(Long deviceId);
+    DeviceMaintenance findByDeviceId(String  deviceId);
 
-    void delete(Long deviceId);
+    void delete(String deviceId);
 
     DeviceMaintenance create(DeviceMaintenance deviceMaintenance);
+
+    Integer updateDeviceMaintenance(DeviceMaintenance deviceMaintenance);
 }

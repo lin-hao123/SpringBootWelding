@@ -21,16 +21,12 @@ public class DeviceMaintenance {
 
     @Id
     @Column
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     /**
      * 设备编号
      */
-    private Long  deviceId;
+    private String  deviceId;
 
-    /**
-     * 设备型号
-     */
-    private String deviceModel;
 
     /**
      * 设备名称
@@ -43,12 +39,7 @@ public class DeviceMaintenance {
     private String maintenanceContent;
 
     /**
-     *责任部门
-     */
-    private String department;
-
-    /**
-     *责任人
+     *负责人
      */
     private String responsible;
 
