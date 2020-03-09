@@ -133,14 +133,14 @@ public class WarehouseController {
      * 分页获取入库单信息
      * @param page
      * @param size
-     * @param materialId
+     * @param weldingProducts
      * @return
      */
     @GetMapping("entryList/{page}/{size}")
-    public ResponseData queryEntryListPage(@PathVariable("page") int page, @PathVariable("size") int size, String materialId){
+    public ResponseData queryEntryListPage(@PathVariable("page") int page, @PathVariable("size") int size, String weldingProducts){
 
         ResponseData responseData=new ResponseData();
-        Page<EntryList> entryListPage=entryListService.findByMaterialIdLike(materialId,page,size);
+        Page<EntryList> entryListPage=entryListService.findByWeldingProductsLike(weldingProducts,page,size);
         responseData.setCode(200);
         responseData.setMsg("success");
         responseData.setData(entryListPage);
@@ -192,6 +192,18 @@ public class WarehouseController {
     }
 
 
+    @PutMapping("entryList/update/{id}")
+    public ResponseData updateEntryList(@PathVariable(value = "id") String id, @RequestBody EntryList entryList) {
+        entryList.setEntryListId(Long.parseLong(id));
+        Integer rs=entryListService.updateEntryList(entryList);
+        if(rs==1){
+            return ResponseDataUtil.success("修改成功",rs);
+        }else{
+            return ResponseDataUtil.failure(500, "修改失败");
+        }
+    }
+
+
 
     //===========================================物料管理======================================
 
@@ -220,7 +232,7 @@ public class WarehouseController {
      * @return
      */
     @GetMapping("material/{materialId}")
-    public ResponseData findMaterial(@PathVariable("materialId") Long materialId){
+    public ResponseData findMaterial(@PathVariable("materialId") String materialId){
 
         ResponseData responseData=new ResponseData();
         Material material=materialService.findById(materialId);
@@ -237,7 +249,7 @@ public class WarehouseController {
      * @return
      */
     @DeleteMapping("material/{materialId}")
-    public ResponseData deleteMaterial(@PathVariable("materialId") Long materialId){
+    public ResponseData deleteMaterial(@PathVariable("materialId") String materialId){
 
         ResponseData responseData=new ResponseData();
         materialService.delete(materialId);
@@ -262,6 +274,17 @@ public class WarehouseController {
         responseData.setData(createMaterial);
 
         return responseData;
+    }
+
+    @PutMapping("material/update/{id}")
+    public ResponseData updateMaterial(@PathVariable(value = "id") String id, @RequestBody Material material) {
+        material.setMaterialId(id);
+        Integer rs= materialService.updateMaterial(material);
+        if(rs==1){
+            return ResponseDataUtil.success("修改成功",rs);
+        }else{
+            return ResponseDataUtil.failure(500, "修改失败");
+        }
     }
 
     //===========================================成品管理======================================
@@ -291,7 +314,7 @@ public class WarehouseController {
      * @return
      */
     @GetMapping("product/{productId}")
-    public ResponseData findProduct(@PathVariable("productId") Long productId){
+    public ResponseData findProduct(@PathVariable("productId") String productId){
 
         ResponseData responseData=new ResponseData();
         Product product=productService.findById(productId);
@@ -308,7 +331,7 @@ public class WarehouseController {
      * @return
      */
     @DeleteMapping("product/{productId}")
-    public ResponseData deleteProduct(@PathVariable("productId") Long productId){
+    public ResponseData deleteProduct(@PathVariable("productId") String productId){
 
         ResponseData responseData=new ResponseData();
         productService.delete(productId);
@@ -335,20 +358,32 @@ public class WarehouseController {
     }
 
 
+    @PutMapping("product/update/{id}")
+    public ResponseData updateProduct(@PathVariable(value = "id") String id, @RequestBody Product product) {
+        product.setProductId(id);
+        Integer rs= productService.updateProduct(product);
+        if(rs==1){
+            return ResponseDataUtil.success("修改成功",rs);
+        }else{
+            return ResponseDataUtil.failure(500, "修改失败");
+        }
+    }
+
+
     //===========================================领料单管理======================================
 
     /**
      * 领料单查询
      * @param page
      * @param size
-     * @param materialId
+     * @param user
      * @return
      */
     @GetMapping("materialRequestion/{page}/{size}")
-    public ResponseData getMaterialRequestion(@PathVariable("page") int page, @PathVariable("size") int size, String materialId){
+    public ResponseData getMaterialRequestion(@PathVariable("page") int page, @PathVariable("size") int size, String user){
 
         ResponseData responseData=new ResponseData();
-        Page<MaterialRequestion> materialRequestionPage=materialRequestionService.findByMaterialIdLike(materialId,page,size);
+        Page<MaterialRequestion> materialRequestionPage=materialRequestionService.findByUserLike(user,page,size);
         responseData.setCode(200);
         responseData.setMsg("success");
         responseData.setData(materialRequestionPage);
@@ -392,6 +427,17 @@ public class WarehouseController {
         responseData.setData(newMaterialRequestion);
 
         return responseData;
+    }
+
+    @PutMapping("materialRequestion/update/{id}")
+    public ResponseData updateMaterialRequestion(@PathVariable(value = "id") String id, @RequestBody MaterialRequestion materialRequestion) {
+        materialRequestion.setMaterialRequestionId(Long.parseLong(id));
+        Integer rs= materialRequestionService.updateMaterialRequestion(materialRequestion);
+        if(rs==1){
+            return ResponseDataUtil.success("修改成功",rs);
+        }else{
+            return ResponseDataUtil.failure(500, "修改失败");
+        }
     }
 
 
@@ -467,6 +513,17 @@ public class WarehouseController {
         return responseData;
     }
 
+    @PutMapping("warehouse/update/{id}")
+    public ResponseData updateWarehouse(@PathVariable(value = "id") String id, @RequestBody Warehouse warehouse) {
+        warehouse.setWarehouseId(Long.parseLong(id));
+        Integer rs= warehouseService.updateWarehouse(warehouse);
+        if(rs==1){
+            return ResponseDataUtil.success("修改成功",rs);
+        }else{
+            return ResponseDataUtil.failure(500, "修改失败");
+        }
+    }
+
 
 
     //===========================================供应商管理======================================
@@ -539,6 +596,18 @@ public class WarehouseController {
         responseData.setMsg("success");
         return responseData;
     }
+
+    @PutMapping("supplier/update/{id}")
+    public ResponseData updateSupplier(@PathVariable(value = "id") String id, @RequestBody Supplier supplier) {
+        supplier.setSupplierId(Long.parseLong(id));
+        Integer rs= supplierService.updateSupplier(supplier);
+        if(rs==1){
+            return ResponseDataUtil.success("修改成功",rs);
+        }else{
+            return ResponseDataUtil.failure(500, "修改失败");
+        }
+    }
+
 
 
 }

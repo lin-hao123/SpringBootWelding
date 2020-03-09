@@ -24,47 +24,37 @@ public class Material implements Serializable {
 
     @Id
     @Column
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     /**
-     *主键id
+     *编号
      */
-    private Long materialId;
+    private String materialId;
 
     /**
-     *材料名称
+     *物料
      */
     private String materialName;
 
     /**
-     *大小
+     *尺寸
      */
     private String materialSize;
 
     /**
-     *
+     *仓库
+     */
+    private String warehouse;
+    /**
+     *位置
      */
     private String location;
+    /**
+     *余量
+     */
+    private Long leftNum;
 
     /**
-     *价格
+     *供应商
      */
-    private double materialPrice;
-
-    /**
-     *数量
-     */
-    private Long num;
-
-    private String note;
-
-    /**
-     *入库单id
-     */
-    private String entryListId;
-
-    /**
-     *供应商id
-     */
-    private String supplierId;
+    private String supplier;
 
 }

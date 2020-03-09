@@ -330,12 +330,12 @@
                                                 <table class="table table-striped table-bordered">
                                                     <thead>
                                                     <tr align="center">
-                                                        <th>仓库编号</th>
+                                                        <th>编号</th>
                                                         <th>仓库名称</th>
-                                                        <th>联系方式</th>
+                                                        <th>物料类型</th>
+                                                        <th>负责人</th>
+                                                        <th>联系电话</th>
                                                         <th>地址</th>
-                                                        <th>创建时间</th>
-                                                        <th>更新时间</th>
                                                         <th>操作</th>
                                                     </tr>
                                                     </thead>
@@ -403,6 +403,14 @@
 
             <!-- 模态框主体 -->
             <div class="modal-body">
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">编号</span>
+                    </div>
+                    <span class="form-control"  id="warehouseId2"></span>
+                </div>
+
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text">仓库名称</span>
@@ -412,7 +420,21 @@
 
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text">联系方式</span>
+                        <span class="input-group-text">物料类型</span>
+                    </div>
+                    <input type="text" class="form-control"  id="type" name="type">
+                </div>
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">负责人</span>
+                    </div>
+                    <input type="text" class="form-control"  id="responsible" name="responsible">
+                </div>
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">联系电话</span>
                     </div>
                     <input type="text" class="form-control"  id="warehouseTel" name="warehouseTel">
                 </div>
@@ -428,7 +450,7 @@
 
             <!-- 模态框底部 -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" id="subbtn">保存</button>
+                <button type="button" class="btn btn-danger" id="editSaveBtn">保存</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
             </div>
 
@@ -454,21 +476,35 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text">仓库名称</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="仓库名称" id="createWarehouseName" name="createWarehouseName">
+                    <input type="text" class="form-control" id="createWarehouseName" name="createWarehouseName">
                 </div>
 
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text">联系方式</span>
+                        <span class="input-group-text">物料类型</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="联系方式" id="createWarehouseTel" name="createWarehouseTel">
+                    <input type="text" class="form-control" id="createType" name="createType">
+                </div>
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">负责人</span>
+                    </div>
+                    <input type="text" class="form-control" id="createResponsible" name="createResponsible">
+                </div>
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">联系电话</span>
+                    </div>
+                    <input type="text" class="form-control" id="createWarehouseTel" name="createWarehouseTel">
                 </div>
 
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text">地址</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="地址" id="createAddress" name="createAddress">
+                    <input type="text" class="form-control" id="createAddress" name="createAddress">
                 </div>
 
 

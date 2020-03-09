@@ -316,7 +316,7 @@
                                             &nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-outline-secondary" id="selectbtn2">取消查询</button>
                                         </div>
                                         <div class="col-12 col-lg-2 col-md-2">
-                                            <button type='button' id="createMaterial" class="btn btn-secondary" data-toggle='modal' data-target='#myModal3'>创建物料 +</button><a href="#" class="navbar-brand font-weight-bold text-uppercase text-base"></a>
+                                            <button type='button' id="createMaterial" class="btn btn-secondary" data-toggle='modal' data-target='#myModal3'>创建新物料 +</button><a href="#" class="navbar-brand font-weight-bold text-uppercase text-base"></a>
                                         </div>
                                     </form>
                                 </div>
@@ -328,14 +328,13 @@
                                                 <table class="table table-striped table-bordered">
                                                     <thead>
                                                     <tr align="center">
-                                                        <th>材料编号</th>
-                                                        <th>材料名称</th>
-                                                        <th>材料大小</th>
+                                                        <th>编号</th>
+                                                        <th>物料</th>
+                                                        <th>尺寸</th>
+                                                        <th>仓库</th>
                                                         <th>位置</th>
-                                                        <th>价格</th>
-                                                        <th>数量</th>
-                                                        <th>入库单编号</th>
-                                                        <th>供应商编号</th>
+                                                        <th>余量</th>
+                                                        <th>供应商</th>
                                                         <th>操作</th>
                                                     </tr>
                                                     </thead>
@@ -407,16 +406,30 @@
             <div class="modal-body">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text">物料名称</span>
+                        <span class="input-group-text">编号</span>
+                    </div>
+                    <span class="form-control" id="materialId2"></span>
+                </div>
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">物料</span>
                     </div>
                     <input type="text" class="form-control"  id="materialName" name="materialName">
                 </div>
 
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text">物料大小</span>
+                        <span class="input-group-text">尺寸</span>
                     </div>
                     <input type="text" class="form-control"  id="materialSize" name="materialSize">
+                </div>
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">仓库</span>
+                    </div>
+                    <input type="text" class="form-control"  id="warehouse" name="warehouse">
                 </div>
 
                 <div class="input-group mb-3">
@@ -428,37 +441,23 @@
 
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text">价格</span>
+                        <span class="input-group-text">余量</span>
                     </div>
-                    <input type="text" class="form-control"  id="materialPrice" name="materialPrice">
+                    <input type="text" class="form-control"  id="leftNum" name="leftNum">
                 </div>
 
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text">数量</span>
+                        <span class="input-group-text">供应商</span>
                     </div>
-                    <input type="text" class="form-control"  id="num" name="num">
-                </div>
-
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">入库单编号</span>
-                    </div>
-                    <input type="text" class="form-control"  id="entryListId" name="entryListId">
-                </div>
-
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">仓库编号</span>
-                    </div>
-                    <input type="text" class="form-control"  id="supplierId" name="supplierId">
+                    <input type="text" class="form-control"  id="supplier" name="supplier">
                 </div>
 
             </div>
 
             <!-- 模态框底部 -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" id="subbtn">保存</button>
+                <button type="button" class="btn btn-danger" id="editSaveBtn">保存</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
             </div>
 
@@ -482,52 +481,52 @@
             <div class="modal-body">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text">物料名称</span>
+                        <span class="input-group-text">编号</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="物料名称" id="createMaterialName" name="createMaterialName">
+                    <input type="text" class="form-control"  id="createMaterialId" name="createMaterialId">
                 </div>
 
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text">物料大小</span>
+                        <span class="input-group-text">物料</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="物料大小" id="createMaterialSize" name="createMaterialSize">
+                    <input type="text" class="form-control"  id="createMaterialName" name="createMaterialName">
+                </div>
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">尺寸</span>
+                    </div>
+                    <input type="text" class="form-control"  id="createMaterialSize" name="createMaterialSize">
+                </div>
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">仓库</span>
+                    </div>
+                    <input type="text" class="form-control"  id="createWarehouse" name="createWarehouse">
                 </div>
 
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text">位置</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="位置" id="createLocation" name="createLocation">
+                    <input type="text" class="form-control"  id="createLocation" name="createLocation">
                 </div>
 
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text">价格</span>
+                        <span class="input-group-text">余量</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="价格" id="createMaterialPrice" name="createMaterialPrice">
-                </div>
-
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">数量</span>
-                    </div>
-                    <input type="text" class="form-control" placeholder="数量" id="createNum" name="createNum">
-                </div>
-
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">入库单编号</span>
-                    </div>
-                    <input type="text" class="form-control" placeholder="入库单编号" id="createListId" name="createListId">
+                    <input type="text" class="form-control"  id="createLeftNum" name="createLeftNum">
                 </div>
 
 
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text">仓库编号</span>
+                        <span class="input-group-text">供应商</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="仓库编号" id="createSupplierId" name="createSupplierId">
+                    <input type="text" class="form-control" id="createSupplier" name="createSupplier">
                 </div>
 
 

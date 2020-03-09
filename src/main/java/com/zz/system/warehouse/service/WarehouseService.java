@@ -15,4 +15,6 @@ public interface WarehouseService {
     Warehouse findById(Long warehouseId);
 
     void delete(Long warehouseId);
+
+    Integer updateWarehouse(Warehouse warehouse);
 }

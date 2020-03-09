@@ -12,7 +12,9 @@ public interface ProductService {
 
     Page<Product> findByProductNameLike(String productName, int page, int size);
 
-    Product findById(Long productId);
+    Product findById(String productId);
 
-    void delete(Long productId);
+    void delete(String productId);
+
+    Integer updateProduct(Product product);
 }

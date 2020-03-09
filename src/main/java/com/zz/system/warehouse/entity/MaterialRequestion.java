@@ -27,19 +27,21 @@ public class MaterialRequestion implements Serializable {
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     /**
-     * 领料单编号
+     * 编号
      */
     private Long materialRequestionId;
-
     /**
-     * 用户编号
+     * 申请部门
      */
-    private String  userId;
-
+    private String  department;
     /**
-     * 完成日期
+     * 申请人
      */
-    private Date finishTime;
+    private String  user;
+    /**
+     * 物料
+     */
+    private String material;
 
     /**
      * 创建日期
@@ -47,9 +49,9 @@ public class MaterialRequestion implements Serializable {
     private Date createTime;
 
     /**
-     * 材料编号
+     * 完成
      */
-    private String materialId;
+    private String finished;
 
     /**
      * 备注

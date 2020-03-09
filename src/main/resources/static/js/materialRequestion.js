@@ -2,18 +2,18 @@ $(document).ready(function(){
 //	创建设备
     //保存
     $("#creatMaterialRequestionSave").click(function(data){
-        var userId=$("input[name='createUserId']").val();
-        var materialRequestionId=$("input[name='createMaterialRequestionId']").val();
-        var materialId=$("input[name='createMaterialId']").val();
-        var finishTime=$("input[name='createFinishTime']").val();
-        var createTime=$("input[name='createCreateTime']").val();
-        var materialNote=$("input[name='createMaterialRequestionNote']").val();
+        var department=$("input[name='createDepartment']").val();
+        var user=$("input[name='createUser']").val();
+        var material=$("input[name='createMaterial']").val();
+        var finished=$("input[name='createFinished']").val();
+        var materialNote=$("input[name='createMaterialNote']").val();
+
+
         var data = {
-            "userId":userId,
-            "materialRequestionId":materialRequestionId,
-            "materialId": materialId,
-            "finishTime": finishTime,
-            "createTime": createTime,
+            "department":department,
+            "user":user,
+            "material": material,
+            "finished": finished,
             "materialNote": materialNote,
 
         }
@@ -52,13 +52,15 @@ $(document).ready(function(){
                     "<tr id='tridval"+i+"'>"
                     +"<td>"+contentdata[i].materialRequestionId
                     +"</td>"
-                    +"<td>"+contentdata[i].userId
+                    +"<td>"+contentdata[i].department
                     +"</td>"
-                    +"<td>"+contentdata[i].materialId
+                    +"<td>"+contentdata[i].user
                     +"</td>"
-                    +"<td>"+contentdata[i].finishTime
+                    +"<td>"+contentdata[i].material
                     +"</td>"
                     +"<td>"+contentdata[i].createTime
+                    +"</td>"
+                    +"<td>"+contentdata[i].finished
                     +"</td>"
                     +"<td>"+contentdata[i].materialNote
                     +"</td>"
@@ -75,11 +77,20 @@ $(document).ready(function(){
                 var materialRequestionId=this.id
                 $.getJSON("warehouse/materialRequestion/"+materialRequestionId,function(data){
                     console.log(data);
-                    var setUserId=data.data.userId;
-                    var setMateriaId=data.data.materialId;
+                    var setMaterialRequestionId=data.data.materialRequestionId;
+                    var setDepartment=data.data.department;
+                    var setUser=data.data.user;
+                    var setMaterial=data.data.material;
+                    var setCreateTime=data.data.createTime;
+                    var setFinished=data.data.finished;
                     var setMaterialNote=data.data.materialNote;
-                    $("input[name='userId']").val(setUserId);
-                    $("input[name='materialId']").val(setMateriaId);
+
+                    $("#materialRequestionId2").text(setMaterialRequestionId);
+                    $("input[name='department']").val(setDepartment);
+                    $("input[name='user']").val(setUser);
+                    $("input[name='material']").val(setMaterial);
+                    $("input[name='createTime']").val(setCreateTime);
+                    $("input[name='finished']").val(setFinished);
                     $("input[name='materialNote']").val(setMaterialNote);
 
                 });
@@ -88,22 +99,26 @@ $(document).ready(function(){
 
             //保存修改
             $("#editSaveBtn").click(function(data){
-                var userId=$("input[name='userId']").val();
-                var materialId=$("input[name='materialId']").val();
+
+                var id= $("#materialRequestionId2").text();
+                var department=$("input[name='department']").val();
+                var user=$("input[name='user']").val();
+                var material=$("input[name='material']").val();
+                var createTime=$("input[name='createTime']").val();
+                var finished=$("input[name='finished']").val();
                 var materialNote=$("input[name='materialNote']").val();
-                $('input[name="interest1"]:checked').each(function(){
-                    var temp = {};
-                    temp.id = $(this).val();
-                    chk_value.push(temp);
-                });
+
                 var data = {
-                    "userId": userId,
-                    "materialId": materialId,
+                    "department": department,
+                    "user": user,
+                    "material": material,
+                    "createTime": createTime,
+                    "finished": finished,
                     "materialNote": materialNote,
                 }
                 $.ajax({
                     type: "PUT",
-                    url: "warehouse/materialRequestion",
+                    url: "warehouse/materialRequestion/update/"+id,
                     data: JSON.stringify(data),
                     contentType: 'application/json',
                     success: function (json) {

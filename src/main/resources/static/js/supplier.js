@@ -3,14 +3,19 @@ $(document).ready(function(){
     //保存
     $("#creatSupplierSave").click(function(data){
         var supplierName=$("input[name='createSupplierName']").val();
+        var material=$("input[name='createMaterial']").val();
+        var responsible=$("input[name='createResponsible']").val();
         var supplierTel=$("input[name='createSupplierTel']").val();
         var address=$("input[name='createAddress']").val();
-        var company=$("input[name='createCompany']").val();
+        var note=$("input[name='createNote']").val();
+
         var data = {
             "supplierName": supplierName,
+            "material": material,
+            "responsible": responsible,
             "supplierTel": supplierTel,
             "address": address,
-            "company": company,
+            "note": note,
 
         }
         $.ajax({
@@ -48,11 +53,15 @@ $(document).ready(function(){
                     +"</td>"
                     +"<td>"+contentdata[i].supplierName
                     +"</td>"
+                    +"<td>"+contentdata[i].material
+                    +"</td>"
+                    +"<td>"+contentdata[i].responsible
+                    +"</td>"
                     +"<td>"+contentdata[i].supplierTel
                     +"</td>"
                     +"<td>"+contentdata[i].address
                     +"</td>"
-                    +"<td>"+contentdata[i].company
+                    +"<td>"+contentdata[i].note
                     +"</td>"
                     +"<td>"
                     +"&nbsp<button type='button' class='btn btn-outline-danger btn-sm'  id="+contentdata[i].supplierId+" name='deleteBtn' >删除</button>&nbsp;&nbsp;"
@@ -67,14 +76,21 @@ $(document).ready(function(){
                 var supplierId=this.id
                 $.getJSON("warehouse/supplier/"+supplierId,function(data){
                     console.log(data);
+                    var setSupplierId=data.data.supplierId;
                     var setSupplierName=data.data.supplierName;
+                    var setMaterial=data.data.material;
+                    var setResponsible=data.data.responsible;
                     var setSupplierTel=data.data.supplierTel;
                     var setAddress=data.data.address;
-                    var setCompany=data.data.company;
+                    var setNote=data.data.note;
+
+                    $("#supplierId2").text(setSupplierId);
                     $("input[name='supplierName']").val(setSupplierName);
+                    $("input[name='material']").val(setMaterial);
+                    $("input[name='responsible']").val(setResponsible);
                     $("input[name='supplierTel']").val(setSupplierTel);
                     $("input[name='address']").val(setAddress);
-                    $("input[name='company']").val(setCompany);
+                    $("input[name='note']").val(setNote);
 
                 });
             })
@@ -82,34 +98,33 @@ $(document).ready(function(){
 
             //保存修改
             $("#editSaveBtn").click(function(data){
-                var customerName= $("input[name='customerName']").val();
-                var productId=$("input[name='productId']").val();
-                var customerTel=$("input[name='customerTel']").val();
+                var id= $("#supplierId2").text();
+                var supplierName= $("input[name='supplierName']").val();
+                var material=$("input[name='material']").val();
+                var responsible=$("input[name='responsible']").val();
+                var supplierTel=$("input[name='supplierTel']").val();
                 var address=$("input[name='address']").val();
-                var sex=$("input[name='sex']").val();
-                $('input[name="interest1"]:checked').each(function(){
-                    var temp = {};
-                    temp.id = $(this).val();
-                    chk_value.push(temp);
-                });
+                var note=$("input[name='note']").val();
+
                 var data = {
-                    "customerName": customerName,
-                    "productId": productId,
-                    "customerTel": customerTel,
+                    "supplierName": supplierName,
+                    "material": material,
+                    "responsible": responsible,
+                    "supplierTel": supplierTel,
                     "address": address,
-                    "sex": sex,
+                    "note": note,
 
                 }
                 $.ajax({
                     type: "PUT",
-                    url: "deviceController/device",
+                    url: "warehouse/supplier/update/"+id,
                     data: JSON.stringify(data),
                     contentType: 'application/json',
                     success: function (json) {
                         console.log(json);
                         if(json.code==200){
                             alert("保存成功");
-                            window.location.href="deviceMessage.html";
+                            window.location.href="supplier.html";
                         }else{
                             alert("编辑失败");
                         }

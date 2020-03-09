@@ -3,10 +3,14 @@ $(document).ready(function(){
     //保存
     $("#creatWarehouseSave").click(function(data){
         var warehouseName=$("input[name='createWarehouseName']").val();
+        var type=$("input[name='createType']").val();
+        var responsible=$("input[name='createResponsible']").val();
         var warehouseTel=$("input[name='createWarehouseTel']").val();
         var address=$("input[name='createAddress']").val();
         var data = {
             "warehouseName": warehouseName,
+            "type": type,
+            "responsible": responsible,
             "warehouseTel": warehouseTel,
             "address": address,
 
@@ -46,13 +50,13 @@ $(document).ready(function(){
                     +"</td>"
                     +"<td>"+contentdata[i].warehouseName
                     +"</td>"
+                    +"<td>"+contentdata[i].type
+                    +"</td>"
+                    +"<td>"+contentdata[i].responsible
+                    +"</td>"
                     +"<td>"+contentdata[i].warehouseTel
                     +"</td>"
                     +"<td>"+contentdata[i].address
-                    +"</td>"
-                    +"<td>"+contentdata[i].createTime
-                    +"</td>"
-                    +"<td>"+contentdata[i].updateTime
                     +"</td>"
                     +"<td>"
                     +"&nbsp<button type='button' class='btn btn-outline-danger btn-sm'  id="+contentdata[i].warehouseId+" name='deleteBtn' >删除</button>&nbsp;&nbsp;"
@@ -67,10 +71,17 @@ $(document).ready(function(){
                 var warehouseId=this.id
                 $.getJSON("warehouse/warehouse/"+warehouseId,function(data){
                     console.log(data);
+                    var setWarehouseId=data.data.warehouseId;
                     var setWarehouseName=data.data.warehouseName;
+                    var setType=data.data.type;
+                    var setResponsible=data.data.responsible;
                     var setWarehouseTel=data.data.warehouseTel;
                     var setAddress=data.data.address;
+
+                    $("#warehouseId2").text(setWarehouseId);
                     $("input[name='warehouseName']").val(setWarehouseName);
+                    $("input[name='type']").val(setType);
+                    $("input[name='responsible']").val(setResponsible);
                     $("input[name='warehouseTel']").val(setWarehouseTel);
                     $("input[name='address']").val(setAddress);
 
@@ -80,34 +91,31 @@ $(document).ready(function(){
 
             //保存修改
             $("#editSaveBtn").click(function(data){
-                var customerName= $("input[name='customerName']").val();
-                var productId=$("input[name='productId']").val();
-                var customerTel=$("input[name='customerTel']").val();
+                var id= $("#warehouseId2").text();
+                var warehouseName= $("input[name='warehouseName']").val();
+                var type=$("input[name='type']").val();
+                var responsible=$("input[name='responsible']").val();
+                var warehouseTel=$("input[name='warehouseTel']").val();
                 var address=$("input[name='address']").val();
-                var sex=$("input[name='sex']").val();
-                $('input[name="interest1"]:checked').each(function(){
-                    var temp = {};
-                    temp.id = $(this).val();
-                    chk_value.push(temp);
-                });
+
                 var data = {
-                    "customerName": customerName,
-                    "productId": productId,
-                    "customerTel": customerTel,
+                    "warehouseName": warehouseName,
+                    "type": type,
+                    "responsible": responsible,
+                    "warehouseTel": warehouseTel,
                     "address": address,
-                    "sex": sex,
 
                 }
                 $.ajax({
                     type: "PUT",
-                    url: "deviceController/device",
+                    url: "warehouse/warehouse/update/"+id,
                     data: JSON.stringify(data),
                     contentType: 'application/json',
                     success: function (json) {
                         console.log(json);
                         if(json.code==200){
                             alert("保存成功");
-                            window.location.href="deviceMessage.html";
+                            window.location.href="warehouse.html";
                         }else{
                             alert("编辑失败");
                         }

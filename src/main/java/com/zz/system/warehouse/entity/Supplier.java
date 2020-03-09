@@ -25,9 +25,21 @@ public class Supplier implements Serializable {
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     /**
-     *主键id
+     *编号
      */
     private Long supplierId;
+    /**
+     *供应商名称
+     */
+    private String supplierName;
+    /**
+     *物料
+     */
+    private String material;
+    /**
+     *负责人
+     */
+    private String responsible;
 
     /**
      *联系方式
@@ -38,17 +50,13 @@ public class Supplier implements Serializable {
      *地址
      */
     private String address;
+    /**
+     *备注
+     */
 
     private String note;
 
-    /**
-     *公司
-     */
-    private String company;
 
-    /**
-     *供应商名称
-     */
-    private String supplierName;
+
 
 }

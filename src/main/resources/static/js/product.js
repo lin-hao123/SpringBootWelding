@@ -2,21 +2,24 @@ $(document).ready(function(){
 //	创建设备
     //保存
     $("#createProductSave").click(function(data){
+        var productId=$("input[name='createProductId']").val();
         var productName=$("input[name='createProductName']").val();
         var num=$("input[name='createNum']").val();
+        var warehouse=$("input[name='createWarehouse']").val();
+        var location=$("input[name='createLocation']").val();
+        var customer=$("input[name='createCustomer']").val();
         var status=$("input[name='createStatus']").val();
-        var customerId=$("input[name='createCustomerId']").val();
-        var warehouseId=$("input[name='createWarehouseId']").val();
         var entryListId=$("input[name='createEntryListId']").val();
-        var money=$("input[name='createMoney']").val();
+
         var data = {
+            "productId": productId,
             "productName": productName,
             "num": num,
+            "warehouse": warehouse,
+            "location": location,
+            "customer": customer,
             "status": status,
-            "customerId": customerId,
-            "warehouseId": warehouseId,
             "entryListId": entryListId,
-            "money": money,
 
         }
         $.ajax({
@@ -58,17 +61,17 @@ $(document).ready(function(){
                     +"</td>"
                     +"<td>"+contentdata[i].num
                     +"</td>"
+                    +"<td>"+contentdata[i].warehouse
+                    +"</td>"
+                    +"<td>"+contentdata[i].location
+                    +"</td>"
+                    +"<td>"+contentdata[i].customer
+                    +"</td>"
                     +"<td>"+contentdata[i].status
-                    +"</td>"
-                    +"<td>"+contentdata[i].customerId
-                    +"</td>"
-                    +"<td>"+contentdata[i].warehouseId
                     +"</td>"
                     +"<td>"+contentdata[i].entryListId
                     +"</td>"
-                    +"<td>"+contentdata[i].money
-                    +"</td>"
-                    +"<td>"+contentdata[i].createTime
+                    +"<td>"+contentdata[i].finishedTime
                     +"</td>"
                     +"<td>"
                     +"&nbsp<button type='button' class='btn btn-outline-danger btn-sm'  id="+contentdata[i].productId+" name='deleteBtn' >删除</button>&nbsp;&nbsp;"
@@ -83,58 +86,63 @@ $(document).ready(function(){
                 var productId=this.id
                 $.getJSON("warehouse/product/"+productId,function(data){
                     console.log(data);
+                    var setProductId=data.data.productId;
                     var setProductName=data.data.productName;
                     var setNum=data.data.num;
+                    var setWarehouse=data.data.warehouse;
+                    var setLocation=data.data.location;
+                    var setCustomer=data.data.customer;
                     var setStatus=data.data.status;
-                    var setCustomerId=data.data.customerId;
-                    var setWarehouseId=data.data.warehouseId;
                     var setEntryListId=data.data.entryListId;
-                    var setMoney=data.data.money;
+                    var setFinishedTime=data.data.finishedTime;
+
+                    $("#productId2").text(setProductId);
                     $("input[name='productName']").val(setProductName);
                     $("input[name='num']").val(setNum);
+                    $("input[name='warehouse']").val(setWarehouse);
+                    $("input[name='location']").val(setLocation);
+                    $("input[name='customer']").val(setCustomer);
                     $("input[name='status']").val(setStatus);
-                    $("input[name='customerId']").val(setCustomerId);
-                    $("input[name='warehouseId']").val(setWarehouseId);
                     $("input[name='entryListId']").val(setEntryListId);
-                    $("input[name='money']").val(setMoney);
+                    $("input[name='finishedTime']").val(setFinishedTime);
                 });
             })
 
 
             //保存修改
             $("#editSaveBtn").click(function(data){
+
+                var id= $("#productId2").text();
                 var productName=$("input[name='productName']").val();
                 var num=$("input[name='num']").val();
+                var warehouse=$("input[name='warehouse']").val();
+                var location=$("input[name='location']").val();
+                var customer=$("input[name='customer']").val();
                 var status=$("input[name='status']").val();
-                var customerId=$("input[name='customerId']").val();
-                var warehouseId=$("input[name='warehouseId']").val();
                 var entryListId=$("input[name='entryListId']").val();
-                var money=$("input[name='money']").val();
-                $('input[name="interest1"]:checked').each(function(){
-                    var temp = {};
-                    temp.id = $(this).val();
-                    chk_value.push(temp);
-                });
+                var finishedTime=$("input[name='finishedTime']").val();
+
                 var data = {
                     "productName": productName,
                     "num": num,
+                    "warehouse": warehouse,
+                    "location": location,
+                    "customer": customer,
                     "status": status,
-                    "customerId": customerId,
-                    "warehouseId": warehouseId,
                     "entryListId": entryListId,
-                    "money": money,
+                    "finishedTime": finishedTime,
 
                 }
                 $.ajax({
                     type: "PUT",
-                    url: "deviceController/device",
+                    url: "warehouse/product/update/"+id,
                     data: JSON.stringify(data),
                     contentType: 'application/json',
                     success: function (json) {
                         console.log(json);
                         if(json.code==200){
                             alert("保存成功");
-                            window.location.href="deviceMessage.html";
+                            window.location.href="product.html";
                         }else{
                             alert("编辑失败");
                         }

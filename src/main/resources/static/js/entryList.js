@@ -2,17 +2,15 @@ $(document).ready(function(){
 //	创建出库单
     //保存
     $("#creatEntryListSave").click(function(data){
-        var materialId=$("input[name='createMaterialId']").val();
+        var weldingProducts=$("input[name='createWeldingProducts']").val();
         var num=$("input[name='createNum']").val();
-        var productId=$("input[name='createProductId']").val();
-        var warehouseId=$("input[name='createWarehouseId']").val();
-        var supplierId=$("input[name='createSupplierId']").val();
+        var warehouse=$("input[name='createWarehouse']").val();
+        var supplier=$("input[name='createSupplier']").val();
         var data = {
-            "materialId": materialId,
+            "weldingProducts": weldingProducts,
             "num": num,
-            "productId": productId,
-            "warehouseId": warehouseId,
-            "supplierId": supplierId,
+            "warehouse": warehouse,
+            "supplier": supplier,
         }
         $.ajax({
             type: "POST",
@@ -47,17 +45,15 @@ $(document).ready(function(){
                     "<tr id='tridval"+i+"'>"
                     +"<td>"+contentdata[i].entryListId
                     +"</td>"
-                    +"<td>"+contentdata[i].materialId
+                    +"<td>"+contentdata[i].weldingProducts
                     +"</td>"
                     +"<td>"+contentdata[i].num
                     +"</td>"
+                    +"<td>"+contentdata[i].warehouse
+                    +"</td>"
+                    +"<td>"+contentdata[i].supplier
+                    +"</td>"
                     +"<td>"+contentdata[i].entryTime
-                    +"</td>"
-                    +"<td>"+contentdata[i].productId
-                    +"</td>"
-                    +"<td>"+contentdata[i].warehouseId
-                    +"</td>"
-                    +"<td>"+contentdata[i].supplierId
                     +"</td>"
                     +"<td>"
                     +"&nbsp<button type='button' class='btn btn-outline-danger btn-sm'  id="+contentdata[i].entryListId+" name='deleteBtn' >删除</button>&nbsp;&nbsp;"
@@ -72,17 +68,19 @@ $(document).ready(function(){
                 var entryListId=this.id
                 $.getJSON("warehouse/entryList/"+entryListId,function(data){
                     console.log(data);
-                    var setMaterialId=data.data.materialId;
+                    var setEntryListId=data.data.entryListId;
+                    var setWeldingProducts=data.data.weldingProducts;
                     var setNum=data.data.num;
-                    var setProductId=data.data.productId;
-                    var setWarehouseId=data.data.warehouseId;
-                    var setSupplierId=data.data.supplierId;
+                    var setWarehouse=data.data.warehouse;
+                    var setSupplier=data.data.supplier;
+                    var setEntryTime=data.data.entryTime;
 
-                    $("input[name='materialId']").val(setMaterialId);
+                    $("#entryListId2").text(setEntryListId);
+                    $("input[name='weldingProducts']").val(setWeldingProducts);
                     $("input[name='num']").val(setNum);
-                    $("input[name='productId']").val(setProductId);
-                    $("input[name='warehouseId']").val(setWarehouseId);
-                    $("input[name='supplierId']").val(setSupplierId);
+                    $("input[name='warehouse']").val(setWarehouse);
+                    $("input[name='supplier']").val(setSupplier);
+                    $("input[name='entryTime']").val(setEntryTime);
 
                 });
             })
@@ -90,34 +88,31 @@ $(document).ready(function(){
 
             //保存修改
             $("#editSaveBtn").click(function(data){
-                var customerName= $("input[name='customerName']").val();
-                var productId=$("input[name='productId']").val();
-                var customerTel=$("input[name='customerTel']").val();
-                var address=$("input[name='address']").val();
-                var sex=$("input[name='sex']").val();
-                $('input[name="interest1"]:checked').each(function(){
-                    var temp = {};
-                    temp.id = $(this).val();
-                    chk_value.push(temp);
-                });
+                var id=$("#entryListId2").text();
+                var weldingProducts= $("input[name='weldingProducts']").val();
+                var num=$("input[name='num']").val();
+                var warehouse=$("input[name='warehouse']").val();
+                var supplier=$("input[name='supplier']").val();
+                var entryTime=$("input[name='entryTime']").val();
+
                 var data = {
-                    "customerName": customerName,
-                    "productId": productId,
-                    "customerTel": customerTel,
-                    "address": address,
-                    "sex": sex,
+                    "weldingProducts": weldingProducts,
+                    "num": num,
+                    "warehouse": warehouse,
+                    "supplier": supplier,
+                    "entryTime": entryTime,
 
                 }
                 $.ajax({
                     type: "PUT",
-                    url: "deviceController/device",
+                    url: "warehouse/entryList/update/"+id,
                     data: JSON.stringify(data),
                     contentType: 'application/json',
                     success: function (json) {
                         console.log(json);
                         if(json.code==200){
                             alert("保存成功");
-                            window.location.href="deviceMessage.html";
+                            window.location.href="entryList.html";
                         }else{
                             alert("编辑失败");
                         }

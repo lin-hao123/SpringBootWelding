@@ -317,7 +317,7 @@
                                             &nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-outline-secondary" id="selectbtn2">取消查询</button>
                                         </div>
                                         <div class="col-12 col-lg-2 col-md-2">
-                                            <button type='button' id="createCustomer" class="btn btn-secondary" data-toggle='modal' data-target='#myModal3'>创建产品 +</button><a href="#" class="navbar-brand font-weight-bold text-uppercase text-base"></a>
+                                            <button type='button' id="createNewCustomer" class="btn btn-secondary" data-toggle='modal' data-target='#myModal3'>创建产品 +</button><a href="#" class="navbar-brand font-weight-bold text-uppercase text-base"></a>
                                         </div>
                                     </form>
                                 </div>
@@ -331,13 +331,13 @@
                                                     <tr align="center">
                                                         <th>产品编号</th>
                                                         <th>产品名称</th>
-                                                        <th>产品数量</th>
-                                                        <th>状态</th>
-                                                        <th>顾客编号</th>
-                                                        <th>仓库编号</th>
-                                                        <th>入库单编号</th>
-                                                        <th>产品价格</th>
-                                                        <th>创建时间</th>
+                                                        <th>数量</th>
+                                                        <th>仓库</th>
+                                                        <th>位置</th>
+                                                        <th>客户名称</th>
+                                                        <th>入库/出库</th>
+                                                        <th>入库/出库编号</th>
+                                                        <th>时间</th>
                                                         <th>操作</th>
                                                     </tr>
                                                     </thead>
@@ -407,6 +407,13 @@
             <div class="modal-body">
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
+                        <span class="input-group-text">产品编号</span>
+                    </div>
+                    <span class="form-control" id="productId2"></span>
+                </div>
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
                         <span class="input-group-text">产品名称</span>
                     </div>
                     <input type="text" class="form-control"  id="productName" name="productName">
@@ -414,52 +421,53 @@
 
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text">产品数量</span>
+                        <span class="input-group-text">数量</span>
                     </div>
                     <input type="text" class="form-control"  id="num" name="num">
                 </div>
 
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text">产品状态</span>
+                        <span class="input-group-text">仓库</span>
+                    </div>
+                    <input type="text" class="form-control"  id="warehouse" name="warehouse">
+                </div>
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">客户名</span>
+                    </div>
+                    <input type="text" class="form-control"  id="customer" name="customer">
+                </div>
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">入库/出库</span>
                     </div>
                     <input type="text" class="form-control"  id="status" name="status">
                 </div>
 
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text">用户编号</span>
-                    </div>
-                    <input type="text" class="form-control"  id="customerId" name="customerId">
-                </div>
-
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">仓库编号</span>
-                    </div>
-                    <input type="text" class="form-control"  id="warehouseId" name="warehouseId">
-                </div>
-
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">出库单编号</span>
+                        <span class="input-group-text">入库/出库编号</span>
                     </div>
                     <input type="text" class="form-control"  id="entryListId" name="entryListId">
                 </div>
 
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text">产品价格</span>
+                        <span class="input-group-text">时间</span>
                     </div>
-                    <input type="text" class="form-control"  id="money" name="money">
+                    <input type="text" class="form-control"  id="finishedTime" name="finishedTime">
                 </div>
+
 
 
             </div>
 
             <!-- 模态框底部 -->
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" id="subbtn">保存</button>
+                <button type="button" class="btn btn-danger" id="editSaveBtn">保存</button>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
             </div>
 
@@ -481,54 +489,64 @@
 
             <!-- 模态框主体 -->
             <div class="modal-body">
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">产品编号</span>
+                    </div>
+                    <input type="text" class="form-control" id="createProductId" name="createProductId">
+                </div>
+
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text">产品名称</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="产品名称" id="createProductName" name="createProductName">
+                    <input type="text" class="form-control" id="createProductName" name="createProductName">
                 </div>
 
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text">产品数量</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="产品数量" id="createNum" name="createNum">
+                    <input type="text" class="form-control" id="createNum" name="createNum">
                 </div>
 
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text">产品状态</span>
+                        <span class="input-group-text">仓库</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="产品状态" id="createStatus" name="createStatus">
+                    <input type="text" class="form-control" id="createWarehouse" name="createWarehouse">
                 </div>
 
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text">顾客编号</span>
+                        <span class="input-group-text">位置</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="顾客编号" id="createCustomerId" name="createCustomerId">
+                    <input type="text" class="form-control" id="createLocation" name="createLocation">
                 </div>
 
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text">仓库编号</span>
+                        <span class="input-group-text">客户名</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="仓库编号" id="createWarehouseId" name="createWarehouseId">
+                    <input type="text" class="form-control"  id="createCustomer" name="createCustomer">
                 </div>
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">入库/出库</span>
+                    </div>
+                    <input type="text" class="form-control" id="createStatus" name="createStatus">
+                </div>
+
 
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text">入库单编号</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="仓库编号" id="createEntryListId" name="createEntryListId">
+                    <input type="text" class="form-control"  id="createEntryListId" name="createEntryListId">
                 </div>
 
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">产品价格</span>
-                    </div>
-                    <input type="text" class="form-control" placeholder="产品价格" id="createMoney" name="createMoney">
-                </div>
 
             </div>
 

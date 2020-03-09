@@ -3,6 +3,8 @@ package com.zz.system.warehouse.service;
 import com.zz.system.warehouse.entity.Material;
 import org.springframework.data.domain.Page;
 
+import java.rmi.MarshalException;
+
 /**
  * created by linlx on 2020/1/20
  */
@@ -12,7 +14,9 @@ public interface MaterialService {
 
     Material create(Material material);
 
-    void delete(Long materialId);
+    void delete(String materialId);
 
-    Material findById(Long materialId);
+    Material findById(String materialId);
+
+    Integer updateMaterial(Material material);
 }

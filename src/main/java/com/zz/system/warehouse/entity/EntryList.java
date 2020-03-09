@@ -27,45 +27,31 @@ public class EntryList implements Serializable {
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     /**
-     *主键id
+     *编号
      */
     private Long entryListId;
 
     /**
-     *材料id
+     *焊接产品
      */
-    private String materialId;
+    private String weldingProducts;
 
     /**
-     *用户id
-     */
-    private String userId;
-
-    /**
-     *数量
+     *入库数量
      */
     private Long num;
+    /**
+     *仓库
+     */
+    private String warehouse;
 
-    private String note;
-
+    /**
+     *供应商
+     */
+    private String supplier;
     /**
      *入库日期
      */
     private Date entryTime;
-
-    /**
-     *产品id
-     */
-    private String productId;
-
-    /**
-     *仓库id
-     */
-    private String warehouseId;
-
-    /**
-     *供应商id
-     */
-    private String supplierId;
 
 }

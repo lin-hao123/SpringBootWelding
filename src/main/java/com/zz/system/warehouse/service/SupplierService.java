@@ -15,4 +15,6 @@ public interface SupplierService {
     Supplier create(Supplier supplier);
 
     void delete(Long supplierId);
+
+    Integer updateSupplier(Supplier supplier);
 }

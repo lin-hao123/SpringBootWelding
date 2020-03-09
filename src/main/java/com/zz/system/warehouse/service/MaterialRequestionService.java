@@ -8,11 +8,13 @@ import org.springframework.data.domain.Page;
  */
 public interface MaterialRequestionService {
 
-    Page<MaterialRequestion> findByMaterialIdLike(String materialId,int page,int size);
+    Page<MaterialRequestion> findByUserLike(String user,int page,int size);
 
     void delete(Long materialRequestionId);
 
     MaterialRequestion create(MaterialRequestion materialRequestion);
 
     MaterialRequestion findByMaterialRequestionId(Long materialRequestionId);
+
+    Integer updateMaterialRequestion(MaterialRequestion materialRequestion);
 }

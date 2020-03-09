@@ -2,21 +2,21 @@ $(document).ready(function(){
 //	创建物料
     //保存
     $("#creatMaterialSave").click(function(data){
+        var materialId=$("input[name='createMaterialId']").val();
         var materialName=$("input[name='createMaterialName']").val();
         var materialSize=$("input[name='createMaterialSize']").val();
+        var warehouse=$("input[name='createWarehouse']").val();
         var location=$("input[name='createLocation']").val();
-        var materialPrice=$("input[name='createMaterialPrice']").val();
-        var num=$("input[name='createNum']").val();
-        var entryListId=$("input[name='createListId']").val();
-        var supplierId=$("input[name='createSupplierId']").val();
+        var leftNum=$("input[name='createLeftNum']").val();
+        var supplier=$("input[name='createSupplier']").val();
         var data = {
+            "materialId": materialId,
             "materialName": materialName,
             "materialSize": materialSize,
+            "warehouse": warehouse,
             "location": location,
-            "materialPrice": materialPrice,
-            "num": num,
-            "entryListId": entryListId,
-            "supplierId": supplierId,
+            "leftNum": leftNum,
+            "supplier": supplier,
 
         }
         $.ajax({
@@ -57,15 +57,13 @@ $(document).ready(function(){
                     +"</td>"
                     +"<td>"+contentdata[i].materialSize
                     +"</td>"
+                    +"<td>"+contentdata[i].warehouse
+                    +"</td>"
                     +"<td>"+contentdata[i].location
                     +"</td>"
-                    +"<td>"+contentdata[i].materialPrice
+                    +"<td>"+contentdata[i].leftNum
                     +"</td>"
-                    +"<td>"+contentdata[i].num
-                    +"</td>"
-                    +"<td>"+contentdata[i].entryListId
-                    +"</td>"
-                    +"<td>"+contentdata[i].supplierId
+                    +"<td>"+contentdata[i].supplier
                     +"</td>"
                     +"<td>"
                     +"&nbsp<button type='button' class='btn btn-outline-danger btn-sm'  id="+contentdata[i].materialId+" name='deleteBtn' >删除</button>&nbsp;&nbsp;"
@@ -80,20 +78,22 @@ $(document).ready(function(){
                 var materialId=this.id
                 $.getJSON("warehouse/material/"+materialId,function(data){
                     console.log(data);
+                    var setMaterialId=data.data.materialId;
                     var setMaterialName=data.data.materialName;
                     var setMaterialSize=data.data.materialSize;
+                    var setWarehouse=data.data.warehouse;
                     var setLocation=data.data.location;
-                    var setMaterialPrice=data.data.materialPrice;
-                    var setNum=data.data.num;
-                    var setEntryListId=data.data.entryListId;
-                    var setSupplierId=data.data.supplierId;
+                    var setLeftNum=data.data.leftNum;
+                    var setSupplier=data.data.supplier;
+
+                    $("#materialId2").text(setMaterialId);
                     $("input[name='materialName']").val(setMaterialName);
                     $("input[name='materialSize']").val(setMaterialSize);
+                    $("input[name='warehouse']").val(setWarehouse);
                     $("input[name='location']").val(setLocation);
-                    $("input[name='materialPrice']").val(setMaterialPrice);
-                    $("input[name='num']").val(setNum);
-                    $("input[name='entryListId']").val(setEntryListId);
-                    $("input[name='supplierId']").val(setSupplierId);
+                    $("input[name='leftNum']").val(setLeftNum);
+                    $("input[name='supplier']").val(setSupplier);
+
 
                 });
             })
@@ -101,40 +101,34 @@ $(document).ready(function(){
 
             //保存修改
             $("#editSaveBtn").click(function(data){
-                var deviceId= $("#deviceId").text();
-                var deviceName=$("input[name='deviceName']").val();
-                var vendor=$("input[name='vendor']").val();
-                var vendorTel=$("input[name='vendorTel']").val();
-                var weldingType=$("input[name='weldingType']").val();
-                var department=$("input[name='department']").val();
-                var deviceFunction=$("input[name='deviceFunction']").val();
-                var responsible=$("input[name='responsible']").val();
-                $('input[name="interest1"]:checked').each(function(){
-                    var temp = {};
-                    temp.id = $(this).val();
-                    chk_value.push(temp);
-                });
+
+                var id= $("#materialId2").text();
+                var materialName=$("input[name='materialName']").val();
+                var materialSize=$("input[name='materialSize']").val();
+                var warehouse=$("input[name='warehouse']").val();
+                var location=$("input[name='location']").val();
+                var leftNum=$("input[name='leftNum']").val();
+                var supplier=$("input[name='supplier']").val();
+
                 var data = {
-                    "deviceId": deviceId,
-                    "deviceName": deviceName,
-                    "vendor": vendor,
-                    "vendorTel": vendorTel,
-                    "weldingType": weldingType,
-                    "deviceFunction": deviceFunction,
-                    "department": department,
-                    "responsible": responsible,
+                    "materialName": materialName,
+                    "materialSize": materialSize,
+                    "warehouse": warehouse,
+                    "location": location,
+                    "leftNum": leftNum,
+                    "supplier": supplier,
 
                 }
                 $.ajax({
                     type: "PUT",
-                    url: "deviceController/device",
+                    url: "warehouse/material/update/"+id,
                     data: JSON.stringify(data),
                     contentType: 'application/json',
                     success: function (json) {
                         console.log(json);
                         if(json.code==200){
                             alert("保存成功");
-                            window.location.href="deviceMessage.html";
+                            window.location.href="material.html";
                         }else{
                             alert("编辑失败");
                         }

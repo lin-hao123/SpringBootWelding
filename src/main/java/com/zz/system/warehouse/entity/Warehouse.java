@@ -25,22 +25,25 @@ public class Warehouse implements Serializable {
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     /**
-     *主键id
+     *编号
      */
     private Long warehouseId;
-
-    /**
-     *用户id
-     */
-    private String userId;
 
     /**
      *仓库名称
      */
     private String warehouseName;
+    /**
+     *物料类型
+     */
+    private String type;
+     /**
+     *负责人
+     */
+    private String responsible;
 
     /**
-     *练习方式
+     *联系电话
      */
     private String warehouseTel;
 
@@ -49,9 +52,6 @@ public class Warehouse implements Serializable {
      */
     private String address;
 
-    private Date createTime;
-
-    private Date updateTime;
 
 
 }

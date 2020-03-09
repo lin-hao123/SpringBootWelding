@@ -23,63 +23,43 @@ public class Product implements Serializable {
 
     @Id
     @Column
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     /**
-     *产品id
+     *产品编号
      */
-    private Long productId;
+    private String productId;
 
     /**
      *产品名称
      */
     private String productName;
-
     /**
-     *产品数量
+     *数量
      */
     private Long num;
 
-    private Date deadTime;
-
     /**
-     *状态 入库/出库
+     *仓库
+     */
+    private String warehouse;
+    /**
+     *位置
+     */
+    private String location;
+    /**
+     *客户名
+     */
+    private String customer;
+    /**
+     *入库/出库
      */
     private int status;
-
-    private String note;
-
     /**
-     *顾客id
-     */
-    private String customerId;
-
-    /**
-     *仓库id
-     */
-    private String warehouseId;
-
-    /**
-     *入库单id
+     *入库/出库编号
      */
     private String entryListId;
-
     /**
-     *用户id
+     *时间
      */
-    private String userId;
-
-    /**
-     *价格
-     */
-    private double money;
-
-    private String location;
-
-    private String size;
-
-    /**
-     *创建时间
-     */
-    private Date createTime;
+    private Date finishedTime;
 
 }
