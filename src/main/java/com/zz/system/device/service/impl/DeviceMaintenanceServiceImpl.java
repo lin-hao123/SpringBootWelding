@@ -34,19 +34,26 @@ public class DeviceMaintenanceServiceImpl implements DeviceMaintenanceService {
     }
 
     @Override
-    public DeviceMaintenance findByDeviceId(Long deviceId) {
-        return deviceMaintenanceRepository.findById(deviceId).get();
+    public DeviceMaintenance findByDeviceId(String deviceId) {
+        return deviceMaintenanceRepository.findByDeviceId(deviceId);
     }
 
     @Override
     @Transactional(value = "transactionManager", rollbackFor = {Exception.class}, readOnly = false)
-    public void delete(Long deviceId) {
-        deviceMaintenanceRepository.deleteById(deviceId);
+    public void delete(String deviceId) {
+        deviceMaintenanceRepository.deleteByDeviceId(deviceId);
     }
 
     @Override
+    @Transactional(value = "transactionManager", rollbackFor = {Exception.class}, readOnly = false)
     public DeviceMaintenance create(DeviceMaintenance deviceMaintenance) {
         deviceMaintenance.setMaintenanceTime(new Date());
         return deviceMaintenanceRepository.save(deviceMaintenance);
+    }
+
+    @Override
+    @Transactional(value = "transactionManager", rollbackFor = {Exception.class}, readOnly = false)
+    public Integer updateDeviceMaintenance(DeviceMaintenance deviceMaintenance) {
+        return deviceMaintenanceRepository.updateDeviceMaintenance(deviceMaintenance);
     }
 }

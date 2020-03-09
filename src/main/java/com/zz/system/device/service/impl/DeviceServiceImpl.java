@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Date;
 
 /**
  * created by linlx on 2020/1/16
@@ -25,7 +26,7 @@ public class DeviceServiceImpl implements DeviceService {
 
     @Override
     public Page<Device> findByDeviceNameLike(String deviceName, int page, int size) {
-        Sort sort=new Sort(Sort.Direction.DESC,"deviceId");
+        Sort sort=new Sort(Sort.Direction.DESC,"purchaseTime");
         Pageable pageable= PageRequest.of(page,size,sort);
         if (deviceName==null||deviceName==""){
             deviceName= "%%";
@@ -37,27 +38,27 @@ public class DeviceServiceImpl implements DeviceService {
     }
 
     @Override
+    @Transactional(value = "transactionManager", rollbackFor = {Exception.class}, readOnly = false)
     public Device createDevice(Device device) {
+        device.setPurchaseTime(new Date());
         return deviceRepository.save(device);
     }
 
     @Override
-    public Device findByDeviceId(Long deviceId) {
-        return deviceRepository.findById(deviceId).get();
+    public Device findByDeviceId(String deviceId) {
+        return deviceRepository.findByDeviceId(deviceId);
     }
 
     @Override
     @Transactional(value = "transactionManager", rollbackFor = {Exception.class}, readOnly = false)
-    public void delete(Long deviceId) {
-        deviceRepository.deleteById(deviceId);
+    public void delete(String deviceId) {
+        deviceRepository.deleteByDeviceId(deviceId);
     }
 
     @Override
     @Transactional(value = "transactionManager", rollbackFor = {Exception.class}, readOnly = false)
-    public void update(Device device) {
-        deviceRepository.update(device);
-
+    public Integer updateDevice(Device device) {
+        return deviceRepository.updateDevice(device);
     }
-
 
 }

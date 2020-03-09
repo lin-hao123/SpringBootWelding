@@ -1,5 +1,6 @@
 package com.zz.system.device.service.impl;
 
+import com.zz.config.ShiroRealm;
 import com.zz.system.device.entity.DeviceRepair;
 import com.zz.system.device.repository.DeviceRepairRepository;
 import com.zz.system.device.service.DeviceRepairService;
@@ -35,20 +36,27 @@ public class DeviceRepaireServiceImpl implements DeviceRepairService {
     }
 
     @Override
-    public DeviceRepair findByDeviceId(Long deviceId) {
-        return deviceRepairRepository.findById(deviceId).get();
+    public DeviceRepair findByDeviceId(String deviceId) {
+        return deviceRepairRepository.findByDeviceId(deviceId);
     }
 
     @Override
     @Transactional(value = "transactionManager", rollbackFor = {Exception.class}, readOnly = false)
-    public void deleteDeviceRepair(Long deviceId) {
-        deviceRepairRepository.deleteById(deviceId);
+    public void deleteDeviceRepair(String deviceId) {
+        deviceRepairRepository.deleteByDeviceId(deviceId);
 
     }
 
     @Override
+    @Transactional(value = "transactionManager", rollbackFor = {Exception.class}, readOnly = false)
     public DeviceRepair create(DeviceRepair deviceRepair) {
         deviceRepair.setRepairTime(new Date());
         return deviceRepairRepository.save(deviceRepair);
+    }
+
+    @Override
+    @Transactional(value = "transactionManager", rollbackFor = {Exception.class}, readOnly = false)
+    public Integer updateDeviceRepair(DeviceRepair deviceRepair) {
+        return deviceRepairRepository.updateDeviceRepair(deviceRepair);
     }
 }
