@@ -25,21 +25,21 @@ public class AnnouncementServiceImpl implements AnnouncementService {
 
 
     @Override
-    public Page<Announcement> findByAnnouncementContentLike(String announcementContent, int page, int size) {
+    public Page<Announcement> findByAnnouncementTitleLike(String announcementTitle, int page, int size) {
         Sort sort=new Sort(Sort.Direction.DESC,"createTime");
         Pageable pageable= PageRequest.of(page,size,sort);
-        if(announcementContent==null||announcementContent==""){
-            announcementContent="%%";
+        if(announcementTitle==null||announcementTitle==""){
+            announcementTitle="%%";
         }else {
-            announcementContent="%"+announcementContent+"%";
+            announcementTitle="%"+announcementTitle+"%";
         }
-        return announcementRepository.findByAnnouncementContentLike(announcementContent,pageable);
+        return announcementRepository.findByAnnouncementTitleLike(announcementTitle,pageable);
     }
 
     @Override
+    @Transactional(value = "transactionManager", rollbackFor = {Exception.class}, readOnly = false)
     public Announcement create(Announcement announcement) {
         announcement.setCreateTime(new Date());
-        announcement.setUpdateTime(new Date());
         return announcementRepository.save(announcement);
     }
 
@@ -53,5 +53,10 @@ public class AnnouncementServiceImpl implements AnnouncementService {
     @Override
     public Announcement findById(Long announcementId) {
         return announcementRepository.findById(announcementId).get();
+    }
+
+    @Override
+    public Integer updateAnnouncement(Announcement announcement) {
+        return announcementRepository.updateAnnouncement(announcement);
     }
 }

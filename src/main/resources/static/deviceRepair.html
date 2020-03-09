@@ -67,10 +67,6 @@
                                     <i class="lni-lock"></i>
                                     <span>退出</span>
                                 </a>
-                                <a href="index.html">
-                                    <i class="lni-lock"></i>
-                                    <span>首页</span>
-                                </a>
                             </li>
                         </ul>
                     </li>
@@ -335,7 +331,6 @@
                                                     <tr align="center">
                                                         <th>设备编号</th>
                                                         <th>设备名称</th>
-                                                        <th>责任部门</th>
                                                         <th>维修内容</th>
                                                         <th>维修结果</th>
                                                         <th>维修人员</th>
@@ -405,12 +400,21 @@
 
             <!-- 模态框主体 -->
             <div class="modal-body">
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">设备编号</span>
+                    </div>
+                    <span class="form-control" id="deviceId2"></span>
+                </div>
+
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text">设备名称</span>
                     </div>
                     <input type="text" class="form-control" id="deviceName" name="deviceName">
                 </div>
+
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text">维修内容</span>
@@ -429,12 +433,14 @@
                     </div>
                     <input type="text" class="form-control" id="repairStaff" name="repairStaff">
                 </div>
+
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text">责任部门</span>
+                        <span class="input-group-text">维修日期</span>
                     </div>
-                    <input type="text" class="form-control"  id="department" name="department">
+                    <input type="text" class="form-control"  id="repairTime" name="repairTime">
                 </div>
+
             </div>
 
             <!-- 模态框底部 -->
@@ -462,36 +468,40 @@
 
             <!-- 模态框主体 -->
             <div class="modal-body">
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">设备编号</span>
+                    </div>
+                    <input type="text" class="form-control" id="createDeviceId" name="createDeviceId">
+                </div>
+
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text">设备名称</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="设备名称" id="createDeviceName" name="createDeviceName">
+                    <input type="text" class="form-control" id="createDeviceName" name="createDeviceName">
                 </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">责任部门</span>
-                    </div>
-                    <input type="password" class="form-control" placeholder="责任部门" id="createDepartment" name="createDepartment">
-                </div>
+
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text">维修内容</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="维修内容" id="createRepairContent" name="createRepairContent">
+                    <input type="text" class="form-control" id="createRepairContent" name="createRepairContent">
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text">维修结果</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="维修结果" id="createRepairResult" name="createRepairResult">
+                    <input type="text" class="form-control"  id="createRepairResult" name="createRepairResult">
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text">维修人员</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="所在部门" id="createRepairStaff" name="createRepairStaff">
+                    <input type="text" class="form-control"  id="createRepairStaff" name="createRepairStaff">
                 </div>
+
             </div>
 
             <!-- 模态框底部 -->

@@ -2,22 +2,19 @@ $(document).ready(function(){
 //	创建设备
     //保存
     $("#createDeviceRepairSave").click(function(data){
+        var deviceId=$("input[name='createDeviceId']").val();
         var deviceName=$("input[name='createDeviceName']").val();
-        var department=$("input[name='createDepartment']").val();
         var repairContent=$("input[name='createRepairContent']").val();
         var repairResult=$("input[name='createRepairResult']").val();
         var repairStaff=$("input[name='createRepairStaff']").val();
-        $('input[name="interest1"]:checked').each(function(){
-            var temp = {};
-            temp.id = $(this).val();
-            chk_value.push(temp);
-        });
+
         var data = {
+            "deviceId": deviceId,
             "deviceName": deviceName,
             "repairContent": repairContent,
             "repairResult": repairResult,
             "repairStaff": repairStaff,
-            "department": department,
+
 
         }
         $.ajax({
@@ -56,8 +53,6 @@ $(document).ready(function(){
                     +"</td>"
                     +"<td>"+contentdata[i].deviceName
                     +"</td>"
-                    +"<td>"+contentdata[i].department
-                    +"</td>"
                     +"<td>"+contentdata[i].repairContent
                     +"</td>"
                     +"<td>"+contentdata[i].repairResult
@@ -79,45 +74,51 @@ $(document).ready(function(){
                 var deviceId=this.id
                 $.getJSON("deviceController/deviceRepair/"+deviceId,function(data){
                     console.log(data);
+                    var setDeviceId=data.data.deviceId;
                     var setDeviceName=data.data.deviceName;
                     var setRepairContent=data.data.repairContent;
                     var setRepairResult=data.data.repairResult;
                     var setRepairStaff=data.data.repairStaff;
-                    var setDepartment=data.data.department;
+                    var setRepairTime=data.data.repairTime;
+
+                    $("#deviceId2").text(setDeviceId);
                     $("input[name='deviceName']").val(setDeviceName);
                     $("input[name='repairContent']").val(setRepairContent);
                     $("input[name='repairResult']").val(setRepairResult);
                     $("input[name='repairStaff']").val(setRepairStaff);
-                    $("input[name='department']").val(setDepartment);
+                    $("input[name='repairTime']").val(setRepairTime);
+
                 });
             })
 
 
             //保存修改
-            $("#subbtn").click(function(data){
-                var id= $("#roleId").text();
-                var roleName=$("input[name='roleName']").val();
-                var chk_value =[];
-                $('input[name="interest"]:checked').each(function(){
-                    var temp = {};
-                    temp.id = $(this).val();
-                    chk_value.push(temp);
-                });
-                var data2 = {
-                    "id": id,
-                    "detail": roleName,
-                    "permissionList": JSON.stringify(chk_value)
+            $("#editSaveBtn").click(function(data){
+
+                var id= $("#deviceId2").text();
+                var deviceName=$("input[name='deviceName']").val();
+                var repairContent=$("input[name='repairContent']").val();
+                var repairResult=$("input[name='repairResult']").val();
+                var repairStaff=$("input[name='repairStaff']").val();
+                var repairTime=$("input[name='repairTime']").val();
+
+                var data = {
+                    "deviceName": deviceName,
+                    "repairContent": repairContent,
+                    "repairResult": repairResult,
+                    "repairStaff": repairStaff,
+                    "repairTime": repairTime,
                 }
                 $.ajax({
                     type: "PUT",
-                    url: "role/update",
-                    data: JSON.stringify(data2),
+                    url: "deviceController/deviceRepair/update/"+id,
+                    data: JSON.stringify(data),
                     contentType: 'application/json',
                     success: function (json) {
                         console.log(json);
                         if(json.code==200){
                             alert("保存成功");
-                            window.location.href="role.html";
+                            window.location.href="deviceRepair.html";
                         }else{
                             alert("编辑失败");
                         }

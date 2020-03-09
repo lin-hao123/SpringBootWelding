@@ -2,20 +2,20 @@ $(document).ready(function(){
 //	创建设备
     //保存
     $("#createDeviceSave").click(function(data){
+        var deviceId=$("input[name='createDeviceId']").val();
         var deviceName=$("input[name='createDeviceName']").val();
+        var weldingType=$("input[name='createWeldingType']").val();
+        var location=$("input[name='createLocation']").val();
         var vendor=$("input[name='createVendor']").val();
         var vendorTel=$("input[name='createVendorTel']").val();
-        var weldingType=$("input[name='createWeldingType']").val();
-        var department=$("input[name='createDepartment']").val();
-        var deviceFunction=$("input[name='createDeviceFunction']").val();
         var responsible=$("input[name='createResponsible']").val();
         var data = {
+            "deviceId": deviceId,
             "deviceName": deviceName,
             "vendor": vendor,
             "vendorTel": vendorTel,
             "weldingType": weldingType,
-            "department": department,
-            "deviceFunction": deviceFunction,
+            "location": location,
             "responsible": responsible,
 
         }
@@ -58,15 +58,15 @@ $(document).ready(function(){
                     +"</td>"
                     +"<td>"+contentdata[i].deviceName
                     +"</td>"
+                    +"<td>"+contentdata[i].weldingType
+                    +"</td>"
+                    +"<td>"+contentdata[i].location
+                    +"</td>"
                     +"<td>"+contentdata[i].vendor
                     +"</td>"
                     +"<td>"+contentdata[i].vendorTel
                     +"</td>"
-                    +"<td>"+contentdata[i].weldingType
-                    +"</td>"
-                    +"<td>"+contentdata[i].department
-                    +"</td>"
-                    +"<td>"+contentdata[i].deviceFunction
+                    +"<td>"+contentdata[i].purchaseTime
                     +"</td>"
                     +"<td>"+contentdata[i].responsible
                     +"</td>"
@@ -83,16 +83,23 @@ $(document).ready(function(){
                 var deviceId=this.id
                 $.getJSON("deviceController/device/"+deviceId,function(data){
                     console.log(data);
-                    var setCustomerName=data.data.deviceName;
-                    var setProductId=data.data.productId;
-                    var setCustomerTel=data.data.customerTel;
-                    var setAddress=data.data.address;
-                    var setSex=data.data.sex;
-                    $("input[name='deviceName']").val(setCustomerName);
-                    $("input[name='productId']").val(setProductId);
-                    $("input[name='customerTel']").val(setCustomerTel);
-                    $("input[name='address']").val(setAddress);
-                    $("input[name='sex']").val(setSex);
+                    var setDeviceId=data.data.deviceId;
+                    var setDeviceName=data.data.deviceName;
+                    var setWeldingType=data.data.weldingType;
+                    var setLocation=data.data.location;
+                    var setVendor=data.data.vendor;
+                    var setVendorTel=data.data.vendorTel;
+                    var setPurchaseTime=data.data.purchaseTime;
+                    var setResponsible=data.data.responsible;
+
+                    $("#deviceId2").text(setDeviceId);
+                    $("input[name='deviceName']").val(setDeviceName);
+                    $("input[name='weldingType']").val(setWeldingType);
+                    $("input[name='location']").val(setLocation);
+                    $("input[name='vendor']").val(setVendor);
+                    $("input[name='vendorTel']").val(setVendorTel);
+                    $("input[name='purchaseTime']").val(setPurchaseTime);
+                    $("input[name='responsible']").val(setResponsible);
 
                 });
             })
@@ -100,33 +107,29 @@ $(document).ready(function(){
 
             //保存修改
             $("#editSaveBtn").click(function(data){
-                var deviceId= $("#deviceId").text();
+
+                var id= $("#deviceId2").text();
                 var deviceName=$("input[name='deviceName']").val();
+                var weldingType=$("input[name='weldingType']").val();
+                var location=$("input[name='location']").val();
                 var vendor=$("input[name='vendor']").val();
                 var vendorTel=$("input[name='vendorTel']").val();
-                var weldingType=$("input[name='weldingType']").val();
-                var department=$("input[name='department']").val();
-                var deviceFunction=$("input[name='deviceFunction']").val();
+                var purchaseTime=$("input[name='purchaseTime']").val();
                 var responsible=$("input[name='responsible']").val();
-                $('input[name="interest1"]:checked').each(function(){
-                    var temp = {};
-                    temp.id = $(this).val();
-                    chk_value.push(temp);
-                });
+
                 var data = {
-                    "deviceId": deviceId,
                     "deviceName": deviceName,
                     "vendor": vendor,
                     "vendorTel": vendorTel,
                     "weldingType": weldingType,
-                    "deviceFunction": deviceFunction,
-                    "department": department,
+                    "location": location,
+                    "purchaseTime": purchaseTime,
                     "responsible": responsible,
 
                 }
                 $.ajax({
                     type: "PUT",
-                    url: "deviceController/device",
+                    url: "deviceController/device/update/"+id,
                     data: JSON.stringify(data),
                     contentType: 'application/json',
                     success: function (json) {

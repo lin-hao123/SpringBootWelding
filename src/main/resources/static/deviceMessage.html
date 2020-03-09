@@ -332,12 +332,12 @@
                                                     <tr align="center">
                                                         <th>设备编号</th>
                                                         <th>设备名称</th>
-                                                        <th>厂商</th>
-                                                        <th>厂商联系方式</th>
                                                         <th>焊接种类</th>
-                                                        <th>所在部门</th>
-                                                        <th>功能作用</th>
-                                                        <th>责任人</th>
+                                                        <th>位置</th>
+                                                        <th>厂商</th>
+                                                        <th>厂商联系电话</th>
+                                                        <th>购买时间</th>
+                                                        <th>负责人</th>
                                                         <th>操作</th>
                                                     </tr>
                                                     </thead>
@@ -403,23 +403,19 @@
 
             <!-- 模态框主体 -->
             <div class="modal-body">
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">设备编号</span>
+                    </div>
+                    <span class="form-control" id="deviceId2"></span>
+                </div>
+
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text">设备名称</span>
                     </div>
                     <input type="text" class="form-control" id="deviceName" name="deviceName">
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">厂商</span>
-                    </div>
-                    <input type="text" class="form-control" id="vendor"name="vendor">
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">厂商联系方式</span>
-                    </div>
-                    <input type="text" class="form-control" id="vendorTel" name="vendorTel">
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -429,19 +425,36 @@
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text">所在部门</span>
+                        <span class="input-group-text">位置</span>
                     </div>
-                    <input type="text" class="form-control"  id="department" name="department">
+                    <input type="text" class="form-control"  id="location" name="location">
                 </div>
+
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text">功能作用</span>
+                        <span class="input-group-text">厂商</span>
                     </div>
-                    <input type="text" class="form-control"  id="deviceFunction" name="deviceFunction">
+                    <input type="text" class="form-control" id="vendor"name="vendor">
                 </div>
+
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text">责任人</span>
+                        <span class="input-group-text">厂商联系电话</span>
+                    </div>
+                    <input type="text" class="form-control" id="vendorTel" name="vendorTel">
+                </div>
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">购买时间</span>
+                    </div>
+                    <input type="text" class="form-control" id="purchaseTime" name="purchaseTime">
+                </div>
+
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">负责人</span>
                     </div>
                     <input type="text" class="form-control" id="responsible" name="responsible">
                 </div>
@@ -472,47 +485,53 @@
 
             <!-- 模态框主体 -->
             <div class="modal-body">
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">设备编号</span>
+                    </div>
+                    <input type="text" class="form-control" id="createDeviceId" name="createDeviceId">
+                </div>
+
+
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text">设备名称</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="设备名称" id="createDeviceName" name="createDeviceName">
+                    <input type="text" class="form-control" id="createDeviceName" name="createDeviceName">
                 </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">厂商</span>
-                    </div>
-                    <input type="password" class="form-control" placeholder="厂商" id="createVendor" name="createVendor">
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">厂商联系方式</span>
-                    </div>
-                    <input type="text" class="form-control" placeholder="厂商联系方式" id="createVendorTel" name="createVendorTel">
-                </div>
+
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text">焊接种类</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="焊接种类" id="createWeldingType" name="createWeldingType">
+                    <input type="text" class="form-control"  id="createWeldingType" name="createWeldingType">
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text">所在部门</span>
+                        <span class="input-group-text">位置</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="所在部门" id="createDepartment" name="createDepartment">
+                    <input type="text" class="form-control"  id="createLocation" name="createLocation">
+                </div>
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">厂商</span>
+                    </div>
+                    <input type="text" class="form-control"  id="createVendor" name="createVendor">
                 </div>
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text">功能作用</span>
+                        <span class="input-group-text">厂商联系电话</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="功能作用" id="createDeviceFunction" name="createDeviceFunction">
+                    <input type="text" class="form-control"  id="createVendorTel" name="createVendorTel">
                 </div>
+
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text">责任人</span>
+                        <span class="input-group-text">负责人</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="责任人" id="createResponsible" name="createResponsible">
+                    <input type="text" class="form-control" id="createResponsible" name="createResponsible">
                 </div>
             </div>
 

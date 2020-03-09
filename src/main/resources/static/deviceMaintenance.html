@@ -63,14 +63,10 @@
 
                             <li>
                                 <a href="login.html">
-
                                     <i class="lni-lock"></i>
                                     <span>退出</span>
                                 </a>
-                                <a href="index.html">
-                                    <i class="lni-lock"></i>
-                                    <span>首页</span>
-                                </a>
+
                             </li>
                         </ul>
                     </li>
@@ -321,7 +317,7 @@
                                             &nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-outline-secondary" id="selectbtn2">取消查询</button>
                                         </div>
                                         <div class="col-12 col-lg-2 col-md-2">
-                                            <button type="button" class="btn btn-danger btn-rounded" data-toggle="modal" data-target="#insertrkbtn" name='createDevicebtn'>新建设备维修记录  +</button>
+                                            <button type="button" class="btn btn-danger btn-rounded" data-toggle="modal" data-target="#insertrkbtn" name='createDevicebtn'>新建设备保养日志  +</button>
                                         </div>
                                     </form>
                                 </div>
@@ -335,10 +331,8 @@
                                                     <tr align="center">
                                                         <th>设备编号</th>
                                                         <th>设备名称</th>
-                                                        <th>设备型号</th>
                                                         <th>保养内容</th>
-                                                        <th>责任部门</th>
-                                                        <th>责任人</th>
+                                                        <th>负责人</th>
                                                         <th>保养日期</th>
                                                         <th>操作</th>
                                                     </tr>
@@ -405,36 +399,42 @@
 
             <!-- 模态框主体 -->
             <div class="modal-body">
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">设备编号</span>
+                    </div>
+                    <span class="form-control" id="deviceId2"></span>
+                </div>
+
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text">设备名称</span>
                     </div>
                     <input type="text" class="form-control" id="deviceName" name="deviceName">
                 </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">设备型号</span>
-                    </div>
-                    <input type="text" class="form-control" id="deviceModel" name="deviceModel">
-                </div>
+
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text">保养内容</span>
                     </div>
                     <input type="text" class="form-control" id="maintenanceContent" name="maintenanceContent">
                 </div>
+
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text">责任部门</span>
-                    </div>
-                    <input type="text" class="form-control" id="department" name="department">
-                </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">责任人</span>
+                        <span class="input-group-text">负责人</span>
                     </div>
                     <input type="text" class="form-control"  id="responsible" name="responsible">
                 </div>
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">保养日期</span>
+                    </div>
+                    <input type="text" class="form-control"  id="maintenanceTime" name="maintenanceTime">
+                </div>
+
             </div>
 
             <!-- 模态框底部 -->
@@ -462,36 +462,35 @@
 
             <!-- 模态框主体 -->
             <div class="modal-body">
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">设备编号</span>
+                    </div>
+                    <input type="text" class="form-control"  id="createDeviceId" name="createDeviceId">
+                </div>
+
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text">设备名称</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="设备名称" id="createDeviceName" name="createDeviceName">
+                    <input type="text" class="form-control" id="createDeviceName" name="createDeviceName">
                 </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">设备型号</span>
-                    </div>
-                    <input type="password" class="form-control" placeholder="设备型号" id="createDeviceModel" name="createDeviceModel">
-                </div>
+
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text">保养内容</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="保养内容" id="createMaintenanceContent" name="createMaintenanceContent">
+                    <input type="text" class="form-control" id="createMaintenanceContent" name="createMaintenanceContent">
                 </div>
+
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
-                        <span class="input-group-text">责任部门</span>
+                        <span class="input-group-text">负责人</span>
                     </div>
-                    <input type="text" class="form-control" placeholder="责任部门" id="createDepartment" name="createDepartment">
+                    <input type="text" class="form-control" id="createResponsible" name="createResponsible">
                 </div>
-                <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">责任人</span>
-                    </div>
-                    <input type="text" class="form-control" placeholder="责任人" id="createResponsible" name="createResponsible">
-                </div>
+
             </div>
 
             <!-- 模态框底部 -->

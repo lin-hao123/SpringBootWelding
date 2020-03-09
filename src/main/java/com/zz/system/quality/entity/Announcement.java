@@ -28,9 +28,14 @@ public class Announcement implements Serializable {
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     /**
-     * 公告编号
+     * 编号
      */
     private Long announcementId;
+
+    /**
+     * 公告标题
+     */
+    private String announcementTitle;
 
     /**
      * 公告内容
@@ -38,13 +43,14 @@ public class Announcement implements Serializable {
     private String announcementContent;
 
     /**
+     * 发布部门
+     */
+    private String department;
+
+    /**
      * 发布日期
      */
     private Date createTime;
 
-    /**
-     * 修改日期
-     */
-    private Date updateTime;
 
 }

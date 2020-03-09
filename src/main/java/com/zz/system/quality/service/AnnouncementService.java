@@ -9,11 +9,13 @@ import org.springframework.data.domain.Page;
  */
 public interface AnnouncementService {
 
-    Page<Announcement> findByAnnouncementContentLike(String announcementContent, int page,int size);
+    Page<Announcement> findByAnnouncementTitleLike(String announcementTitle, int page,int size);
 
     Announcement create(Announcement announcement);
 
     void delete(Long announcementId);
 
     Announcement findById(Long announcementId);
+
+    Integer updateAnnouncement(Announcement announcement);
 }

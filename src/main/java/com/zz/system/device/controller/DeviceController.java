@@ -8,6 +8,7 @@ import com.zz.system.device.service.DeviceMaintenanceService;
 import com.zz.system.device.service.DeviceRepairService;
 import com.zz.system.device.service.DeviceService;
 import com.zz.vo.ResponseData;
+import com.zz.vo.ResponseDataUtil;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
@@ -56,7 +57,7 @@ public class DeviceController {
      * @return
      */
     @GetMapping("device/{deviceId}")
-    public ResponseData findDeviceByDeviceId(@PathVariable("deviceId") Long  deviceId){
+    public ResponseData findDeviceByDeviceId(@PathVariable("deviceId") String  deviceId){
         ResponseData responseData=new ResponseData();
         Device device=deviceService.findByDeviceId(deviceId);
         responseData.setCode(200);
@@ -65,13 +66,15 @@ public class DeviceController {
         return responseData;
     }
 
-    @PutMapping("device")
-    public ResponseData updateDevice(@RequestBody Device device){
-        ResponseData responseData=new ResponseData();
-        deviceService.update(device);
-        responseData.setCode(200);
-        responseData.setMsg("success");
-        return responseData;
+    @PutMapping("device/update/{id}")
+    public ResponseData updateDevice(@PathVariable(value = "id") String id, @RequestBody Device device) {
+        device.setDeviceId(id);
+        Integer rs= deviceService.updateDevice(device);
+        if(rs==1){
+            return ResponseDataUtil.success("修改成功",rs);
+        }else{
+            return ResponseDataUtil.failure(500, "修改失败");
+        }
     }
 
     /**
@@ -97,7 +100,7 @@ public class DeviceController {
      * @return
      */
     @DeleteMapping("device/{deviceId}")
-    public ResponseData deleteDevice(@PathVariable ("deviceId") Long deviceId){
+    public ResponseData deleteDevice(@PathVariable ("deviceId") String deviceId){
 
         ResponseData responseData=new ResponseData();
         deviceService.delete(deviceId);
@@ -153,7 +156,7 @@ public class DeviceController {
      * @return
      */
     @GetMapping("deviceMaintenance/{deviceId}")
-    public ResponseData findDeviceMaintenanceByDeviceId(@PathVariable("deviceId") Long deviceId){
+    public ResponseData findDeviceMaintenanceByDeviceId(@PathVariable("deviceId") String deviceId){
 
         ResponseData responseData=new ResponseData();
         DeviceMaintenance deviceMaintenance=deviceMaintenanceService.findByDeviceId(deviceId);
@@ -170,13 +173,24 @@ public class DeviceController {
      * @return
      */
     @DeleteMapping("deviceMaintenance/{deviceId}")
-    public ResponseData deleteDeviceMaintenance(@PathVariable("deviceId") Long deviceId){
+    public ResponseData deleteDeviceMaintenance(@PathVariable("deviceId") String deviceId){
 
         ResponseData responseData=new ResponseData();
         deviceMaintenanceService.delete(deviceId);
         responseData.setCode(200);
         responseData.setMsg("success");
         return responseData;
+    }
+
+    @PutMapping("deviceMaintenance/update/{id}")
+    public ResponseData updateDeviceMaintenance(@PathVariable(value = "id") String id, @RequestBody DeviceMaintenance deviceMaintenance) {
+      deviceMaintenance.setDeviceId(id);
+      Integer rs= deviceMaintenanceService.updateDeviceMaintenance(deviceMaintenance);
+      if(rs==1){
+          return ResponseDataUtil.success("修改成功",rs);
+        }else{
+            return ResponseDataUtil.failure(500, "修改失败");
+        }
     }
 
 
@@ -210,7 +224,7 @@ public class DeviceController {
      * @return
      */
     @GetMapping("deviceRepair/{deviceId}")
-    public ResponseData findDeviceRepairByDeviceId(@PathVariable("deviceId") Long deviceId){
+    public ResponseData findDeviceRepairByDeviceId(@PathVariable("deviceId") String deviceId){
 
         ResponseData responseData=new ResponseData();
         DeviceRepair deviceRepair=deviceRepairService.findByDeviceId(deviceId);
@@ -227,7 +241,7 @@ public class DeviceController {
      * @return
      */
     @DeleteMapping("deviceRepair/{deviceId}")
-    public ResponseData deleteDeviceRepair(@PathVariable("deviceId") Long deviceId){
+    public ResponseData deleteDeviceRepair(@PathVariable("deviceId") String  deviceId){
 
         ResponseData responseData=new ResponseData();
         deviceRepairService.deleteDeviceRepair(deviceId);
@@ -251,6 +265,20 @@ public class DeviceController {
         responseData.setData(createDeviceRepair);
         return responseData;
     }
+
+
+    @PutMapping("deviceRepair/update/{id}")
+    public ResponseData updateDeviceRepair(@PathVariable(value = "id") String id, @RequestBody DeviceRepair deviceRepair) {
+        deviceRepair.setDeviceId(id);
+        Integer rs= deviceRepairService.updateDeviceRepair(deviceRepair);
+        if(rs==1){
+            return ResponseDataUtil.success("修改成功",rs);
+        }else{
+            return ResponseDataUtil.failure(500, "修改失败");
+        }
+    }
+
+
 
 
 

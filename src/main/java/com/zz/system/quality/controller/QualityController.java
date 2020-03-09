@@ -2,6 +2,7 @@ package com.zz.system.quality.controller;
 
 
 import com.zz.system.design.entity.Customer;
+import com.zz.system.device.entity.DeviceRepair;
 import com.zz.system.production.entity.DispatchInformation;
 import com.zz.system.quality.entity.Announcement;
 import com.zz.system.quality.entity.MaterialInspection;
@@ -202,13 +203,13 @@ public class QualityController {
      * 分页显示公告信息
      * @param page
      * @param size
-     * @param announcementContent
+     * @param announcementTitle
      * @return
      */
     @GetMapping("announcement/{page}/{size}")
-    public ResponseData queryAnnouncement(@PathVariable("page") int page, @PathVariable("size") int size, String announcementContent){
+    public ResponseData queryAnnouncement(@PathVariable("page") int page, @PathVariable("size") int size, String announcementTitle){
         ResponseData responseData=new ResponseData();
-        Page<Announcement> announcementPage=announcementService.findByAnnouncementContentLike(announcementContent,page,size);
+        Page<Announcement> announcementPage=announcementService.findByAnnouncementTitleLike(announcementTitle,page,size);
         responseData.setCode(200);
         responseData.setMsg("success");
         responseData.setData(announcementPage);
@@ -262,5 +263,19 @@ public class QualityController {
         responseData.setData(announcement);
         return responseData;
     }
+
+
+    @PutMapping("announcement/update/{id}")
+    public ResponseData updateAnnouncement(@PathVariable(value = "id") String id, @RequestBody Announcement announcement) {
+        announcement.setAnnouncementId(Long.parseLong(id));
+        Integer rs= announcementService.updateAnnouncement(announcement);
+        if(rs==1){
+            return ResponseDataUtil.success("修改成功",rs);
+        }else{
+            return ResponseDataUtil.failure(500, "修改失败");
+        }
+    }
+
+
 
 }

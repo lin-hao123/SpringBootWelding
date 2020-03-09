@@ -2,10 +2,16 @@ $(document).ready(function(){
 //	创建物料
     //保存
     $("#createAnnouncementSave").click(function(data){
-        var announcementContent=$("input[name='createAnnouncementContent']").val();
+
+        var announcementTitle=$("input[name='createAnnouncementTitle']").val();
+        var announcementContent=$("textarea[name='createAnnouncementContent']").val();
+        var department=$("input[name='createDepartment']").val();
+
 
         var data = {
-            "announcementContent": announcementContent
+            "announcementTitle": announcementTitle,
+            "announcementContent": announcementContent,
+            "department": department,
         }
         $.ajax({
             type: "POST",
@@ -41,19 +47,41 @@ $(document).ready(function(){
                     "<tr id='tridval"+i+"'>"
                     +"<td>"+contentdata[i].announcementId
                     +"</td>"
-                    +"<td>"+contentdata[i].announcementContent
+                    +"<td>"+contentdata[i].announcementTitle
+                    +"</td>"
+                    +"<td>"+contentdata[i].department
                     +"</td>"
                     +"<td>"+contentdata[i].createTime
                     +"</td>"
-                    +"<td>"+contentdata[i].updateTime
-                    +"</td>"
                     +"<td>"
-                    +"&nbsp<button type='button' class='btn btn-outline-danger btn-sm'  id="+contentdata[i].announcementId+" name='deleteBtn' >删除</button>&nbsp;&nbsp;"
+                    +"&nbsp<button type='button' class='btn btn-outline-info btn-sm'  data-toggle='modal' data-target='#myModal2' id="+contentdata[i].announcementId+" name='detailBtn'>详情</button>"
+                    +"&nbsp<button type='button' class='btn btn-outline-danger btn-sm'  id="+contentdata[i].announcementId+" name='deleteBtn' >删除</button>"
                     +"&nbsp<button type='button' class='btn btn-outline-success btn-sm'  data-toggle='modal' data-target='#myModal' id="+contentdata[i].announcementId+"  name='editBtn'>编辑</button>"
                     +"</td></tr>"
                 )
             }
 
+
+            // 详情查看
+            $("button[name='detailBtn']").click(function(){
+                var announcementId=this.id
+
+                $.getJSON("quality/announcement/"+announcementId,function(data){
+
+                    var setAnnouncementId=data.data.announcementId;
+                    var setAnnouncementTitle=data.data.announcementTitle;
+                    var setAnnouncementContent=data.data.announcementContent;
+                    var setDepartment=data.data.department;
+                    var setCreateTime=data.data.createTime;
+
+                    $("#announcementId1").text(setAnnouncementId);
+                    $("#announcementTitle1").text(setAnnouncementTitle);
+                    $("#announcementContent1").text(setAnnouncementContent);
+                    $("#department1").text(setDepartment);
+                    $("#createTime1").text(setCreateTime);
+
+                });
+            });
 
             //--公告信息编辑显示--//
             $("button[name='editBtn']").click(function(){
@@ -61,10 +89,16 @@ $(document).ready(function(){
                 $.getJSON("quality/announcement/"+announcementId,function(data){
                     console.log(data);
                     var setAnnouncementId=data.data.announcementId;
+                    var setAnnouncementTitle=data.data.announcementTitle;
                     var setAnnouncementContent=data.data.announcementContent;
+                    var setDepartment=data.data.department;
+                    var setCreateTime=data.data.createTime;
 
-                    $("input[name='announcementId']").val(setAnnouncementId);
-                    $("input[name='announcementContent']").val(setAnnouncementContent);
+                    $("#announcementId2").text(setAnnouncementId);
+                    $("input[name='announcementTitle']").val(setAnnouncementTitle);
+                    $("textarea[name='announcementContent']").val(setAnnouncementContent);
+                    $("input[name='department']").val(setDepartment);
+                    $("input[name='createTime']").val(setCreateTime);
 
                 });
             })
@@ -72,21 +106,23 @@ $(document).ready(function(){
 
             //保存修改
             $("#editSaveBtn").click(function(data){
-                var announcementId=$("input[name='announcementId']").val();
-                var announcementContent=$("input[name='announcementContent']").val();
 
-                $('input[name="interest1"]:checked').each(function(){
-                    var temp = {};
-                    temp.id = $(this).val();
-                    chk_value.push(temp);
-                });
+                var id= $("#announcementId2").text();
+                var announcementTitle=$("input[name='announcementTitle']").val();
+                var announcementContent=$("textarea[name='announcementContent']").val();
+                var department=$("input[name='department']").val();
+                var createTime=$("input[name='createTime']").val();
+
+
                 var data = {
-                    "announcementId": announcementId,
+                    "announcementTitle": announcementTitle,
                     "announcementContent": announcementContent,
+                    "department": department,
+                    "createTime": createTime,
                 }
                 $.ajax({
                     type: "PUT",
-                    url: "deviceController/device",
+                    url: "quality/announcement/update/"+id,
                     data: JSON.stringify(data),
                     contentType: 'application/json',
                     success: function (json) {
