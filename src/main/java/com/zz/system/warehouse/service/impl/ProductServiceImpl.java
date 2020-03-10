@@ -23,14 +23,15 @@ public class ProductServiceImpl implements ProductService {
     ProductRepository productRepository;
 
     @Override
+    @Transactional(value = "transactionManager", rollbackFor = {Exception.class}, readOnly = false)
     public Product create(Product product) {
-        product.setCreateTime(new Date());
+        product.setFinishedTime(new Date());
         return productRepository.save(product);
     }
 
     @Override
     public Page<Product> findByProductNameLike(String productName, int page, int size) {
-        Sort sort=new Sort(Sort.Direction.DESC,"createTime");
+        Sort sort=new Sort(Sort.Direction.DESC,"productId");
         Pageable pageable= PageRequest.of(page,size,sort);
         if(productName==null||productName==""){
             productName="%%";
@@ -41,14 +42,20 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product findById(Long productId) {
-        return productRepository.findById(productId).get();
+    public Product findById(String productId) {
+        return productRepository.findByProductId(productId);
     }
 
     @Override
     @Transactional(value = "transactionManager", rollbackFor = {Exception.class}, readOnly = false)
-    public void delete(Long productId) {
-        productRepository.deleteById(productId);
+    public void delete(String productId) {
+        productRepository.deleteByProductId(productId);
+    }
+
+    @Override
+    @Transactional(value = "transactionManager", rollbackFor = {Exception.class}, readOnly = false)
+    public Integer updateProduct(Product product) {
+        return productRepository.updateProduct(product);
     }
 
 

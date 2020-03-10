@@ -24,15 +24,15 @@ public class EntryListServiceImpl implements EntryListService {
     EntryListRepository entryListRepository;
 
     @Override
-    public Page<EntryList> findByMaterialIdLike(String materialId, int page, int size) {
+    public Page<EntryList> findByWeldingProductsLike(String weldingProducts, int page, int size) {
         Sort sort=new Sort(Sort.Direction.DESC,"entryTime");
         Pageable pageable= PageRequest.of(page,size,sort);
-        if(materialId==null || materialId==""){
-            materialId="%%";
+        if(weldingProducts==null || weldingProducts==""){
+            weldingProducts="%%";
         }else {
-            materialId="%"+materialId+"%";
+            weldingProducts="%"+weldingProducts+"%";
         }
-        return entryListRepository.findByMaterialIdLike(materialId,pageable);
+        return entryListRepository.findByWeldingProductsLike(weldingProducts,pageable);
     }
 
     @Override
@@ -50,5 +50,11 @@ public class EntryListServiceImpl implements EntryListService {
     @Override
     public EntryList findById(Long entryListId) {
         return entryListRepository.findById(entryListId).get();
+    }
+
+    @Override
+    @Transactional(value = "transactionManager", rollbackFor = {Exception.class}, readOnly = false)
+    public Integer updateEntryList(EntryList entryList) {
+        return entryListRepository.updateEntryList(entryList);
     }
 }

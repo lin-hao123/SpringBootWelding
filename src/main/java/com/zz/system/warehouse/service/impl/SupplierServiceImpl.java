@@ -8,6 +8,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
@@ -40,13 +41,21 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     @Override
+    @Transactional(value = "transactionManager", rollbackFor = {Exception.class}, readOnly = false)
     public Supplier create(Supplier supplier) {
         return supplierRepository.save(supplier);
     }
 
     @Override
+    @Transactional(value = "transactionManager", rollbackFor = {Exception.class}, readOnly = false)
     public void delete(Long supplierId) {
         supplierRepository.deleteById(supplierId);
 
+    }
+
+    @Override
+    @Transactional(value = "transactionManager", rollbackFor = {Exception.class}, readOnly = false)
+    public Integer updateSupplier(Supplier supplier) {
+        return supplierRepository.updateSupplier(supplier);
     }
 }

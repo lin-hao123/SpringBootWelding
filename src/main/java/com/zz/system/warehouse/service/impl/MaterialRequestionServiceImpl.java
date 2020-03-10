@@ -23,15 +23,15 @@ public class MaterialRequestionServiceImpl implements MaterialRequestionService 
     MaterialRequestionRepository materialRequestionRepository;
 
     @Override
-    public Page<MaterialRequestion> findByMaterialIdLike(String materialId, int page, int size) {
+    public Page<MaterialRequestion> findByUserLike(String user, int page, int size) {
         Sort sort=new Sort(Sort.Direction.DESC,"createTime");
         Pageable pageable= PageRequest.of(page,size,sort);
-        if(materialId==null || materialId==""){
-            materialId="%%";
+        if(user==null || user==""){
+            user="%%";
         }else {
-            materialId="%"+materialId+"%";
+            user="%"+user+"%";
         }
-        return materialRequestionRepository.findByMaterialIdLike(materialId,pageable);
+        return materialRequestionRepository.findByUserLike(user,pageable);
     }
 
     @Override
@@ -41,14 +41,20 @@ public class MaterialRequestionServiceImpl implements MaterialRequestionService 
     }
 
     @Override
+    @Transactional(value = "transactionManager", rollbackFor = {Exception.class}, readOnly = false)
     public MaterialRequestion create(MaterialRequestion materialRequestion) {
         materialRequestion.setCreateTime(new Date());
-        materialRequestion.setFinishTime(new Date());
         return materialRequestionRepository.save(materialRequestion);
     }
 
     @Override
     public MaterialRequestion findByMaterialRequestionId(Long materialRequestionId) {
         return materialRequestionRepository.findById(materialRequestionId).get();
+    }
+
+    @Override
+    @Transactional(value = "transactionManager", rollbackFor = {Exception.class}, readOnly = false)
+    public Integer updateMaterialRequestion(MaterialRequestion materialRequestion) {
+        return materialRequestionRepository.updateMaterialRequestion(materialRequestion);
     }
 }

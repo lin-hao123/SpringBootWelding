@@ -41,12 +41,18 @@ public class MaterialServiceImpl implements MaterialService {
 
     @Override
     @Transactional(value = "transactionManager", rollbackFor = {Exception.class}, readOnly = false)
-    public void delete(Long materialId) {
-        materialRepository.deleteById(materialId);
+    public void delete(String materialId) {
+        materialRepository.deleteByMaterialId(materialId);
     }
 
     @Override
-    public Material findById(Long materialId) {
-        return materialRepository.findById(materialId).get();
+    public Material findById(String materialId) {
+        return materialRepository.findByMaterialId(materialId);
+    }
+
+    @Override
+    @Transactional(value = "transactionManager", rollbackFor = {Exception.class}, readOnly = false)
+    public Integer updateMaterial(Material material) {
+        return materialRepository.updateMaterial(material);
     }
 }

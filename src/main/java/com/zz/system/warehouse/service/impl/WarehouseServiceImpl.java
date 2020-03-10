@@ -37,9 +37,8 @@ public class WarehouseServiceImpl implements WarehouseService {
     }
 
     @Override
+    @Transactional(value = "transactionManager", rollbackFor = {Exception.class}, readOnly = false)
     public Warehouse create(Warehouse warehouse) {
-        warehouse.setCreateTime(new Date());
-        warehouse.setUpdateTime(new Date());
         return warehouseRepository.save(warehouse);
     }
 
@@ -52,5 +51,11 @@ public class WarehouseServiceImpl implements WarehouseService {
     @Transactional(value = "transactionManager", rollbackFor = {Exception.class}, readOnly = false)
     public void delete(Long warehouseId) {
         warehouseRepository.deleteById(warehouseId);
+    }
+
+    @Override
+    @Transactional(value = "transactionManager", rollbackFor = {Exception.class}, readOnly = false)
+    public Integer updateWarehouse(Warehouse warehouse) {
+        return warehouseRepository.updateWarehouse(warehouse);
     }
 }
